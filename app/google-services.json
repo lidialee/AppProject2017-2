@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1064269245561",
+    "firebase_url": "https://pettogether-11ca5.firebaseio.com",
+    "project_id": "pettogether-11ca5",
+    "storage_bucket": "pettogether-11ca5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064269245561:android:3b783ec6173390c7",
+        "android_client_info": {
+          "package_name": "com.example.lidia.appproject2017_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064269245561-e5q522ii4to4rvg982d2ohqnbge6rm4r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lidia.appproject2017_2",
+            "certificate_hash": "13c0886896c293fbaf15aea1e7d51d1e45e9696d"
+          }
+        },
+        {
+          "client_id": "1064269245561-20n0g15kla75f31o7p20i1gbvmrvu947.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5BSOMDROBEjH1Xrrq5usGKUVAzX5PCOw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064269245561-20n0g15kla75f31o7p20i1gbvmrvu947.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

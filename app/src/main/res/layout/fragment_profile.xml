@@ -1,0 +1,115 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.lidia.appproject2017_2.ProfileFragment">
+
+
+
+    <RelativeLayout
+        android:id="@+id/relative_mypage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image_mypage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/edit_info_image"
+            android:src="@drawable/profiledefault"
+            app:civ_border_color="@color/orange"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/name_text_mypage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Riome"
+            android:textAlignment="center"
+            android:textColor="#3e3e3e"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/profile_image_mypage"/>
+
+        <TextView
+            android:id="@+id/email_text_mypage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OOOO@gmail.com"
+            android:textAlignment="center"
+            android:textColor="#3e3e3e"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/name_text_mypage"/>
+
+        <TextView
+            android:id="@+id/userType_text_mypage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="일반사용자"
+            android:textAlignment="center"
+            android:textColor="#3e3e3e"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/email_text_mypage"/>
+
+        <ImageView
+            android:id="@+id/edit_info_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/setting"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"/>
+
+
+    </RelativeLayout>
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout_profile"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/orange"
+        android:layout_below="@+id/relative_mypage">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tablayout_profile_frag"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@color/orange"
+                android:textAlignment="center"
+                app:tabIndicatorColor="@color/colorAccent"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabTextColor="@color/black" />
+
+        </RelativeLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/ViewPagercontainerProfile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbarlayout_profile"
+        android:layout_marginTop="15dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+</RelativeLayout>
