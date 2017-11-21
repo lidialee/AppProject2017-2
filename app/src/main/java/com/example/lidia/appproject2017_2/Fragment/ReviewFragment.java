@@ -1,4 +1,4 @@
-package com.example.lidia.appproject2017_2;
+package com.example.lidia.appproject2017_2.Fragment;
 
 
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.lidia.appproject2017_2.R;
 
 
 /**

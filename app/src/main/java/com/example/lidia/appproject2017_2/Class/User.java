@@ -1,4 +1,4 @@
-package com.example.lidia.appproject2017_2;
+package com.example.lidia.appproject2017_2.Class;
 
 public class User {
     private String name;
@@ -8,7 +8,7 @@ public class User {
     private int isOwner;    //  0 = userBox  1 = ownerBox
     private int petType;         // 0 (x)  1 (dogBox)  2(catBox)  3(etcBox)
 
-    User(){}
+    public User(){}
 
     // 일반 회원가입
     public User(String name, String email, String userImage,

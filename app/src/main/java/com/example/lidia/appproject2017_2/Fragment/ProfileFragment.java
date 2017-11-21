@@ -1,13 +1,11 @@
-package com.example.lidia.appproject2017_2;
+package com.example.lidia.appproject2017_2.Fragment;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -15,9 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.example.lidia.appproject2017_2.Activity.EditProfileActivity;
+import com.example.lidia.appproject2017_2.Activity.MainFindActivity;
+import com.example.lidia.appproject2017_2.Listener.UserInfoEventListener;
+import com.example.lidia.appproject2017_2.R;
+import com.example.lidia.appproject2017_2.Class.User;
+import com.example.lidia.appproject2017_2.Model.UserModel;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

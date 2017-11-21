@@ -1,4 +1,4 @@
-package com.example.lidia.appproject2017_2;
+package com.example.lidia.appproject2017_2.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lidia.appproject2017_2.Listener.UserInfoEventListener;
+import com.example.lidia.appproject2017_2.R;
+import com.example.lidia.appproject2017_2.Class.User;
+import com.example.lidia.appproject2017_2.Model.UserModel;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;

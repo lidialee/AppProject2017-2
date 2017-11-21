@@ -1,4 +1,4 @@
-package com.example.lidia.appproject2017_2;
+package com.example.lidia.appproject2017_2.Activity;
 
 import android.content.ContentResolver;
 import android.content.DialogInterface;
@@ -10,7 +10,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,9 +18,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.lidia.appproject2017_2.Listener.UserInfoEventListener;
+import com.example.lidia.appproject2017_2.R;
+import com.example.lidia.appproject2017_2.Class.User;
+import com.example.lidia.appproject2017_2.Model.UserModel;
 
 import java.io.InputStream;
-import java.nio.Buffer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

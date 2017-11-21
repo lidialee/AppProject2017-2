@@ -5,7 +5,7 @@
     android:id="@+id/signin_parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lidia.appproject2017_2.SigninActivity">
+    tools:context="com.example.lidia.appproject2017_2.Activity.SigninActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbarlayout_signin"

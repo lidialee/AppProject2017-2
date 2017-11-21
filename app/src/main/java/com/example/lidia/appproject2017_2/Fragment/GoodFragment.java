@@ -1,4 +1,4 @@
-package com.example.lidia.appproject2017_2;
+package com.example.lidia.appproject2017_2.Fragment;
 
 
 import android.os.Bundle;
@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.lidia.appproject2017_2.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WishFragment extends Fragment {
+public class GoodFragment extends Fragment {
 
 
-    public WishFragment() {
+    public GoodFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +25,7 @@ public class WishFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wish, container, false);
+        return inflater.inflate(R.layout.fragment_good, container, false);
     }
 
 }

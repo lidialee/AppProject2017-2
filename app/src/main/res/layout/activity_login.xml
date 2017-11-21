@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main"
-    tools:context="com.example.lidia.appproject2017_2.LoginActivity">
+    tools:context="com.example.lidia.appproject2017_2.Activity.LoginActivity">
 
 
     <ImageView

@@ -1,6 +1,5 @@
-package com.example.lidia.appproject2017_2;
+package com.example.lidia.appproject2017_2.Activity;
 
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.example.lidia.appproject2017_2.Fragment.FindFragment;
+import com.example.lidia.appproject2017_2.Fragment.ProfileFragment;
+import com.example.lidia.appproject2017_2.R;
+import com.example.lidia.appproject2017_2.Fragment.RankingFragment;
+import com.example.lidia.appproject2017_2.Model.UserModel;
 
 public class MainFindActivity extends AppCompatActivity {
 
