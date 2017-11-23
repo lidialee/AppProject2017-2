@@ -41,7 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SigninActivity extends AppCompatActivity {
+public class SigninActivity extends BasicActivity {
 
     @BindView(R.id.signin_circle_image)
     CircleImageView circleImageView;

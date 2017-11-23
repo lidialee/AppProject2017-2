@@ -98,6 +98,7 @@ public class test extends AppCompatActivity {
                         Intent intent = new Intent(
                                 Intent.ACTION_VIEW,
                                 Uri.parse(sss));
+
                         startActivity(intent);
                     }
                 }

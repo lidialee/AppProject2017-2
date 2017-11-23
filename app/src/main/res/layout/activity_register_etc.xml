@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lidia.appproject2017_2.Activity.RegisterHotelActivity">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/register1_appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/register1_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/register1_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="end"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/close" />
+
+            <TextView
+                android:id="@+id/register1_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/register1_x"
+                android:text="가게 등록하기"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/register1_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/next" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+    
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/register1_appBarLayout"
+        android:layout_alignParentBottom="true"
+        android:paddingEnd="25dp"
+        android:paddingStart="25dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:id="@+id/register1_titletext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="✽ 점포명을 입력해주세요"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/register1_title_edit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/register_edit"
+            android:focusableInTouchMode="true" />
+
+        <TextView
+            android:id="@+id/register1_cafe_titletext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="✽ 가게 타입을 선택해주세요"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp">
+
+            <ImageView
+                android:id="@+id/hotel"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="#f5cdcd"/>
+            <ImageView
+                android:id="@+id/pension"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toEndOf="@+id/hotel"
+                android:background="#f5cdcd"/>
+            <ImageView
+                android:id="@+id/cafe"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="#f5cdcd"
+                android:layout_toEndOf="@+id/pension"/>
+
+            <ImageView
+                android:id="@+id/rest"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/hotel"
+                android:layout_marginEnd="5dp"
+                android:background="#f5cdcd" />
+
+            <ImageView
+                android:id="@+id/etc"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/pension"
+                android:layout_toEndOf="@+id/rest"
+                android:layout_marginTop="5dp"
+                android:background="#f5cdcd" />
+        </RelativeLayout>
+
+
+        <!-- 어떤 가게를 운영하시나요 는 기타만 적용되는 사항 -->
+        <LinearLayout
+            android:id="@+id/extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✽ 어떤 가게를 운영하시나요"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+            <EditText
+                android:id="@+id/register1_extra"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/register_edit"
+                android:focusableInTouchMode="true" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/register1_address_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:text="✽ 주소를 입력해주세요"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/register1_address_subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/register1_address_text"
+                android:text="@string/map_check"
+                android:textColor="@color/red"
+                android:textSize="11sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/register1_address_edit"
+                android:layout_width="310dp"
+                android:layout_height="40dp"
+                android:background="@drawable/register_edit"
+                android:layout_below="@+id/register1_address_subtext"
+                android:focusableInTouchMode="true" />
+
+            <ImageView
+                android:id="@+id/register1_address_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/register1_address_subtext"
+                android:background="@color/black"
+                android:layout_toEndOf="@+id/register1_address_edit"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✽ 가게 전화번호를 입력해주세요"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/register1_phone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/register_edit"
+            android:focusableInTouchMode="true"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✽ 가게 웹사이트를 입력해주세요"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/register1_web"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/register_edit"
+            android:focusableInTouchMode="true" />
+    </LinearLayout>
+</RelativeLayout>

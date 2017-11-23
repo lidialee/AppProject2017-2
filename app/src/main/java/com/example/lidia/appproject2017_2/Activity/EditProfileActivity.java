@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class EditProfileActivity extends BasicActivity {
     @BindView(R.id.editprofile_circle_image)
     CircleImageView circleImageView;
 

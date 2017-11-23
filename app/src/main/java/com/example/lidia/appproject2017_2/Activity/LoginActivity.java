@@ -43,7 +43,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BasicActivity {
     @BindView(R.id.login_email_edit)
     EditText email;
 

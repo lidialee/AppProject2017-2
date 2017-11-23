@@ -22,10 +22,10 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".Activity.LoginActivity">
+        <activity android:name=".Activity.test2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,6 +37,12 @@
         <activity android:name=".Activity.EditProfileActivity" />
         <activity android:name=".Activity.BasicActivity" />
         <activity android:name=".Activity.test" />
+        <activity android:name=".Activity.PensionCommon1Activity" />
+        <activity android:name=".Activity.CafeCommon1Activity" />
+        <activity android:name=".Activity.RegisterRestActivity" />
+        <activity android:name=".Activity.RegisterEtcActivity" />
+        <activity android:name=".Activity.PensionKeyword2Activity" />
+        <activity android:name=".Activity.PensionImage3Activity"></activity>
     </application>
 
 </manifest>

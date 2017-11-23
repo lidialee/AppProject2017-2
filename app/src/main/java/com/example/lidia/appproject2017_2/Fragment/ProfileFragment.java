@@ -1,6 +1,7 @@
 package com.example.lidia.appproject2017_2.Fragment;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,12 +12,18 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.lidia.appproject2017_2.Activity.EditProfileActivity;
 import com.example.lidia.appproject2017_2.Activity.MainFindActivity;
+import com.example.lidia.appproject2017_2.Activity.CafeCommon1Activity;
+import com.example.lidia.appproject2017_2.Activity.RegisterEtcActivity;
+import com.example.lidia.appproject2017_2.Activity.PensionCommon1Activity;
+import com.example.lidia.appproject2017_2.Activity.RegisterRestActivity;
 import com.example.lidia.appproject2017_2.Listener.UserInfoEventListener;
 import com.example.lidia.appproject2017_2.R;
 import com.example.lidia.appproject2017_2.Class.User;
@@ -31,15 +38,44 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileFragment extends Fragment {
     private String userUid;
     private CircleImageView profileImage;
-    private TextView name;
-    private TextView email;
-    private TextView type;
-    private ImageView setting;
+    private TextView name, email, type;
+    private ImageView setting, editStore;
     private MainFindActivity activity;
+    private Dialog registerStoreDialog;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
+    private RelativeLayout hotelLayout, pensionLayout, cafeLayout, restLayout, etcLayout;
     private UserModel userModel = new UserModel();
+
+
+    View.OnClickListener layoutClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            switch (view.getId()) {
+                case R.id.container_hotel:
+                    Intent intent1 = new Intent(getContext(), RegisterHotelActivity.class);
+                    startActivity(intent1);
+                    break;
+                case R.id.container_pension:
+                    Intent intent2 = new Intent(getContext(), PensionCommon1Activity.class);
+                    startActivity(intent2);
+                    break;
+                case R.id.container_cafe:
+                    Intent intent3 = new Intent(getContext(), CafeCommon1Activity.class);
+                    startActivity(intent3);
+                    break;
+                case R.id.container_rest:
+                    Intent intent4 = new Intent(getContext(), RegisterRestActivity.class);
+                    startActivity(intent4);
+                    break;
+                case R.id.container_etc:
+                    Intent intent5 = new Intent(getContext(), RegisterEtcActivity.class);
+                    startActivity(intent5);
+                    break;
+            }
+        }
+    };
 
 
     public ProfileFragment() {
@@ -57,6 +93,7 @@ public class ProfileFragment extends Fragment {
         email = rootView.findViewById(R.id.email_text_mypage);
         type = rootView.findViewById(R.id.userType_text_mypage);
         setting = rootView.findViewById(R.id.edit_info_image);
+        editStore = rootView.findViewById(R.id.register_store);
 
         tabLayout = rootView.findViewById(R.id.tablayout_profile_frag);
         viewPager = rootView.findViewById(R.id.ViewPagercontainerProfile);
@@ -72,7 +109,7 @@ public class ProfileFragment extends Fragment {
                     new ReviewFragment(),
             };
 
-            private final String[] titles = new String[]{"위시 리스트","좋아요 가게","작성한 리뷰"};
+            private final String[] titles = new String[]{"위시 리스트", "좋아요 가게", "작성한 리뷰"};
 
             @Override
             public Fragment getItem(int position) {
@@ -91,7 +128,6 @@ public class ProfileFragment extends Fragment {
         };
 
         viewPager.setAdapter(pagerAdapter);
-        System.out.println("불려져");
         tabLayout.setupWithViewPager(viewPager);
 
         return rootView;
@@ -107,13 +143,24 @@ public class ProfileFragment extends Fragment {
             public void getUser(User user) {
                 if (user != null) {
                     Glide.with(ProfileFragment.this).load(user.getUserImage()).into(profileImage);
-                    name.setText(user.getName()+"");
-                    email.setText(user.getEmail()+"");
+                    name.setText(user.getName());
+                    email.setText(user.getEmail());
 
-                    if(user.getUserType()==0)
+                    if (user.getUserType() == 0) {
                         type.setText("일반사용자");
-                    else
+                        editStore.setVisibility(View.INVISIBLE);
+                    } else {
                         type.setText("가게주");
+                        editStore.setVisibility(View.VISIBLE);
+                        editStore.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                registerStoreDialog.show();
+//                                Intent intent = new Intent(getContext(), RegisterHotelActivity.class);
+//                                startActivity(intent);
+                            }
+                        });
+                    }
                 } else
                     System.out.println("유저가 안옴 문제 있음");
             }
@@ -122,10 +169,12 @@ public class ProfileFragment extends Fragment {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity,EditProfileActivity.class);
+                Intent intent = new Intent(activity, EditProfileActivity.class);
                 startActivity(intent);
             }
         });
+
+        initiateDialog();
 
     }
 
@@ -135,6 +184,26 @@ public class ProfileFragment extends Fragment {
         activity = (MainFindActivity) getActivity();
         this.userUid = activity.getUid();
         userModel.getUserInfo(userUid);
+    }
+
+    private void initiateDialog() {
+        registerStoreDialog = new Dialog(getContext());
+        registerStoreDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        registerStoreDialog.setContentView(R.layout.register_store_dialog);
+        //registerStoreDialog.setCanceledOnTouchOutside(false);
+
+        hotelLayout = registerStoreDialog.findViewById(R.id.container_hotel);
+        pensionLayout = registerStoreDialog.findViewById(R.id.container_pension);
+        cafeLayout = registerStoreDialog.findViewById(R.id.container_cafe);
+        restLayout = registerStoreDialog.findViewById(R.id.container_rest);
+        etcLayout = registerStoreDialog.findViewById(R.id.container_etc);
+
+        hotelLayout.setOnClickListener(layoutClickListener);
+        pensionLayout.setOnClickListener(layoutClickListener);
+        cafeLayout.setOnClickListener(layoutClickListener);
+        restLayout.setOnClickListener(layoutClickListener);
+        etcLayout.setOnClickListener(layoutClickListener);
+
     }
 }
 

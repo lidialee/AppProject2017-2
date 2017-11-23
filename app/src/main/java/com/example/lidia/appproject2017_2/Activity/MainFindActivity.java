@@ -17,7 +17,7 @@ import com.example.lidia.appproject2017_2.R;
 import com.example.lidia.appproject2017_2.Fragment.RankingFragment;
 import com.example.lidia.appproject2017_2.Model.UserModel;
 
-public class MainFindActivity extends AppCompatActivity {
+public class MainFindActivity extends BasicActivity {
 
     // android.app.Fragment
     private TextView mTextMessage;

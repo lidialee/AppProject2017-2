@@ -2,6 +2,7 @@ package com.example.lidia.appproject2017_2.Fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.lidia.appproject2017_2.R;
@@ -44,6 +46,7 @@ public class FindFragment extends Fragment implements OnMapReadyCallback {
     private MarkerOptions newMarkerOption = new MarkerOptions();
     private int number =1;
     private boolean isClick = false;
+    private ImageView test;
 
 
 
@@ -84,7 +87,10 @@ public class FindFragment extends Fragment implements OnMapReadyCallback {
             transaction.replace(R.id.googleMap_find, mapFragment).commit();
         }
         mapFragment.getMapAsync(this);
-        return inflater.inflate(R.layout.fragment_find, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_find, container, false);
+        test  = rootView.findViewById(R.id.test);
+
+        return rootView;
     }
 
 //  이 콜백 함수,
@@ -99,6 +105,14 @@ public class FindFragment extends Fragment implements OnMapReadyCallback {
             log = userLocation.getLongitude();
             System.out.println("onActivityCreated 에서 longtitude=" + log + ", latitude=" + lat);
         }
+
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(getContext(), RegisterHotelActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

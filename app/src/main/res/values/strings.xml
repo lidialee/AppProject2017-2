@@ -6,6 +6,17 @@
     <string name="title_ranking">랭킹</string>
     <string name="title_myprofile">내정보</string>
     <string name="title_register">가게 등록하기</string>
+    <string name="map_check">왼쪽 맵 버튼을 통해 지도 위에서의 위치를 확인해주세요</string>
+    <string name="sub_price">1일 최소금액 ~ 최대금액 형식으로 작성해주세요</string>
+
+    <string name="register_image_sub1">최대 5장까지 등록가능합니다</string>
+    <string name="register_image_sub2">화면 아래 이미지를 터치하시면 등록을 취소하실 수 있습니다.</string>
+
+    <string name="register_store">가게 기본 정보 등록</string>
+    <string name="register_store_image">가게 사진 등록하기</string>
+    <string name="register_store_keyword">가게 키워드 등록하기</string>
+    <string name="caution1">중성화여부, 목줄사용, 객실 청소 원칙,음식 반입 등</string>
+    <string name="caution2">팬션 이용 원칙이나 이외 주의 해야할 사항등을 입력해주세요 </string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

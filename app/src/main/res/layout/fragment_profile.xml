@@ -52,7 +52,7 @@
         <TextView
             android:id="@+id/userType_text_mypage"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="15dp"
             android:text="일반사용자"
             android:textAlignment="center"
             android:textColor="#3e3e3e"
@@ -60,15 +60,25 @@
             android:textStyle="bold"
             android:layout_marginBottom="5dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/email_text_mypage"/>
+            android:layout_below="@+id/email_text_mypage" />
+
+        <ImageView
+            android:id="@+id/register_store"
+            android:layout_width="50dp"
+            android:layout_height="15dp"
+            android:background="@color/main"
+            android:layout_toEndOf="@+id/userType_text_mypage"
+            android:layout_below="@+id/email_text_mypage"
+            android:layout_centerHorizontal="true"/>
 
         <ImageView
             android:id="@+id/edit_info_image"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:src="@drawable/setting"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"/>
+
 
 
     </RelativeLayout>
