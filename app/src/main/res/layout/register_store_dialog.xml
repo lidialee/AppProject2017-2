@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
-    android:layout_height="460dp">
+    android:layout_height="400dp">
 
     <RelativeLayout
         android:id="@+id/dialog_header"
@@ -38,29 +38,6 @@
         android:paddingStart="15dp"
         android:paddingEnd="15dp">
 
-        <RelativeLayout
-            android:id="@+id/container_hotel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:id="@+id/dialog_hotel"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/animal" />
-
-            <TextView
-                android:id="@+id/dialog_hotel_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="반려동물 전용호텔"
-                android:textSize="14sp" />
-
-        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"

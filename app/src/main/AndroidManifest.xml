@@ -39,10 +39,16 @@
         <activity android:name=".Activity.test" />
         <activity android:name=".Activity.PensionCommon1Activity" />
         <activity android:name=".Activity.CafeCommon1Activity" />
-        <activity android:name=".Activity.RegisterRestActivity" />
-        <activity android:name=".Activity.RegisterEtcActivity" />
+        <activity android:name=".Activity.RestCommon1Activity" />
+        <activity android:name=".Activity.EtcCommon1Activity" />
         <activity android:name=".Activity.PensionKeyword2Activity" />
-        <activity android:name=".Activity.PensionImage3Activity"></activity>
+        <activity android:name=".Activity.PensionImage3Activity" />
+        <activity android:name=".Activity.CafeKeyword2Activity" />
+        <activity android:name=".Activity.CafeImage3Activity" />
+        <activity android:name=".Activity.RestKeyword2Activity" />
+        <activity android:name=".Activity.RestImage3Activity" />
+        <activity android:name=".Activity.EtcKeyword2Activity" />
+        <activity android:name=".Activity.EtcImage3Activity"></activity>
     </application>
 
 </manifest>

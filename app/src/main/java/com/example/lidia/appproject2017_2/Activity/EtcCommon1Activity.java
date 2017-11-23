@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.example.lidia.appproject2017_2.R;
 
-public class RegisterEtcActivity extends AppCompatActivity {
+public class EtcCommon1Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_etc);
+        setContentView(R.layout.activity_register_etc_common);
     }
 }

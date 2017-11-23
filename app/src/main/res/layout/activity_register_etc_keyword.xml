@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lidia.appproject2017_2.Activity.EtcKeyword2Activity">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/etc2_appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/etc2_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/etc2_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/backarrow" />
+
+                <TextView
+                    android:id="@+id/etc2_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/etc2_back"
+                    android:text="@string/register_store_keyword"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/etc2_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/next" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/register2_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etc2_appBarLayout"
+        android:orientation="vertical"
+        android:paddingBottom="15dp"
+        android:paddingEnd="25dp"
+        android:paddingStart="25dp"
+        android:paddingTop="35dp">
+
+        <TextView
+            android:id="@+id/etc2_titletext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="✽ 이용가능한 반려동물의 타입을 선택해주세요"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="     아래 항목 중에 한가지만 선택이 가능합니다"
+            android:textColor="@color/red"
+            android:textSize="12sp" />
+
+        <RadioGroup
+            android:id="@+id/group_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/cat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="고양이" />
+
+            <RadioButton
+                android:id="@+id/dog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="개" />
+        </RadioGroup>
+
+        <View
+            android:id="@+id/pension_divier1"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp"
+            android:background="#c6c6c6" />
+
+
+        <TextView
+            android:id="@+id/etc2_pet_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="✽ 이용가능한 반려동물의 크기를 선택해주세요"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="     고양이를 선택하신 경우, 반드시 모두가능으로 선택해주세요"
+            android:textColor="@color/red"
+            android:textSize="12sp" />
+
+        <RadioGroup
+            android:id="@+id/group_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/group_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="소형" />
+
+            <RadioButton
+                android:id="@+id/group_big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="대형" />
+
+            <RadioButton
+                android:id="@+id/group_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="모두 가능" />
+        </RadioGroup>
+
+        <View
+            android:id="@+id/pension_divier2"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp"
+            android:background="#c6c6c6" />
+
+        <TextView
+            android:id="@+id/etc2_pet_things"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="✽팬션에서 제공하는 대표적인 서비스를 선택해주세요"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="     중복 선택 가능합니다"
+            android:textColor="@color/red"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/etc2_guide_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="35dp"
+            android:text="반려동물 타입 선택시 이곳에 선택박스가 나타납니다"
+            android:textAlignment="center"
+            android:textColor="#b6b6b6" />
+
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/etc2_dog_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:paddingStart="10dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/dog_things_line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/d_fense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="객실내부 팬스설치" />
+
+                <CheckBox
+                    android:id="@+id/d_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="소형켄넬 설치" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dog_thing_line2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dog_things_line1"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/d_toliet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="배변패드 제공" />
+
+                <CheckBox
+                    android:id="@+id/d_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="대형켄넬 설치" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/etc2_cat_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:paddingStart="10dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/cat_things_line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/c_cage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="켄넬 설치" />
+
+                <CheckBox
+                    android:id="@+id/c_tower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="캣타워 설치" />
+
+                <CheckBox
+                    android:id="@+id/c_sand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="화장실 설치" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/pension_divier3"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginBottom="20dp"
+            android:background="#c6c6c6" />
+
+        <TextView
+            android:id="@+id/etc2_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="✽팬션에서 제공하는 시설을 선택해주세요"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="     중복 선택 가능합니다"
+            android:textColor="@color/red"
+            android:textSize="12sp" />
+
+        <RelativeLayout
+            android:id="@+id/etc2_environ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingStart="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/path"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="산책로" />
+
+                <CheckBox
+                    android:id="@+id/ground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="운동장" />
+
+                <CheckBox
+                    android:id="@+id/pool"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="풀장" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

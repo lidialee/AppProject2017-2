@@ -1,10 +1,9 @@
 package com.example.lidia.appproject2017_2.Activity;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.lidia.appproject2017_2.R;
@@ -12,24 +11,26 @@ import com.example.lidia.appproject2017_2.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PensionCommon1Activity extends BasicActivity {
+public class EtcImage3Activity extends AppCompatActivity {
 
-    @BindView(R.id.pension_x)
-    ImageView close;
+    @BindView(R.id.etc3_back)
+    ImageView backStep;
 
-    @BindView(R.id.pension_next)
-    ImageView nextStep;
+    @BindView(R.id.etc3_done)
+    ImageView done;
+
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
-                case R.id.pension_x:
+                case R.id.etc3_back:
                     finish();
                     break;
-                case R.id.pension_next:
-                    Intent intent = new Intent(PensionCommon1Activity.this, PensionKeyword2Activity.class);
-                    // 넘어갈때 인텐트로 스트링 엄청 넘어간다
+                case R.id.etc3_done:
+                    // 이게 둘리면 이제 서버로 저장되야겠지
+                    finish();
+                    Intent intent = new Intent(EtcImage3Activity.this, MainFindActivity.class);
                     startActivity(intent);
                     break;
             }
@@ -39,11 +40,12 @@ public class PensionCommon1Activity extends BasicActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_pension_common);
+        setContentView(R.layout.activity_register_etc_image);
         ButterKnife.bind(this);
 
-        nextStep.setOnClickListener(listener);
-        close.setOnClickListener(listener);
+
+        backStep.setOnClickListener(listener);
+        done.setOnClickListener(listener);
 
     }
 }

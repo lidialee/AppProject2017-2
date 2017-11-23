@@ -21,9 +21,9 @@ import com.bumptech.glide.Glide;
 import com.example.lidia.appproject2017_2.Activity.EditProfileActivity;
 import com.example.lidia.appproject2017_2.Activity.MainFindActivity;
 import com.example.lidia.appproject2017_2.Activity.CafeCommon1Activity;
-import com.example.lidia.appproject2017_2.Activity.RegisterEtcActivity;
+import com.example.lidia.appproject2017_2.Activity.EtcCommon1Activity;
 import com.example.lidia.appproject2017_2.Activity.PensionCommon1Activity;
-import com.example.lidia.appproject2017_2.Activity.RegisterRestActivity;
+import com.example.lidia.appproject2017_2.Activity.RestCommon1Activity;
 import com.example.lidia.appproject2017_2.Listener.UserInfoEventListener;
 import com.example.lidia.appproject2017_2.R;
 import com.example.lidia.appproject2017_2.Class.User;
@@ -44,19 +44,14 @@ public class ProfileFragment extends Fragment {
     private Dialog registerStoreDialog;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private RelativeLayout hotelLayout, pensionLayout, cafeLayout, restLayout, etcLayout;
+    private RelativeLayout pensionLayout, cafeLayout, restLayout, etcLayout;
     private UserModel userModel = new UserModel();
 
 
     View.OnClickListener layoutClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
             switch (view.getId()) {
-                case R.id.container_hotel:
-                    Intent intent1 = new Intent(getContext(), RegisterHotelActivity.class);
-                    startActivity(intent1);
-                    break;
                 case R.id.container_pension:
                     Intent intent2 = new Intent(getContext(), PensionCommon1Activity.class);
                     startActivity(intent2);
@@ -66,11 +61,11 @@ public class ProfileFragment extends Fragment {
                     startActivity(intent3);
                     break;
                 case R.id.container_rest:
-                    Intent intent4 = new Intent(getContext(), RegisterRestActivity.class);
+                    Intent intent4 = new Intent(getContext(), RestCommon1Activity.class);
                     startActivity(intent4);
                     break;
                 case R.id.container_etc:
-                    Intent intent5 = new Intent(getContext(), RegisterEtcActivity.class);
+                    Intent intent5 = new Intent(getContext(), EtcCommon1Activity.class);
                     startActivity(intent5);
                     break;
             }
@@ -192,13 +187,11 @@ public class ProfileFragment extends Fragment {
         registerStoreDialog.setContentView(R.layout.register_store_dialog);
         //registerStoreDialog.setCanceledOnTouchOutside(false);
 
-        hotelLayout = registerStoreDialog.findViewById(R.id.container_hotel);
         pensionLayout = registerStoreDialog.findViewById(R.id.container_pension);
         cafeLayout = registerStoreDialog.findViewById(R.id.container_cafe);
         restLayout = registerStoreDialog.findViewById(R.id.container_rest);
         etcLayout = registerStoreDialog.findViewById(R.id.container_etc);
 
-        hotelLayout.setOnClickListener(layoutClickListener);
         pensionLayout.setOnClickListener(layoutClickListener);
         cafeLayout.setOnClickListener(layoutClickListener);
         restLayout.setOnClickListener(layoutClickListener);

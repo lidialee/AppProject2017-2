@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lidia.appproject2017_2.Activity.CafeCommon1Activity">
+    tools:context="com.example.lidia.appproject2017_2.Activity.RestCommon1Activity">
 
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/cafe_appBarLayout"
+        android:id="@+id/rest_appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/cafe_toolbar"
+            android:id="@+id/rest_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/main">
@@ -24,7 +23,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/cafe_x"
+                    android:id="@+id/rest_x"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -35,18 +34,18 @@
                     android:src="@drawable/close" />
 
                 <TextView
-                    android:id="@+id/cafe_title"
+                    android:id="@+id/rest_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/cafe_x"
+                    android:layout_toEndOf="@+id/rest_x"
                     android:text="@string/register_store"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <ImageView
-                    android:id="@+id/cafe_next"
+                    android:id="@+id/rest_next"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -63,7 +62,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cafe_appBarLayout">
+        android:layout_below="@+id/rest_appBarLayout">
         <LinearLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
@@ -75,7 +74,7 @@
             android:paddingBottom="15dp">
 
             <TextView
-                android:id="@+id/cafe_titletext"
+                android:id="@+id/rest_titletext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
@@ -84,7 +83,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/cafe_title_edit"
+                android:id="@+id/rest_title_edit"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="12dp"
@@ -97,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp">
                 <TextView
-                    android:id="@+id/cafe_address_text"
+                    android:id="@+id/rest_address_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
@@ -106,30 +105,30 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/cafe_address_subtext"
+                    android:id="@+id/rest_address_subtext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/cafe_address_text"
+                    android:layout_below="@+id/rest_address_text"
                     android:text="@string/map_check"
                     android:textColor="@color/red"
                     android:textSize="11sp"
                     android:layout_marginBottom="4dp"/>
 
                 <EditText
-                    android:id="@+id/cafe_address_edit"
+                    android:id="@+id/rest_address_edit"
                     android:layout_width="310dp"
                     android:layout_height="40dp"
                     android:background="@drawable/register_edit"
-                    android:layout_below="@+id/cafe_address_subtext"
+                    android:layout_below="@+id/rest_address_subtext"
                     android:focusableInTouchMode="true" />
 
                 <ImageView
-                    android:id="@+id/cafe_address_btn"
+                    android:id="@+id/rest_address_btn"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_below="@+id/cafe_address_subtext"
+                    android:layout_below="@+id/rest_address_subtext"
                     android:src="@drawable/mapicon"
-                    android:layout_toEndOf="@+id/cafe_address_edit"
+                    android:layout_toEndOf="@+id/rest_address_edit"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="10dp"/>
             </RelativeLayout>
@@ -141,7 +140,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"/>
             <EditText
-                android:id="@+id/cafe_phone"
+                android:id="@+id/rest_phone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/register_edit"
@@ -155,7 +154,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"/>
             <EditText
-                android:id="@+id/cafe_web"
+                android:id="@+id/rest_web"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/register_edit"
@@ -163,7 +162,7 @@
                 android:layout_marginBottom="12dp"/>
 
             <TextView
-                android:id="@+id/cafe_price_text"
+                android:id="@+id/rest_price_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="✽ 가격대를 입력해주세요"
@@ -172,17 +171,17 @@
                 android:layout_marginBottom="3dp"/>
 
             <TextView
-                android:id="@+id/cafe_price_subtext"
+                android:id="@+id/rest_price_subtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cafe_price_text"
+                android:layout_below="@+id/rest_price_text"
                 android:text="@string/sub_price"
                 android:textColor="@color/red"
                 android:textSize="11sp"
                 android:layout_marginBottom="4dp"/>
 
             <EditText
-                android:id="@+id/cafe_price"
+                android:id="@+id/rest_price"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/register_edit"
@@ -196,7 +195,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"/>
             <EditText
-                android:id="@+id/cafe_plus"
+                android:id="@+id/rest_plus"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
                 android:background="@drawable/register_edit"
@@ -204,7 +203,7 @@
                 android:layout_marginBottom="12dp"/>
 
             <TextView
-                android:id="@+id/cafe_caution_text"
+                android:id="@+id/rest_caution_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="✽ 가게 이용시 주의사항을 입력해주세요"
@@ -230,7 +229,7 @@
                 android:layout_marginBottom="4dp"/>
 
             <EditText
-                android:id="@+id/cafe_caution"
+                android:id="@+id/rest_caution"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
                 android:background="@drawable/register_edit"
@@ -239,4 +238,5 @@
         </LinearLayout>
 
     </ScrollView>
+
 </RelativeLayout>
