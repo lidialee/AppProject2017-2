@@ -47,7 +47,12 @@
         <activity android:name=".Activity.RestKeyword2Activity" />
         <activity android:name=".Activity.RestImage3Activity" />
         <activity android:name=".Activity.EtcKeyword2Activity" />
-        <activity android:name=".Activity.EtcImage3Activity"></activity>
+        <activity android:name=".Activity.EtcImage3Activity" />
+        <activity android:name=".Activity.FindAreaActivity" />
+        <activity android:name=".Activity.FindPensionKeywordActivity" />
+        <activity android:name=".Activity.FindCafeKeywordActivity" />
+        <activity android:name=".Activity.FindRestKeywordActivity" />
+        <activity android:name=".Activity.FindEtcKeywordActivity"></activity>
     </application>
 
 </manifest>

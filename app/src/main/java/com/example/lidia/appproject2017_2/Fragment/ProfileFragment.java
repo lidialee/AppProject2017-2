@@ -194,6 +194,19 @@ public class ProfileFragment extends Fragment {
         restLayout = registerStoreDialog.findViewById(R.id.container_rest);
         etcLayout = registerStoreDialog.findViewById(R.id.container_etc);
 
+        ImageView pension = registerStoreDialog.findViewById(R.id.dialog_pension);
+        Glide.with(this).load(R.drawable.pension2).into(pension);
+
+        ImageView cafe = registerStoreDialog.findViewById(R.id.dialog_cafe);
+        Glide.with(this).load(R.drawable.cafe2).into(cafe);
+
+        ImageView rest = registerStoreDialog.findViewById(R.id.dialog_rest);
+        Glide.with(this).load(R.drawable.rest2).into(rest);
+
+        ImageView etc = registerStoreDialog.findViewById(R.id.dialog_etc);
+        Glide.with(this).load(R.drawable.etc2).into(etc);
+
+
         pensionLayout.setOnClickListener(layoutClickListener);
         cafeLayout.setOnClickListener(layoutClickListener);
         restLayout.setOnClickListener(layoutClickListener);

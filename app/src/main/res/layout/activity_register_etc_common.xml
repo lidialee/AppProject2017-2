@@ -145,7 +145,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_below="@+id/etc_address_subtext"
-                    android:src="@drawable/mapicon"
+                    android:src="@drawable/map2"
                     android:layout_toEndOf="@+id/etc_address_edit"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="10dp"/>

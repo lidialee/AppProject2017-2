@@ -40,8 +40,7 @@
                 android:id="@+id/dialog_pension"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/pension" />
+                android:layout_marginBottom="5dp" />
 
             <TextView
                 android:id="@+id/dialog_pension_text"
@@ -68,8 +67,7 @@
                 android:id="@+id/dialog_cafe"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/cafe" />
+                android:layout_marginBottom="5dp" />
 
             <TextView
                 android:id="@+id/dialog_cafe_text"
@@ -96,8 +94,7 @@
                 android:id="@+id/dialog_rest"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/rest" />
+                android:layout_marginBottom="5dp" />
 
             <TextView
                 android:id="@+id/dialog_rest_text"
@@ -122,8 +119,7 @@
                 android:id="@+id/dialog_etc"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/store" />
+                android:layout_marginBottom="5dp" />
 
             <TextView
                 android:id="@+id/dialog_etc_text"
