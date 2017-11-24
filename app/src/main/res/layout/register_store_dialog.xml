@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="400dp">
+    android:layout_width="290dp"
+    android:layout_height="340dp">
 
     <RelativeLayout
         android:id="@+id/dialog_header"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/dialogBack">
+        android:background="@color/main">
 
         <TextView
             android:id="@+id/dialog_title"
@@ -15,15 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="운영하시는 가게 타입을 선택해주세요"
-            android:textSize="16sp" />
-
-        <View
-            android:id="@+id/dialog_divider"
-            android:layout_width="match_parent"
-            android:layout_height="0.12dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/black" />
-
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
     </RelativeLayout>
 
@@ -35,15 +28,9 @@
         android:layout_below="@+id/dialog_header"
         android:background="@color/white"
         android:orientation="vertical"
+        android:paddingTop="15dp"
         android:paddingStart="15dp"
         android:paddingEnd="15dp">
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.12dp"
-            android:background="@color/black"
-            android:layout_marginBottom="5dp"/>
 
         <RelativeLayout
             android:id="@+id/container_pension"
@@ -61,19 +48,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="24dp"
                 android:layout_toEndOf="@+id/dialog_pension"
-                android:textSize="14sp"
+                android:textSize="15sp"
+                android:textColor="@color/fontgray"
                 android:text="반려동물 동반가능 팬션" />
 
         </RelativeLayout>
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.12dp"
-            android:background="@color/black"
-            android:layout_marginBottom="5dp"/>
 
 
         <RelativeLayout
@@ -93,18 +76,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="24dp"
                 android:layout_toEndOf="@+id/dialog_cafe"
-                android:textSize="14sp"
+                android:textSize="15sp"
+                android:textColor="@color/fontgray"
+
                 android:text="반려동물 동반가능 카페" />
 
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.12dp"
-            android:background="@color/black"
-            android:layout_marginBottom="5dp"/>
+
 
         <RelativeLayout
             android:id="@+id/container_rest"
@@ -123,17 +104,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="24dp"
                 android:layout_toEndOf="@+id/dialog_rest"
-                android:textSize="14sp"
+                android:textSize="15sp"
+                android:textColor="@color/fontgray"
                 android:text="반려동물 동반가능 음식점" />
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.12dp"
-            android:background="@color/black"
-            android:layout_marginBottom="5dp"/>
+
 
         <RelativeLayout
             android:id="@+id/container_etc"
@@ -152,21 +130,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="24dp"
                 android:layout_toEndOf="@+id/dialog_etc"
-                android:textSize="14sp"
+                android:textSize="15sp"
+                android:textColor="@color/fontgray"
                 android:text="반려동물 동반가능 기타 상점" />
         </RelativeLayout>
     </LinearLayout>
-
-
-    <Button
-        android:id="@+id/dialog_done"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="8dp"/>
 
 </RelativeLayout>

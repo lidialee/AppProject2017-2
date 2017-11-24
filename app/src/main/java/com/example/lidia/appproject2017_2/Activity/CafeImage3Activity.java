@@ -11,7 +11,7 @@ import com.example.lidia.appproject2017_2.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CafeImage3Activity extends AppCompatActivity {
+public class CafeImage3Activity extends BasicActivity {
 
     @BindView(R.id.cafe3_back)
     ImageView backStep;
@@ -29,9 +29,9 @@ public class CafeImage3Activity extends AppCompatActivity {
                     break;
                 case R.id.cafe3_done:
                     // 이게 둘리면 이제 서버로 저장되야겠지
-                    finish();
                     Intent intent = new Intent(CafeImage3Activity.this, MainFindActivity.class);
                     startActivity(intent);
+                    finish();
                     break;
             }
         }

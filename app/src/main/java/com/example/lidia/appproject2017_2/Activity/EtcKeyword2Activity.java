@@ -13,21 +13,16 @@ import com.example.lidia.appproject2017_2.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class EtcKeyword2Activity extends AppCompatActivity {
+public class EtcKeyword2Activity extends BasicActivity {
     @BindView(R.id.etc2_back)
     ImageView backStep;
 
     @BindView(R.id.etc2_next)
     ImageView nextStep;
 
-    @BindView(R.id.etc2_dog_layout)
-    RelativeLayout dogLayout;
-
-    @BindView(R.id.etc2_cat_layout)
-    RelativeLayout catLayout;
-
-    @BindView(R.id.etc2_guide_text)
-    TextView guideText;
+//    @BindView(R.id.etc2_things_layout)
+//    RelativeLayout dogLayout;
+//
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -41,17 +36,6 @@ public class EtcKeyword2Activity extends AppCompatActivity {
                     // 넘어갈때 인텐트로 스트링 엄청 넘어간다
                     startActivity(intent);
                     break;
-                case R.id.etc2_dog_layout:
-                    dogLayout.setVisibility(View.VISIBLE);
-                    catLayout.setVisibility(View.GONE);
-                    guideText.setVisibility(View.GONE);
-                    break;
-                case R.id.etc2_cat_layout:
-                    dogLayout.setVisibility(View.GONE);
-                    catLayout.setVisibility(View.VISIBLE);
-                    guideText.setVisibility(View.GONE);
-                    break;
-
             }
         }
     };
@@ -63,8 +47,6 @@ public class EtcKeyword2Activity extends AppCompatActivity {
 
         backStep.setOnClickListener(listener);
         nextStep.setOnClickListener(listener);
-        dogLayout.setOnClickListener(listener);
-        catLayout.setOnClickListener(listener);
 
     }
 }

@@ -88,19 +88,19 @@
             android:textSize="12sp" />
 
         <RadioGroup
-            android:id="@+id/group_type"
+            android:id="@+id/cafe2_group_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/cat"
+                android:id="@+id/cafe2_cat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="고양이" />
 
             <RadioButton
-                android:id="@+id/dog"
+                android:id="@+id/cafe2_dog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -173,7 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
-            android:text="✽팬션에서 제공하는 대표적인 서비스를 선택해주세요"
+            android:text="✽ 카페에서 제공하는 물품,시설등을 선택해주세요"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -220,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
                     android:scaleY="1.1"
-                    android:text="객실내부 팬스설치" />
+                    android:text="카페내 팬스설치" />
 
                 <CheckBox
                     android:id="@+id/d_small"
@@ -252,10 +252,18 @@
                     android:id="@+id/d_big"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
+                    android:layout_marginStart="20dp"
                     android:scaleX="1.1"
                     android:scaleY="1.1"
                     android:text="대형켄넬 설치" />
+                <CheckBox
+                    android:id="@+id/d_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="개인룸" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -286,7 +294,7 @@
                     android:id="@+id/c_tower"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="4dp"
                     android:scaleX="1.1"
                     android:scaleY="1.1"
                     android:text="캣타워 설치" />
@@ -314,57 +322,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
-            android:text="✽팬션에서 제공하는 시설을 선택해주세요"
+            android:text="✽ 반려동물 음식 판매 여부를 선택해주세요"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="     중복 선택 가능합니다"
-            android:textColor="@color/red"
-            android:textSize="12sp" />
-
-        <RelativeLayout
-            android:id="@+id/cafe2_environ"
+        <RadioGroup
+            android:id="@+id/group_food"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:paddingStart="10dp">
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/yes"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:text="판매함 " />
 
-                <CheckBox
-                    android:id="@+id/path"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleX="1.1"
-                    android:scaleY="1.1"
-                    android:text="산책로" />
+            <RadioButton
+                android:id="@+id/no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="판매하지 않음" />
 
-                <CheckBox
-                    android:id="@+id/ground"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:scaleX="1.1"
-                    android:scaleY="1.1"
-                    android:text="운동장" />
-
-                <CheckBox
-                    android:id="@+id/pool"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:scaleX="1.1"
-                    android:scaleY="1.1"
-                    android:text="풀장" />
-            </LinearLayout>
-        </RelativeLayout>
+        </RadioGroup>
 
 
     </LinearLayout>

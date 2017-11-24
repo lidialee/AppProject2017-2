@@ -53,18 +53,22 @@ public class ProfileFragment extends Fragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.container_pension:
+                    registerStoreDialog.dismiss();
                     Intent intent2 = new Intent(getContext(), PensionCommon1Activity.class);
                     startActivity(intent2);
                     break;
                 case R.id.container_cafe:
+                    registerStoreDialog.dismiss();
                     Intent intent3 = new Intent(getContext(), CafeCommon1Activity.class);
                     startActivity(intent3);
                     break;
                 case R.id.container_rest:
+                    registerStoreDialog.dismiss();
                     Intent intent4 = new Intent(getContext(), RestCommon1Activity.class);
                     startActivity(intent4);
                     break;
                 case R.id.container_etc:
+                    registerStoreDialog.dismiss();
                     Intent intent5 = new Intent(getContext(), EtcCommon1Activity.class);
                     startActivity(intent5);
                     break;
@@ -151,8 +155,6 @@ public class ProfileFragment extends Fragment {
                             @Override
                             public void onClick(View view) {
                                 registerStoreDialog.show();
-//                                Intent intent = new Intent(getContext(), RegisterHotelActivity.class);
-//                                startActivity(intent);
                             }
                         });
                     }

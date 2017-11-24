@@ -87,19 +87,19 @@
             android:textSize="12sp" />
 
         <RadioGroup
-            android:id="@+id/group_type"
+            android:id="@+id/pension2_group_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/cat"
+                android:id="@+id/pension2_cat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="고양이" />
 
             <RadioButton
-                android:id="@+id/dog"
+                android:id="@+id/pension2_dog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -172,7 +172,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
-            android:text="✽팬션에서 제공하는 대표적인 서비스를 선택해주세요"
+            android:text="✽팬션에서 제공하는 반려동물 물품을 선택해주세요"
             android:textColor="@color/black"
             android:textSize="16sp" />
 

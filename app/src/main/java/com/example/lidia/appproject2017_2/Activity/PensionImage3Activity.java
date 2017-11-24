@@ -11,7 +11,7 @@ import com.example.lidia.appproject2017_2.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PensionImage3Activity extends AppCompatActivity {
+public class PensionImage3Activity extends BasicActivity {
     @BindView(R.id.pension3_back)
     ImageView backStep;
 
@@ -28,9 +28,10 @@ public class PensionImage3Activity extends AppCompatActivity {
                     break;
                 case R.id.pension3_done:
                     // 이게 둘리면 이제 서버로 저장되야겠지
-                    finish();
+
                     Intent intent = new Intent(PensionImage3Activity.this, MainFindActivity.class);
                     startActivity(intent);
+                    finish();
                     break;
             }
         }

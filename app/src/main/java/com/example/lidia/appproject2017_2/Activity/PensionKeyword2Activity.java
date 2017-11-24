@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,6 +31,16 @@ public class PensionKeyword2Activity extends BasicActivity {
     @BindView(R.id.guide_text)
     TextView guideText;
 
+    @BindView(R.id.pension2_group_type)
+    RadioGroup radiaGroup;
+
+    @BindView(R.id.pension2_dog)
+    RadioButton radiaDog;
+
+    @BindView(R.id.pension2_cat)
+    RadioButton radiaCat;
+
+    // 이동 이미지 클릭리스너
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -41,17 +53,25 @@ public class PensionKeyword2Activity extends BasicActivity {
                     // 넘어갈때 인텐트로 스트링 엄청 넘어간다
                     startActivity(intent);
                     break;
-                case R.id.dog_layout:
+            }
+        }
+    };
+
+    // 동물 타입 라디오타입 리스너, 선택에 따라 뷰 바꾸기
+    RadioGroup.OnCheckedChangeListener radioListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup radioGroup, int i) {
+            switch (i){
+                case R.id.pension2_dog:
                     dogLayout.setVisibility(View.VISIBLE);
                     catLayout.setVisibility(View.GONE);
                     guideText.setVisibility(View.GONE);
                     break;
-                case R.id.cat_layout:
+                case R.id.pension2_cat:
                     dogLayout.setVisibility(View.GONE);
                     catLayout.setVisibility(View.VISIBLE);
                     guideText.setVisibility(View.GONE);
                     break;
-
             }
         }
     };
@@ -64,7 +84,9 @@ public class PensionKeyword2Activity extends BasicActivity {
 
         backStep.setOnClickListener(listener);
         nextStep.setOnClickListener(listener);
-        dogLayout.setOnClickListener(listener);
-        catLayout.setOnClickListener(listener);
+        radiaGroup.setOnCheckedChangeListener(radioListener);
+
     }
+
+
 }

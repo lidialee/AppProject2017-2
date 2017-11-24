@@ -22,7 +22,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Activity.test2">
+        <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +36,6 @@
             android:launchMode="singleTop" />
         <activity android:name=".Activity.EditProfileActivity" />
         <activity android:name=".Activity.BasicActivity" />
-        <activity android:name=".Activity.test" />
         <activity android:name=".Activity.PensionCommon1Activity" />
         <activity android:name=".Activity.CafeCommon1Activity" />
         <activity android:name=".Activity.RestCommon1Activity" />
