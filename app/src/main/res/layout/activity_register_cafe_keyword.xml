@@ -307,6 +307,15 @@
                     android:scaleX="1.1"
                     android:scaleY="1.1"
                     android:text="화장실 설치" />
+
+                <CheckBox
+                    android:id="@+id/c_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:scaleX="1.1"
+                    android:scaleY="1.1"
+                    android:text="개인룸" />
             </LinearLayout>
         </RelativeLayout>
 

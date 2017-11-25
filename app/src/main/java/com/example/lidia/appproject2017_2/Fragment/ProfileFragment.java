@@ -44,35 +44,34 @@ public class ProfileFragment extends Fragment {
     private Dialog registerStoreDialog;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private RelativeLayout pensionLayout, cafeLayout, restLayout, etcLayout;
+    private ImageView pension, cafe, rest, etc;
     private UserModel userModel = new UserModel();
 
 
     View.OnClickListener layoutClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Intent intent = null;
             switch (view.getId()) {
-                case R.id.container_pension:
+                case R.id.register_dialog_pension:
                     registerStoreDialog.dismiss();
-                    Intent intent2 = new Intent(getContext(), PensionCommon1Activity.class);
-                    startActivity(intent2);
+                    intent = new Intent(getContext(), PensionCommon1Activity.class);
                     break;
-                case R.id.container_cafe:
+                case R.id.register_dialog_cafe:
                     registerStoreDialog.dismiss();
-                    Intent intent3 = new Intent(getContext(), CafeCommon1Activity.class);
-                    startActivity(intent3);
+                    intent= new Intent(getContext(), CafeCommon1Activity.class);
                     break;
-                case R.id.container_rest:
+                case R.id.register_dialog_rest:
                     registerStoreDialog.dismiss();
-                    Intent intent4 = new Intent(getContext(), RestCommon1Activity.class);
-                    startActivity(intent4);
+                    intent = new Intent(getContext(), RestCommon1Activity.class);
                     break;
-                case R.id.container_etc:
+                case R.id.register_dialog_etc:
                     registerStoreDialog.dismiss();
-                    Intent intent5 = new Intent(getContext(), EtcCommon1Activity.class);
-                    startActivity(intent5);
+                    intent = new Intent(getContext(), EtcCommon1Activity.class);
                     break;
             }
+            startActivity(intent);
+            getActivity().overridePendingTransition(0, 0);
         }
     };
 
@@ -189,28 +188,20 @@ public class ProfileFragment extends Fragment {
         registerStoreDialog.setContentView(R.layout.register_store_dialog);
         //registerStoreDialog.setCanceledOnTouchOutside(false);
 
-        pensionLayout = registerStoreDialog.findViewById(R.id.container_pension);
-        cafeLayout = registerStoreDialog.findViewById(R.id.container_cafe);
-        restLayout = registerStoreDialog.findViewById(R.id.container_rest);
-        etcLayout = registerStoreDialog.findViewById(R.id.container_etc);
+        pension = registerStoreDialog.findViewById(R.id.register_dialog_pension);
+        cafe = registerStoreDialog.findViewById(R.id.register_dialog_cafe);
+        rest = registerStoreDialog.findViewById(R.id.register_dialog_rest);
+        etc = registerStoreDialog.findViewById(R.id.register_dialog_etc);
 
-        ImageView pension = registerStoreDialog.findViewById(R.id.dialog_pension);
         Glide.with(this).load(R.drawable.pension2).into(pension);
-
-        ImageView cafe = registerStoreDialog.findViewById(R.id.dialog_cafe);
         Glide.with(this).load(R.drawable.cafe2).into(cafe);
-
-        ImageView rest = registerStoreDialog.findViewById(R.id.dialog_rest);
         Glide.with(this).load(R.drawable.rest2).into(rest);
-
-        ImageView etc = registerStoreDialog.findViewById(R.id.dialog_etc);
         Glide.with(this).load(R.drawable.etc2).into(etc);
 
-
-        pensionLayout.setOnClickListener(layoutClickListener);
-        cafeLayout.setOnClickListener(layoutClickListener);
-        restLayout.setOnClickListener(layoutClickListener);
-        etcLayout.setOnClickListener(layoutClickListener);
+        pension.setOnClickListener(layoutClickListener);
+        cafe.setOnClickListener(layoutClickListener);
+        rest.setOnClickListener(layoutClickListener);
+        etc.setOnClickListener(layoutClickListener);
 
     }
 }

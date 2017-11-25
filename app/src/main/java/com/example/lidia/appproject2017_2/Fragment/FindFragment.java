@@ -68,19 +68,20 @@ public class FindFragment extends Fragment{
             else {
                 switch (id){
                     case R.id.find_dialog_pension:
-                        intent.putExtra("storeNumber",1);
+                        intent.putExtra("storeType",1);
                         break;
                     case R.id.find_dialog_cafe:
-                        intent.putExtra("storeNumber",2);
+                        intent.putExtra("storeType",2);
                         break;
                     case R.id.find_dialog_rest:
-                        intent.putExtra("storeNumber",3);
+                        intent.putExtra("storeType",3);
                         break;
                     case R.id.find_dialog_etc:
-                        intent.putExtra("storeNumber",4);
+                        intent.putExtra("storeType",4);
                         break;
                 }
                 startActivity(intent);
+                getActivity().overridePendingTransition(0, 0);
                 findDialog.dismiss();
             }
         }
@@ -123,7 +124,6 @@ public class FindFragment extends Fragment{
                 mainMap.moveCamera(CameraUpdateFactory.newLatLngZoom(getMyLocation(),12));
             }
         });
-
 
         // 찾기 아이콘에 리스너 부착
         find.setOnClickListener(listener);

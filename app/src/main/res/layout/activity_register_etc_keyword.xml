@@ -205,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
                     android:scaleY="1.1"
-                    android:text="가게 내 팬스 설치" />
+                    android:text="팬스 설치" />
 
                 <CheckBox
                     android:id="@+id/small"
@@ -214,17 +214,7 @@
                     android:layout_marginStart="20dp"
                     android:scaleX="1.1"
                     android:scaleY="1.1"
-                    android:text="소형켄넬 설치" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/thing_line2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/things_line1"
-                android:layout_marginTop="2dp"
-                android:orientation="horizontal">
+                    android:text="켄넬 설치" />
 
                 <CheckBox
                     android:id="@+id/toliet"
@@ -232,17 +222,12 @@
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
                     android:scaleY="1.1"
-                    android:text="배변패드 제공" />
+                    android:text="배변패드"
+                    android:layout_marginStart="20dp"/>
 
-                <CheckBox
-                    android:id="@+id/big"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:scaleX="1.1"
-                    android:scaleY="1.1"
-                    android:text="대형켄넬 설치" />
             </LinearLayout>
+
+
         </RelativeLayout>
 
 

@@ -1,5 +1,6 @@
 package com.example.lidia.appproject2017_2.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -66,36 +67,69 @@ public class FindAreaActivity extends BasicActivity {
     @BindView(R.id.area_back)
     ImageView back;
 
-    private int storeType;
-
+    //private int storeType;
+    private int areaType;
     // 1 = 팬션  2 = 카페  3 = 음식점  4 = 기타
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             int id = view.getId();
-            Intent intent = null;
-            if (id == R.id.area_back)
-                finish();
-            else{
-                switch (storeType){
-                    case 1:
-                        intent = new Intent(FindAreaActivity.this, FindPensionKeywordActivity.class);
-                        intent.putExtra("area",1);
-                        break;
-                    case 2:
-                        intent = new Intent(FindAreaActivity.this, FindCafeKeywordActivity.class);
-                        intent.putExtra("area",2);
-                        break;
-                    case 3:
-                        intent = new Intent(FindAreaActivity.this, FindRestKeywordActivity.class);
-                        intent.putExtra("area",3);
-                        break;
-                    case 4:
-                        intent = new Intent(FindAreaActivity.this, FindEtcKeywordActivity.class);
-                        intent.putExtra("area",4);
-                        break;
-                }
-                startActivity(intent);
+            switch (id){
+                case R.id.area_back:
+                    finish();
+                    overridePendingTransition(0, 0);
+                    break;
+                case R.id.seoul:
+                    goToStoreKeywordActivity(1) ;
+                    break;
+                case R.id.busan:
+                    goToStoreKeywordActivity(2) ;
+                    break;
+                case R.id.degu:
+                    goToStoreKeywordActivity(3) ;
+                    break;
+                case R.id.inchen:
+                    goToStoreKeywordActivity(4) ;
+                    break;
+                case R.id.dejen:
+                    goToStoreKeywordActivity(5) ;
+                    break;
+                case R.id.gwangju:
+                    goToStoreKeywordActivity(6) ;
+                    break;
+                case R.id.wolsan:
+                    goToStoreKeywordActivity(7) ;
+                    break;
+                case R.id.sejong:
+                    goToStoreKeywordActivity(8) ;
+                    break;
+                case R.id.geongii:
+                    goToStoreKeywordActivity(9) ;
+                    break;
+                case R.id.gangwondo:
+                    goToStoreKeywordActivity(10) ;
+                    break;
+                case R.id.chungnorth:
+                    goToStoreKeywordActivity(11) ;
+                    break;
+                case R.id.chungsouth:
+                    goToStoreKeywordActivity(12) ;
+                    break;
+                case R.id.junranorth:
+                    goToStoreKeywordActivity(13) ;
+                    break;
+                case R.id.junrasouth:
+                    goToStoreKeywordActivity(14) ;
+                    break;
+                case R.id.geongnorth:
+                    goToStoreKeywordActivity(15) ;
+                    break;
+                case R.id.geongsouth:
+                    goToStoreKeywordActivity(16) ;
+                    break;
+                case R.id.jeju:
+                    goToStoreKeywordActivity(17) ;
+                    break;
 
             }
         }
@@ -109,16 +143,12 @@ public class FindAreaActivity extends BasicActivity {
         ButterKnife.bind(this);
 
         // 앞에서 사용자가 선택한 가게 타입 받아오기
-        storeType = getIntent().getExtras().getInt("storeNumber");
+        //storeType = getIntent().getExtras().getInt("storeNumber");
+
 
         // 리스너 부착
         setListenerToView();
-
-
     }
-
-
-
 
     private void setListenerToView(){
         seoul.setOnClickListener(listener);
@@ -140,4 +170,37 @@ public class FindAreaActivity extends BasicActivity {
         jeju.setOnClickListener(listener);
         back.setOnClickListener(listener);
     }
+
+    private void goToStoreKeywordActivity(int areaType){
+        Intent intent = null;
+        int storeType = getIntent().getExtras().getInt("storeType");
+        switch (storeType){
+            case 1:
+                intent = new Intent(FindAreaActivity.this, FindPensionKeywordActivity.class);
+                intent.putExtra("storeType",storeType);
+                intent.putExtra("areaType",areaType);
+                break;
+            case 2:
+                intent = new Intent(FindAreaActivity.this, FindCafeKeywordActivity.class);
+                intent.putExtra("storeType",storeType);
+                intent.putExtra("areaType",areaType);
+                break;
+            case 3:
+                intent = new Intent(FindAreaActivity.this, FindRestKeywordActivity.class);
+                intent.putExtra("storeType",storeType);
+                intent.putExtra("areaType",areaType);
+                break;
+            case 4:
+                intent = new Intent(FindAreaActivity.this, FindEtcKeywordActivity.class);
+                intent.putExtra("storeType",storeType);
+                intent.putExtra("areaType",areaType);
+                break;
+        }
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+    }
 }
+
+
+
+
