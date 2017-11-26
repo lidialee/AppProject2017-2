@@ -103,6 +103,7 @@ public class PensionKeyword2Activity extends BasicActivity {
                     bundle2.putString("environment",environment);
 
                     Intent intent = new Intent(PensionKeyword2Activity.this, PensionImage3Activity.class);
+                    intent.putExtras(bundle2);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                     break;

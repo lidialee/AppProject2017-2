@@ -16,12 +16,14 @@ public class Rest {
     private int animalSize;
     private String things;
     private int isFood;
+    private double lat;
+    private double log;
 
     public Rest() {}
 
     public Rest(String Uid,String ownerUid,String name, String wholeAddress, String sectionArea,
-                String phone, String web, String time, String plusDescription,
-                String caution, int animalType, int animalSize, String things, int isFood) {
+                String phone, String web, String time, String plusDescription, String caution, int animalType,
+                int animalSize, String things, int isFood,double lat,double log) {
         this.Uid = Uid;
         this.ownerUid = ownerUid;
         this.name = name;
@@ -36,14 +38,16 @@ public class Rest {
         this.animalSize = animalSize;
         this.things = things;
         this.isFood = isFood;
+        this.lat = lat;
+        this.log = log;
     }
 
     public static Rest newRest(String Uid,String ownerUid,String name, String wholeAddress, String sectionArea,
-                               String phone, String web, String time, String plusDescription,
-                               String caution, int animalType, int animalSize, String things, int isFood) {
+                               String phone, String web, String time, String plusDescription, String caution,
+                               int animalType, int animalSize, String things, int isFood,double lat,double log) {
 
         return new Rest(Uid,ownerUid,name, wholeAddress,sectionArea,phone,web,
-                time,plusDescription,caution,animalType,animalSize, things,isFood);
+                time,plusDescription,caution,animalType,animalSize, things,isFood,lat,log);
     }
 
     public String getUid() {
@@ -156,5 +160,21 @@ public class Rest {
 
     public void setIsFood(int isFood) {
         this.isFood = isFood;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLog() {
+        return log;
+    }
+
+    public void setLog(double log) {
+        this.log = log;
     }
 }

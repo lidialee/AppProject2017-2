@@ -14,12 +14,14 @@ public class Etc {
     private int animalType;
     private int animalSize;
     private String things;
+    private double lat;
+    private double log;
 
     public Etc() {}
 
     public Etc(String Uid,String ownerUid,String otherType,String name, String wholeAddress,
                 String sectionArea, String phone, String web, String plusDescription,
-                String caution, int animalType, int animalSize, String things) {
+                String caution, int animalType, int animalSize, String things,double lat,double log) {
         this.Uid = Uid;
         this.ownerUid = ownerUid;
         this.otherType = otherType;
@@ -33,13 +35,17 @@ public class Etc {
         this.animalType = animalType;
         this.animalSize = animalSize;
         this.things = things;
+        this.lat = lat;
+        this.log = log;
+
     }
 
-    public static Etc newEtc(String Uid,String ownerUid,String otherType,String name, String wholeAddress, String sectionArea,
-                             String phone, String web, String plusDescription, String caution,
-                             int animalType, int animalSize, String things) {
+    public static Etc newEtc(String Uid,String ownerUid,String otherType,String name, String wholeAddress,
+                             String sectionArea, String phone, String web, String plusDescription, String caution,
+                             int animalType, int animalSize, String things,double lat,double log) {
 
-        return new Etc(Uid,ownerUid,otherType,name, wholeAddress,sectionArea,phone,web,plusDescription,caution,animalType,animalSize, things);
+        return new Etc(Uid,ownerUid,otherType,name, wholeAddress,sectionArea,phone,web,
+                        plusDescription,caution,animalType,animalSize, things,lat,log);
     }
 
     public String getUid() {
@@ -144,5 +150,21 @@ public class Etc {
 
     public void setThings(String things) {
         this.things = things;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLog() {
+        return log;
+    }
+
+    public void setLog(double log) {
+        this.log = log;
     }
 }

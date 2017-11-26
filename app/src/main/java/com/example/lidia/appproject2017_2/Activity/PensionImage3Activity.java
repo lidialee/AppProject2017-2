@@ -3,8 +3,10 @@ package com.example.lidia.appproject2017_2.Activity;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +19,10 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.lidia.appproject2017_2.Adapter.NewPostImageRecyclerAdapter;
 import com.example.lidia.appproject2017_2.Listener.OnImageAddedListener;
+import com.example.lidia.appproject2017_2.Model.PensionModel;
 import com.example.lidia.appproject2017_2.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -44,11 +49,14 @@ public class PensionImage3Activity extends BasicActivity {
 
     private List<Uri> mImageUriList = new ArrayList<>();
     private NewPostImageRecyclerAdapter imageAdapter;
+    private PensionModel pensionModel = new PensionModel();
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            switch (view.getId()){
+            switch (view.getId()) {
                 case R.id.pension3_back:
                     finish();
                     overridePendingTransition(0, 0);
@@ -56,14 +64,29 @@ public class PensionImage3Activity extends BasicActivity {
                 case R.id.pension3_done:
                     // 이게 둘리면 이제 서버로 저장되야겠지
 
+                    if (mImageUriList.isEmpty()) {
+                        Snackbar.make(getWindow().getDecorView().getRootView(), "한장의 사진이라도 추가해주십시오", Snackbar.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    /**
+                     * 2에서 온 번들에 마지막에 마지막으로 현재 로그인한 사용자의 uid를 외부저장소에서
+                     * 불러와서 번들에 저장하고 이 번들을 storeImage()의 파라미터로 던져준다*/
+
+                    Bundle finalBundle = getIntent().getExtras();
+                    SharedPreferences sharedPreferences = getSharedPreferences("uidfile", MODE_PRIVATE);
+                    finalBundle.putString("userUid", sharedPreferences.getString("uid", ""));
+
+                    // 번들에서 '서울광역시' 같은 지역 단위를 불러와 아래 데이터베이스 계층 이름으로 추가 한다
+                    String areaSection = finalBundle.getString("area");
+                    if(areaSection!=null){
+                        DatabaseReference storeRef = mDatabase.child("Pension").child(areaSection).push();
+                        String storeKey = storeRef.getKey();
+                        pensionModel.storeImage(changeToInputStream(mImageUriList), storeRef, storeKey, finalBundle);
+                        showAlertDialog("포스트를 등록하였습니다", "메인으로 돌아가기");
+                    }
 
 
-
-                    Intent intent = new Intent(PensionImage3Activity.this, MainFindActivity.class);
-                    startActivity(intent);
-                    // 이거 어디 뒤에 둬야 할까 , 애니메이션 없다면 이거 확인
-                    overridePendingTransition(0, 0);
-                    finish();
                     break;
 
                 case R.id.pension3_camera:
@@ -154,12 +177,15 @@ public class PensionImage3Activity extends BasicActivity {
         return newList;
     }
 
-    private void showAlertDialog(String mainText, String buttonText){
+    private void showAlertDialog(String mainText, String buttonText) {
         AlertDialog dialog = new AlertDialog.Builder(PensionImage3Activity.this)
                 .setMessage(mainText)
                 .setPositiveButton(buttonText, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(PensionImage3Activity.this, MainFindActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
                         finish();
                     }
                 }).create();

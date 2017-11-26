@@ -1,6 +1,7 @@
 package com.example.lidia.appproject2017_2.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.design.widget.Snackbar;
@@ -190,6 +191,8 @@ public class RestCommon1Activity extends BasicActivity {
      **/
     private Bundle makeBundle() {
         Bundle bundle = new Bundle();
+        SharedPreferences sharedPreferences = getSharedPreferences("uidfile", MODE_PRIVATE);
+        bundle.putString("userUid", sharedPreferences.getString("uid", ""));
         bundle.putString("name", name);
         bundle.putString("wholeAddress", wholeArea);
         bundle.putString("area", area);
@@ -202,4 +205,5 @@ public class RestCommon1Activity extends BasicActivity {
         bundle.putDouble("log", log);
         return bundle;
     }
+
 }

@@ -16,12 +16,14 @@ public class Pension {
     private int animalSize;
     private String things;
     private String environment;
+    private double lat;
+    private double log;
 
     public Pension() {}
 
     public Pension(String Uid,String ownerUid,String name, String wholeAddress, String sectionArea,
-                   String phone, String web, String price, String plusDescription,
-                   String caution, int animalType, int animalSize, String things, String environment) {
+                   String phone, String web, String price, String plusDescription, String caution,
+                   int animalType, int animalSize, String things, String environment,double lat,double log) {
         this.Uid = Uid;
         this.ownerUid = ownerUid;
         this.name = name;
@@ -36,14 +38,16 @@ public class Pension {
         this.animalSize = animalSize;
         this.things = things;
         this.environment = environment;
+        this.lat = lat;
+        this.log = log;
     }
 
     public static Pension newPension(String Uid,String ownerUid,String name, String wholeAddress, String sectionArea,
-                                     String phone, String web, String price, String plusDescription,
-                                     String caution, int animalType, int animalSize, String things, String environment) {
-        return new Pension(Uid,ownerUid,name, wholeAddress,sectionArea,phone
-                                ,web,price,plusDescription,caution
-                                     ,animalType,animalSize,things,environment);
+                                     String phone, String web, String price, String plusDescription, String caution,
+                                     int animalType, int animalSize, String things, String environment,double lat,double log) {
+
+        return new Pension(Uid,ownerUid,name, wholeAddress,sectionArea,phone,web,price,plusDescription
+                            ,caution,animalType,animalSize,things,environment,lat,log);
     }
 
 
@@ -157,5 +161,21 @@ public class Pension {
 
     public void setEnvironment(String environment) {
         this.environment = environment;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLog() {
+        return log;
+    }
+
+    public void setLog(double log) {
+        this.log = log;
     }
 }
