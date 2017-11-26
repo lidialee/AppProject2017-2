@@ -109,7 +109,7 @@
         </RadioGroup>
 
         <View
-            android:id="@+id/pension_divier1"
+            android:id="@+id/etc2_divier1"
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
             android:layout_marginBottom="15dp"
@@ -135,24 +135,24 @@
             android:textSize="12sp" />
 
         <RadioGroup
-            android:id="@+id/group_size"
+            android:id="@+id/etc2_group_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/group_small"
+                android:id="@+id/etc2_radio_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="소+중형" />
             <RadioButton
-                android:id="@+id/group_big"
+                android:id="@+id/etc2_radio_big"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="대형" />
             <RadioButton
-                android:id="@+id/group_all"
+                android:id="@+id/etc2_radio_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -160,7 +160,7 @@
         </RadioGroup>
 
         <View
-            android:id="@+id/pension_divier2"
+            android:id="@+id/etc2_divier2"
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
             android:layout_marginBottom="15dp"
@@ -200,7 +200,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/fense"
+                    android:id="@+id/etc2_fense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
@@ -208,7 +208,7 @@
                     android:text="팬스 설치" />
 
                 <CheckBox
-                    android:id="@+id/small"
+                    android:id="@+id/etc2_cage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -217,7 +217,7 @@
                     android:text="켄넬 설치" />
 
                 <CheckBox
-                    android:id="@+id/toliet"
+                    android:id="@+id/etc2_toliet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
@@ -232,7 +232,7 @@
 
 
         <View
-            android:id="@+id/pension_divier3"
+            android:id="@+id/etc2_divier3"
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
             android:layout_marginBottom="20dp"

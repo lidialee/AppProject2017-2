@@ -1,13 +1,27 @@
 package com.example.lidia.appproject2017_2.Activity;
 
+import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.example.lidia.appproject2017_2.Adapter.NewPostImageRecyclerAdapter;
+import com.example.lidia.appproject2017_2.Listener.OnImageAddedListener;
 import com.example.lidia.appproject2017_2.R;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,6 +33,17 @@ public class RestImage3Activity extends BasicActivity {
     @BindView(R.id.rest3_done)
     ImageView done;
 
+    @BindView(R.id.rest3_image)
+    ImageView recentImage;
+
+    @BindView(R.id.rest3_recycler)
+    RecyclerView imageRecycler;
+
+    @BindView(R.id.rest3_camera)
+    ImageView camera;
+
+    private List<Uri> mImageUriList = new ArrayList<>();
+    private NewPostImageRecyclerAdapter imageAdapter;
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -35,6 +60,10 @@ public class RestImage3Activity extends BasicActivity {
                     overridePendingTransition(0, 0);
                     finish();
                     break;
+                case R.id.rest3_camera:
+                    Intent intent2 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent2, 100);
+                    break;
             }
         }
     };
@@ -47,6 +76,10 @@ public class RestImage3Activity extends BasicActivity {
 
         backStep.setOnClickListener(listener);
         done.setOnClickListener(listener);
+        camera.setOnClickListener(listener);
+
+        settingImageRecycler();
+
     }
 
     @Override
@@ -59,4 +92,67 @@ public class RestImage3Activity extends BasicActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK)
+            return;
+
+        if (requestCode == 100) {
+            mImageUriList.add(data.getData());
+            imageAdapter.setUriImageList(mImageUriList);
+
+            Glide.with(this)
+                    .load(data.getData())
+                    .into(recentImage);
+        }
+    }
+
+    private void settingImageRecycler() {
+        LinearLayoutManager imageLayoutManager = new LinearLayoutManager(getBaseContext());
+        imageLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        imageRecycler.setLayoutManager(imageLayoutManager);
+
+        imageAdapter = new NewPostImageRecyclerAdapter(getBaseContext(), mImageUriList);
+
+        // 이미지 추가 리스너
+        imageAdapter.setAddListener(new OnImageAddedListener() {
+            @Override
+            public void imageAdd() {
+                imageRecycler.getAdapter().notifyDataSetChanged();
+                imageRecycler.removeAllViews();
+            }
+        });
+
+        imageRecycler.setAdapter(imageAdapter);
+    }
+    private List<InputStream> changeToInputStream(List<Uri> list) {
+        List<InputStream> newList = new ArrayList<>();
+        InputStream is;
+        ContentResolver contentResolver;
+        try {
+            for (Uri i : list) {
+                contentResolver = getContentResolver();
+                is = contentResolver.openInputStream(i);
+                newList.add(is);
+            }
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+        }
+        return newList;
+
+    }
+
+    private void showAlertDialog(String mainText, String buttonText){
+        AlertDialog dialog = new AlertDialog.Builder(RestImage3Activity.this)
+                .setMessage(mainText)
+                .setPositiveButton(buttonText, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).create();
+        dialog.show();
+    }
+
 }

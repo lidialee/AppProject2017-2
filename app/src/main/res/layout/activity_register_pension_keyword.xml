@@ -133,26 +133,26 @@
             android:textSize="12sp" />
 
         <RadioGroup
-            android:id="@+id/group_size"
+            android:id="@+id/pension2_group_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/group_small"
+                android:id="@+id/pension2_radio_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="소+중형" />
 
             <RadioButton
-                android:id="@+id/group_big"
+                android:id="@+id/pension2_radio_big"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="대형" />
 
             <RadioButton
-                android:id="@+id/group_all"
+                android:id="@+id/pension2_radio_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -214,7 +214,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/d_fense"
+                    android:id="@+id/pension2_d_fense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
@@ -222,7 +222,7 @@
                     android:text="객실내부 팬스설치" />
 
                 <CheckBox
-                    android:id="@+id/d_small"
+                    android:id="@+id/pension2_d_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -240,7 +240,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/d_toliet"
+                    android:id="@+id/pension2_d_toliet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
@@ -248,7 +248,7 @@
                     android:text="배변패드 제공" />
 
                 <CheckBox
-                    android:id="@+id/d_big"
+                    android:id="@+id/pension2_d_big"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -274,7 +274,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/c_cage"
+                    android:id="@+id/pension2_c_cage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
@@ -282,7 +282,7 @@
                     android:text="켄넬 설치" />
 
                 <CheckBox
-                    android:id="@+id/c_tower"
+                    android:id="@+id/pension2_c_tower"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -291,7 +291,7 @@
                     android:text="캣타워 설치" />
 
                 <CheckBox
-                    android:id="@+id/c_sand"
+                    android:id="@+id/pension2_c_sand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -338,7 +338,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/path"
+                    android:id="@+id/pension2_path"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
@@ -346,7 +346,7 @@
                     android:text="산책로" />
 
                 <CheckBox
-                    android:id="@+id/ground"
+                    android:id="@+id/pension2_ground"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -355,7 +355,7 @@
                     android:text="운동장" />
 
                 <CheckBox
-                    android:id="@+id/pool"
+                    android:id="@+id/pension2_pool"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"

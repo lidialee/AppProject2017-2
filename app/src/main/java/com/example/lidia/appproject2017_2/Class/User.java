@@ -21,8 +21,6 @@ public class User {
         this.petType = petType;
     }
 
-
-
     //  구글 소셜 로그인
     public User(String name, String email, String userImage, String userUid) {
         this(name, email,userImage,userUid,0,0);

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="270dp">
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapdialog"
+        android:layout_width="400dp"
+        android:layout_height="270dp"/>
+
+</RelativeLayout>

@@ -134,26 +134,26 @@
             android:textSize="12sp" />
 
         <RadioGroup
-            android:id="@+id/group_size"
+            android:id="@+id/cafe2_group_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/group_small"
+                android:id="@+id/cafe2_radio_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="소+중형" />
 
             <RadioButton
-                android:id="@+id/group_big"
+                android:id="@+id/cafe2_radio_big"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="대형" />
 
             <RadioButton
-                android:id="@+id/group_all"
+                android:id="@+id/cafe2_radio_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -215,7 +215,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/d_fense"
+                    android:id="@+id/cafe2_d_fense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
@@ -223,7 +223,7 @@
                     android:text="카페내 팬스설치" />
 
                 <CheckBox
-                    android:id="@+id/d_small"
+                    android:id="@+id/cafe2_d_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -241,7 +241,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/d_toliet"
+                    android:id="@+id/cafe2_d_toliet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
@@ -249,7 +249,7 @@
                     android:text="배변패드 제공" />
 
                 <CheckBox
-                    android:id="@+id/d_big"
+                    android:id="@+id/cafe2_d_big"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -257,7 +257,7 @@
                     android:scaleY="1.1"
                     android:text="대형켄넬 설치" />
                 <CheckBox
-                    android:id="@+id/d_room"
+                    android:id="@+id/cafe2_d_room"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -283,7 +283,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/c_cage"
+                    android:id="@+id/cafe2_c_cage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleX="1.1"
@@ -291,7 +291,7 @@
                     android:text="켄넬 설치" />
 
                 <CheckBox
-                    android:id="@+id/c_tower"
+                    android:id="@+id/cafe2_c_tower"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
@@ -300,7 +300,7 @@
                     android:text="캣타워 설치" />
 
                 <CheckBox
-                    android:id="@+id/c_sand"
+                    android:id="@+id/cafe2_c_sand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
@@ -309,7 +309,7 @@
                     android:text="화장실 설치" />
 
                 <CheckBox
-                    android:id="@+id/c_room"
+                    android:id="@+id/cafe2_c_room"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -336,19 +336,19 @@
             android:textSize="16sp" />
 
         <RadioGroup
-            android:id="@+id/group_food"
+            android:id="@+id/cafe2_group_food"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/yes"
+                android:id="@+id/cafe2_yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="판매함 " />
 
             <RadioButton
-                android:id="@+id/no"
+                android:id="@+id/cafe2_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"

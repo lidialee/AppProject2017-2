@@ -76,9 +76,7 @@ public class test extends AppCompatActivity {
 
                 String str = edit.getText().toString();
                 try {
-                    list = geocoder.getFromLocationName
-                            (str, // 지역 이름
-                                    10); // 읽을 개수
+                    list = geocoder.getFromLocationName(str,10); // 지역 이름 읽을 개수
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e("test","입출력 오류 - 서버에서 주소변환시 에러발생");
@@ -95,10 +93,7 @@ public class test extends AppCompatActivity {
 
                         String sss = String.format("geo:%f,%f", lat, lon);
 
-                        Intent intent = new Intent(
-                                Intent.ACTION_VIEW,
-                                Uri.parse(sss));
-
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sss));
                         startActivity(intent);
                     }
                 }
