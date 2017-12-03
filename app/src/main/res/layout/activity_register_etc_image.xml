@@ -107,13 +107,28 @@
             android:textSize="12sp"
             android:layout_marginBottom="20dp"/>
         <!--320 ,120 -->
-        <ImageView
-            android:id="@+id/etc3_image"
-            android:layout_width="320dp"
-            android:layout_height="320dp"
-            android:background="@color/dialogBack"
-            android:layout_gravity="center"
-            android:layout_marginBottom="15dp"/>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_gravity="center">
+            <ImageView
+                android:id="@+id/etc3_image"
+                android:layout_width="320dp"
+                android:layout_height="320dp"
+                android:background="@drawable/register_image_box"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="사진이 이곳에 보여집니다"
+                android:textSize="15sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"/>
+        </FrameLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,12 +137,18 @@
             android:text="✽ 등록 리스트"
             android:textColor="@color/black"
             android:textSize="16sp" />
+        <View
+            android:id="@+id/divier"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="1dp"
+            android:background="#acacac" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/etc3_recycler"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/main">
+            android:layout_height="135dp">
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 

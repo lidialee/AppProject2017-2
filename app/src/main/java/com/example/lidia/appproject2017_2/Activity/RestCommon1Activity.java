@@ -191,8 +191,6 @@ public class RestCommon1Activity extends BasicActivity {
      **/
     private Bundle makeBundle() {
         Bundle bundle = new Bundle();
-        SharedPreferences sharedPreferences = getSharedPreferences("uidfile", MODE_PRIVATE);
-        bundle.putString("userUid", sharedPreferences.getString("uid", ""));
         bundle.putString("name", name);
         bundle.putString("wholeAddress", wholeArea);
         bundle.putString("area", area);

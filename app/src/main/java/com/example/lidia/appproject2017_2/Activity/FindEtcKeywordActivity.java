@@ -86,8 +86,8 @@ public class FindEtcKeywordActivity extends BasicActivity {
         back.setOnClickListener(listener);
         done.setOnClickListener(listener);
 
-        Toast.makeText(this,getIntent().getExtras().getInt("areaType")+" : 지역확인",Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,getIntent().getExtras().getInt("storeType")+" : 가게확인",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,getIntent().getExtras().getInt("areaType")+" : 지역확인",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,getIntent().getExtras().getInt("storeType")+" : 가게확인",Toast.LENGTH_SHORT).show();
 
     }
 }

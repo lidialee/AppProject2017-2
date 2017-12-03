@@ -197,7 +197,6 @@ public class EtcCommon1Activity extends BasicActivity {
         bundle.putString("area", area);
         bundle.putString("phone", phone);
         bundle.putString("web", web);
-        bundle.putString("price", price);       // 그냥 기입 x라고 보내긴 한다
         bundle.putString("plus", plus);
         bundle.putString("caution", caution);
         bundle.putDouble("lat", lat);

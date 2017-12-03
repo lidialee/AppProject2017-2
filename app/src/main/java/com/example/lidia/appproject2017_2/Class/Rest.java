@@ -1,9 +1,12 @@
 package com.example.lidia.appproject2017_2.Class;
 
 
-public class Rest {
+import java.io.Serializable;
+
+public class Rest implements Serializable {
     private String Uid;
     private String ownerUid;
+    private String storeType;
     private String name;
     private String wholeAddress;
     private String sectionArea;
@@ -18,14 +21,16 @@ public class Rest {
     private int isFood;
     private double lat;
     private double log;
+    private int love;
 
     public Rest() {}
 
-    public Rest(String Uid,String ownerUid,String name, String wholeAddress, String sectionArea,
+    public Rest(String Uid,String ownerUid,String storeType,String name, String wholeAddress, String sectionArea,
                 String phone, String web, String time, String plusDescription, String caution, int animalType,
-                int animalSize, String things, int isFood,double lat,double log) {
+                int animalSize, String things, int isFood,double lat,double log,int love) {
         this.Uid = Uid;
         this.ownerUid = ownerUid;
+        this.storeType = storeType;
         this.name = name;
         this.wholeAddress = wholeAddress;
         this.sectionArea = sectionArea;
@@ -40,14 +45,15 @@ public class Rest {
         this.isFood = isFood;
         this.lat = lat;
         this.log = log;
+        this.love = love;
     }
 
-    public static Rest newRest(String Uid,String ownerUid,String name, String wholeAddress, String sectionArea,
+    public static Rest newRest(String Uid,String ownerUid,String storeType,String name, String wholeAddress, String sectionArea,
                                String phone, String web, String time, String plusDescription, String caution,
-                               int animalType, int animalSize, String things, int isFood,double lat,double log) {
+                               int animalType, int animalSize, String things, int isFood,double lat,double log,int love) {
 
-        return new Rest(Uid,ownerUid,name, wholeAddress,sectionArea,phone,web,
-                time,plusDescription,caution,animalType,animalSize, things,isFood,lat,log);
+        return new Rest(Uid,ownerUid,storeType,name, wholeAddress,sectionArea,phone,web,
+                time,plusDescription,caution,animalType,animalSize, things,isFood,lat,log,love);
     }
 
     public String getUid() {
@@ -64,6 +70,14 @@ public class Rest {
 
     public void setOwnerUid(String ownerUid) {
         this.ownerUid = ownerUid;
+    }
+
+    public String getStoreType() {
+        return storeType;
+    }
+
+    public void setStoreType(String storeType) {
+        this.storeType = storeType;
     }
 
     public String getName() {
@@ -176,5 +190,13 @@ public class Rest {
 
     public void setLog(double log) {
         this.log = log;
+    }
+
+    public int getLove() {
+        return love;
+    }
+
+    public void setLove(int love) {
+        this.love = love;
     }
 }

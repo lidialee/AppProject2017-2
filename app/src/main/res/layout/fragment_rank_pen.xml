@@ -1,0 +1,42 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lidia.appproject2017_2.Fragment.RankingShop.RankPenFragment">
+
+
+    <RelativeLayout
+        android:id="@+id/spinner_container_ranking_pension"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Spinner
+            android:id="@+id/area_spinner_ranking_pension"
+            android:layout_width="wrap_content"
+            android:layout_height="95dp"
+            android:layout_toStartOf="@+id/text_ranking_pension"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:background="@null"
+            />
+        <TextView
+            android:id="@+id/text_ranking_pension"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="인기 랭킹"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/base_recycler_pen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment"
+        android:layout_below="@+id/spinner_container_ranking_pension"/>
+
+</RelativeLayout>

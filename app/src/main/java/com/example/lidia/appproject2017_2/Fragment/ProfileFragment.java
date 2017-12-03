@@ -104,7 +104,6 @@ public class ProfileFragment extends Fragment {
         FragmentPagerAdapter pagerAdapter = new FragmentPagerAdapter(activity.getSupportFragmentManager()) {
             private final Fragment[] fragments = new Fragment[]{
                     new WishFragment(),
-                    new GoodFragment(),
                     new ReviewFragment(),
             };
 

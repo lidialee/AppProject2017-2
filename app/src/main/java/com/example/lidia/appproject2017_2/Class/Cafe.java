@@ -1,9 +1,12 @@
 package com.example.lidia.appproject2017_2.Class;
 
 
-public class Cafe {
+import java.io.Serializable;
+
+public class Cafe implements Serializable {
     private String Uid;
     private String ownerUid;
+    private String storeType;
     private String name;
     private String wholeAddress;
     private String sectionArea;
@@ -18,14 +21,16 @@ public class Cafe {
     private int isFood;
     private double lat;
     private double log;
+    private int love;
 
     public Cafe() {}
 
-    public Cafe(String Uid,String ownerUid,String name, String wholeAddress, String sectionArea,
+    public Cafe(String Uid,String ownerUid,String storeType,String name, String wholeAddress, String sectionArea,
                 String phone, String web, String time, String plusDescription,
-                String caution, int animalType, int animalSize, String things, int isFood,double lat,double log) {
+                String caution, int animalType, int animalSize, String things, int isFood,double lat,double log,int love) {
         this.Uid = Uid;
         this.ownerUid = ownerUid;
+        this.storeType = storeType;
         this.name = name;
         this.wholeAddress = wholeAddress;
         this.sectionArea = sectionArea;
@@ -40,14 +45,15 @@ public class Cafe {
         this.isFood = isFood;
         this.lat = lat;
         this.log = log;
+        this.love = love;
     }
 
-    public static Cafe newCafe(String Uid,String owneruid,String name, String wholeAddress, String sectionArea,
+    public static Cafe newCafe(String Uid,String owneruid,String storeType,String name, String wholeAddress, String sectionArea,
                                String phone, String web, String time, String plusDescription, String caution,
-                               int animalType, int animalSize, String things, int isFood,double lat,double log) {
+                               int animalType, int animalSize, String things, int isFood,double lat,double log,int love) {
 
-        return new Cafe(Uid,owneruid,name, wholeAddress,sectionArea,phone,web,
-                        time,plusDescription,caution,animalType,animalSize, things,isFood,lat,log);
+        return new Cafe(Uid,owneruid,storeType,name, wholeAddress,sectionArea,phone,web,
+                        time,plusDescription,caution,animalType,animalSize, things,isFood,lat,log,love);
     }
 
     public String getUid() {
@@ -64,6 +70,14 @@ public class Cafe {
 
     public void setOwnerUid(String ownerUid) {
         this.ownerUid = ownerUid;
+    }
+
+    public String getStoreType() {
+        return storeType;
+    }
+
+    public void setStoreType(String storeType) {
+        this.storeType = storeType;
     }
 
     public String getName() {
@@ -176,5 +190,13 @@ public class Cafe {
 
     public void setLog(double log) {
         this.log = log;
+    }
+
+    public int getLove() {
+        return love;
+    }
+
+    public void setLove(int love) {
+        this.love = love;
     }
 }

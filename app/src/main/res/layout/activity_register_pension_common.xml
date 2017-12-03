@@ -89,7 +89,8 @@
             android:layout_height="40dp"
             android:layout_marginBottom="12dp"
             android:background="@drawable/register_edit"
-            android:focusableInTouchMode="true" />
+            android:focusableInTouchMode="true"
+            android:text="더 펫텔 프리미엄 스위츠"/>
 
 
         <RelativeLayout
@@ -146,21 +147,23 @@
             android:layout_height="40dp"
             android:background="@drawable/register_edit"
             android:focusableInTouchMode="true"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp"
+            android:text="051-999-2000"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="✽ 가게 웹사이트를 입력해주세요"
             android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
         <EditText
             android:id="@+id/pension_web"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/register_edit"
             android:focusableInTouchMode="true"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp"
+            android:text="www.pettel.com"/>
 
         <TextView
             android:id="@+id/pension_price_text"
@@ -187,7 +190,8 @@
             android:layout_height="40dp"
             android:background="@drawable/register_edit"
             android:focusableInTouchMode="true"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp"
+            android:text="7~20만 (비수기기준)"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -201,7 +205,8 @@
             android:layout_height="110dp"
             android:background="@drawable/register_edit"
             android:focusableInTouchMode="true"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp"
+            android:text="@string/test"/>
 
         <TextView
             android:id="@+id/pension_caution_text"
@@ -235,7 +240,8 @@
             android:layout_height="110dp"
             android:background="@drawable/register_edit"
             android:focusableInTouchMode="true"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp"
+            android:text="@string/test2"/>
     </LinearLayout>
 
     </ScrollView>

@@ -5,22 +5,28 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.lidia.appproject2017_2.Class.Pension;
+import com.example.lidia.appproject2017_2.Listener.OnPensionChangedListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
 public class PensionModel {
-    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    private int fileNumber = 1;
-    private String Uid;
     private String ownerUid;
     private String name;
     private String wholeAddress;
@@ -37,11 +43,22 @@ public class PensionModel {
     private double lat;
     private double log;
 
+    private List<Pension> pensionList = new ArrayList<>();
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private int fileNumber = 1;
+    private OnPensionChangedListener pensionChangedListener;
+    private Ascending ascending ;
+
 
     // 생성자
     public PensionModel() {
+        ascending = new Ascending();
     }
 
+
+    public void setPensionChangedListener(OnPensionChangedListener pensionChangedListener) {
+        this.pensionChangedListener = pensionChangedListener;
+    }
 
     /**
      * < Storage >의 경우
@@ -54,6 +71,9 @@ public class PensionModel {
      */
 
 
+
+
+
     public void storeImage(final List<InputStream> list, final DatabaseReference storeRef, final String storeUid, final Bundle bundle) {
 
         StorageReference storage = FirebaseStorage.getInstance().getReferenceFromUrl("gs://pettogether-11ca5.appspot.com");
@@ -64,12 +84,20 @@ public class PensionModel {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     String imageUrl = taskSnapshot.getDownloadUrl().toString();
 
-                    // 스토리지가 아니라 따로
+                    // 스토리지가 아니라 따로 이미지 url 저장 db
                     mDatabase.child("ImageDatabase").child(storeUid).push().setValue(imageUrl);
 
                     unPackInfo(bundle);
+
+                    // 쉽게 가게 찾을 수 있도록 데이터의 중첩이 생겨도 그냥 통째 집어넣는는 db
+                    mDatabase.child("allPension").child(storeUid)
+                            .setValue(Pension.newPension(storeUid,ownerUid,"호텔/팬션",name,wholeAddress,sectionArea,phone,web,
+                                    price,plusDescription,caution,animalType,animalSize,things,environment,lat,log,0));
+
+
                     // PensionImage3Activity 에서 이미 상점 타입을 보내줬어여
-                    storeRef.setValue(Pension.newPension(storeUid,ownerUid,name,wholeAddress,sectionArea,phone,web,price,plusDescription,caution,animalType,animalSize,things,environment,lat,log));
+                    storeRef.setValue(Pension.newPension(storeUid,ownerUid,"호텔/팬션",name,wholeAddress,sectionArea
+                                ,phone,web,price,plusDescription,caution,animalType,animalSize,things,environment,lat,log,0));
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -80,6 +108,36 @@ public class PensionModel {
             });
             fileNumber++;
         }
+    }
+
+    public void getPension(String area) {
+        mDatabase.child("PensionORHotel").child(area).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final List<Pension> tempList = new ArrayList<>();
+
+                for (DataSnapshot e : dataSnapshot.getChildren()) {
+                    Pension pension = e.getValue(Pension.class);
+                    tempList.add(pension);
+                }
+
+                pensionList = tempList;
+                if (pensionChangedListener != null){
+                    Collections.sort(pensionList,ascending);
+                    pensionChangedListener.getPension(pensionList);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println(databaseError.getMessage());
+            }
+        });
+    }
+
+    public List<Pension> getPensionList() {
+        return this.pensionList;
     }
 
     private void unPackInfo(Bundle bundle) {
@@ -94,11 +152,24 @@ public class PensionModel {
         this.caution = bundle.getString("caution");
         this.animalType = bundle.getInt("animalType");
         this.animalSize= bundle.getInt("animalSize");
-        this.things= bundle.getString("animalSize");
+        this.things= bundle.getString("thing");
         this.environment= bundle.getString("environment");
         this.lat= bundle.getDouble("lat");
         this.log= bundle.getDouble("log");
 
+    }
+
+    class Ascending implements Comparator<Pension>{
+
+        @Override
+        public int compare(Pension p1, Pension p2) {
+            if(p1.getLove()>p2.getLove())
+                return -1;
+            else if(p1.getLove() < p2.getLove())
+                return 1;
+            else
+                return 0;
+        }
     }
 
 }

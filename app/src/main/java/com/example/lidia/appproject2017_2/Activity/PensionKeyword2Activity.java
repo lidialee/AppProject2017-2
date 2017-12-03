@@ -221,11 +221,6 @@ public class PensionKeyword2Activity extends BasicActivity {
             return false;
         }
 
-        if(thing.equals("")){
-            Snackbar.make(getWindow().getDecorView().getRootView(), "제공하는 물품을 1개 이상 선택해주세요", Snackbar.LENGTH_SHORT).show();
-            return false;
-        }
-
         if(environment.equals("")){
             Snackbar.make(getWindow().getDecorView().getRootView(), "제공하는 주변시설을 1개 이상 선택해주세요", Snackbar.LENGTH_SHORT).show();
             return false;

@@ -172,7 +172,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
-            android:text="✽팬션에서 제공하는 반려동물 물품을 선택해주세요"
+            android:text="✽ 호텔/팬션 에서 제공하는 반려동물 물품을 선택해주세요"
             android:textColor="@color/black"
             android:textSize="16sp" />
 

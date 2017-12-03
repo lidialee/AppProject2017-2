@@ -22,5 +22,46 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="google_maps_API_key">AIzaSyA65d9vxYnVPM1GfWQaH-Ty6JOGcM61Ukc</string>
     <string name="maps_API_key">AIzaSyDc2Bxy_Lp5p_wAUx0vA35DYDBYZUOMjNk</string>
+    <string name="title_activity_xcxc">xcxc</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="plus_dest">
+        "안녕하세요 보그도그맘입니다.\n\n"
+
+        "저희는 기존에 잘 알려진 입장료를 내는 애견카페가 아닙니다. 여러분들이 자주 가시는 카페와 동일하지만"
+        "고객님의 반려견을 함께 데려와 휴식을 취할 수 있는 공간입니다. 반려견을 위한 간식, 음료수도 준비되어 있으며"
+        "다른 좌석과 분리된 개인룸 또한 준비되어 있습니다\n"
+    </string>
+
+    <string name="caution">
+        "개들간의 문제를 방지하기 위해 무조건 목줄을 필참하시고 방문해주시기 바랍니다.\n"
+
+        "또한 마킹을 하는 수컷 강아지는 방문을 삼가해주시고 부주의로 인한 교배나 공격에 의한 상처는
+        저희 카페가 책임지지 않습니다. 이점 유의해주시고 방문해주시기 바랍니다"
+
+
+    </string>
+
+    <string name="test">
+        이 숙소는 해변에서 도보로 6분 거리에 있습니다. 부산에 위치한 더펫텔은 레스토랑과 무료 Wi-Fi를 제공하며, 부산아쿠아리움에서 700m 거리에 있습니다. 구내에 무료 전용 주차장이 마련되어 있습니다.
+
+    \n투숙객의 편의를 위해 슬리퍼와 무료 세면도구가 제공됩니다.
+
+    \n프런트 데스크는 24시간 운영됩니다.
+
+    \n더펫텔은 해운대해수욕장에서 800m, 마린시티에서 1km 거리에 있습니다. 가장 가까운 공항은 19km 떨어진 김해 국제공항입니다.
+
+    부산 시내 인기 지역에 위치! 이 지역 다른 숙소의 위치보다 평이 좋습니다.
+    </string>
+
+    <string name="test2">
+        예방접종 완료한 강아지만 투숙 가능,
+        \n 10kg 미만의 소+중형 강아지만 투숙 가능
+        \n 목줄 반드시 가지고 있어야함
+    </string>
 
 </resources>

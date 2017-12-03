@@ -104,7 +104,9 @@ public class RestKeyword2Activity extends BasicActivity {
                     bundle2.putInt("animalSize", animalSize);
                     bundle2.putInt("isFood", isFood);
                     bundle2.putString("thing", thing);
+
                     Intent intent = new Intent(RestKeyword2Activity.this, RestImage3Activity.class);
+                    intent.putExtras(bundle2);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                     break;

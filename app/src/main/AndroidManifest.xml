@@ -52,7 +52,9 @@
         <activity android:name=".Activity.FindPensionKeywordActivity" />
         <activity android:name=".Activity.FindCafeKeywordActivity" />
         <activity android:name=".Activity.FindRestKeywordActivity" />
-        <activity android:name=".Activity.FindEtcKeywordActivity"></activity>
+        <activity android:name=".Activity.FindEtcKeywordActivity" />
+        <activity android:name=".Activity.CommentActivity" />
+        <activity android:name=".Activity.StoreDetailActivity"/>
     </application>
 
 </manifest>

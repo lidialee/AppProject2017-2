@@ -49,7 +49,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/register_dialog_pension"
                 android:layout_marginTop="7dp"
-                android:text="팬션"
+                android:text="숙박"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="15sp" />

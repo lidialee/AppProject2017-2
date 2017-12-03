@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도그보그맘"
+        android:textSize="21sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="서울 특별시 성동구 133-13"
+        android:textSize="14sp"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/things"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="소형캔넬 배변패드"
+        android:textSize="14sp"
+        android:layout_below="@+id/address"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/things_plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="제공"
+        android:textSize="14sp"
+        android:layout_below="@+id/address"
+        android:layout_toEndOf="@+id/things"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="3dp"/>
+
+    <RelativeLayout
+        android:layout_width="55dp"
+        android:layout_height="70dp"
+        android:layout_alignParentEnd="true">
+
+        <ImageView
+            android:id="@+id/heart"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/fill_heart"/>
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/heart"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

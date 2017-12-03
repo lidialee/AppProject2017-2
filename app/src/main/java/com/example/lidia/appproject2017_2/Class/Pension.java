@@ -1,9 +1,12 @@
 package com.example.lidia.appproject2017_2.Class;
 
+import java.io.Serializable;
+
 // 부모 Store를 상속받는 형태도 수정하자
-public class Pension {
+public class Pension implements Serializable{
     private String Uid;
     private String ownerUid;
+    private String storeType;
     private String name;
     private String wholeAddress;
     private String sectionArea;
@@ -18,15 +21,17 @@ public class Pension {
     private String environment;
     private double lat;
     private double log;
+    private int love;
 
     public Pension() {}
 
-    public Pension(String Uid,String ownerUid,String name, String wholeAddress, String sectionArea,
+    public Pension(String Uid,String ownerUid,String storeType,String name, String wholeAddress, String sectionArea,
                    String phone, String web, String price, String plusDescription, String caution,
-                   int animalType, int animalSize, String things, String environment,double lat,double log) {
+                   int animalType, int animalSize, String things, String environment,double lat,double log,int love) {
         this.Uid = Uid;
         this.ownerUid = ownerUid;
         this.name = name;
+        this.storeType = storeType;
         this.wholeAddress = wholeAddress;
         this.sectionArea = sectionArea;
         this.phone = phone;
@@ -40,14 +45,15 @@ public class Pension {
         this.environment = environment;
         this.lat = lat;
         this.log = log;
+        this.love = love;
     }
 
-    public static Pension newPension(String Uid,String ownerUid,String name, String wholeAddress, String sectionArea,
+    public static Pension newPension(String Uid,String ownerUid,String storeType,String name, String wholeAddress, String sectionArea,
                                      String phone, String web, String price, String plusDescription, String caution,
-                                     int animalType, int animalSize, String things, String environment,double lat,double log) {
+                                     int animalType, int animalSize, String things, String environment,double lat,double log,int love) {
 
-        return new Pension(Uid,ownerUid,name, wholeAddress,sectionArea,phone,web,price,plusDescription
-                            ,caution,animalType,animalSize,things,environment,lat,log);
+        return new Pension(Uid,ownerUid,storeType,name,wholeAddress,sectionArea,phone,web,price,plusDescription
+                            ,caution,animalType,animalSize,things,environment,lat,log,love);
     }
 
 
@@ -65,6 +71,14 @@ public class Pension {
 
     public void setOwnerUid(String ownerUid) {
         this.ownerUid = ownerUid;
+    }
+
+    public String getStoreType() {
+        return storeType;
+    }
+
+    public void setStoreType(String storeType) {
+        this.storeType = storeType;
     }
 
     public String getName() {
@@ -177,5 +191,13 @@ public class Pension {
 
     public void setLog(double log) {
         this.log = log;
+    }
+
+    public int getLove() {
+        return love;
+    }
+
+    public void setLove(int love) {
+        this.love = love;
     }
 }

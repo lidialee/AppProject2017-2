@@ -3,8 +3,10 @@ package com.example.lidia.appproject2017_2.Activity;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +19,11 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.lidia.appproject2017_2.Adapter.NewPostImageRecyclerAdapter;
 import com.example.lidia.appproject2017_2.Listener.OnImageAddedListener;
+import com.example.lidia.appproject2017_2.Model.CafeModel;
+import com.example.lidia.appproject2017_2.Model.EtcModel;
 import com.example.lidia.appproject2017_2.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -45,6 +51,9 @@ public class EtcImage3Activity extends BasicActivity {
 
     private List<Uri> mImageUriList = new ArrayList<>();
     private NewPostImageRecyclerAdapter imageAdapter;
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private EtcModel etcModel = new EtcModel();
+
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -56,10 +65,27 @@ public class EtcImage3Activity extends BasicActivity {
                     break;
                 case R.id.etc3_done:
                     // 이게 둘리면 이제 서버로 저장되야겠지
-                    Intent intent = new Intent(EtcImage3Activity.this, MainFindActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
-                    finish();
+
+                    if (mImageUriList.isEmpty()) {
+                        Snackbar.make(getWindow().getDecorView().getRootView(), "한장의 사진이라도 추가해주십시오", Snackbar.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    /**
+                     * 2에서 온 번들에 마지막에 마지막으로 현재 로그인한 사용자의 uid를 외부저장소에서
+                     * 불러와서 번들에 저장하고 이 번들을 storeImage()의 파라미터로 던져준다*/
+                    Bundle finalBundle = getIntent().getExtras();
+                    SharedPreferences sharedPreferences = getSharedPreferences("uidfile", MODE_PRIVATE);
+                    finalBundle.putString("userUid", sharedPreferences.getString("uid", ""));
+
+                    // 번들에서 '서울광역시' 같은 지역 단위를 불러와 아래 데이터베이스 계층 이름으로 추가 한다
+                    String areaSection = finalBundle.getString("area");
+                    if(areaSection!=null){
+                        DatabaseReference storeRef = mDatabase.child("Etc").child(areaSection).push();
+                        String storeKey = storeRef.getKey();
+                        etcModel.storeImage(changeToInputStream(mImageUriList), storeRef, storeKey, finalBundle);
+                        showAlertDialog("포스트를 등록하였습니다", "메인으로 돌아가기");
+                    }
                     break;
                 case R.id.etc3_camera:
                     Intent intent2 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

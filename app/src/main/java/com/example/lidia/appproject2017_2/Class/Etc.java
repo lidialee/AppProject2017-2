@@ -1,9 +1,11 @@
 package com.example.lidia.appproject2017_2.Class;
 
-public class Etc {
+import java.io.Serializable;
+
+public class Etc implements Serializable {
     private String Uid;
     private String ownerUid;
-    private String otherType;
+    private String storeType;
     private String name;
     private String wholeAddress;
     private String sectionArea;
@@ -16,15 +18,16 @@ public class Etc {
     private String things;
     private double lat;
     private double log;
+    private int love;
 
     public Etc() {}
 
-    public Etc(String Uid,String ownerUid,String otherType,String name, String wholeAddress,
+    public Etc(String Uid,String ownerUid,String storeType,String name, String wholeAddress,
                 String sectionArea, String phone, String web, String plusDescription,
-                String caution, int animalType, int animalSize, String things,double lat,double log) {
+                String caution, int animalType, int animalSize, String things,double lat,double log,int love) {
         this.Uid = Uid;
         this.ownerUid = ownerUid;
-        this.otherType = otherType;
+        this.storeType = storeType;
         this.name = name;
         this.wholeAddress = wholeAddress;
         this.sectionArea = sectionArea;
@@ -37,15 +40,16 @@ public class Etc {
         this.things = things;
         this.lat = lat;
         this.log = log;
+        this.love = love;
 
     }
 
-    public static Etc newEtc(String Uid,String ownerUid,String otherType,String name, String wholeAddress,
+    public static Etc newEtc(String Uid,String ownerUid,String storeType,String name, String wholeAddress,
                              String sectionArea, String phone, String web, String plusDescription, String caution,
-                             int animalType, int animalSize, String things,double lat,double log) {
+                             int animalType, int animalSize, String things,double lat,double log,int love) {
 
-        return new Etc(Uid,ownerUid,otherType,name, wholeAddress,sectionArea,phone,web,
-                        plusDescription,caution,animalType,animalSize, things,lat,log);
+        return new Etc(Uid,ownerUid,storeType,name, wholeAddress,sectionArea,phone,web,
+                        plusDescription,caution,animalType,animalSize, things,lat,log,love);
     }
 
     public String getUid() {
@@ -64,12 +68,12 @@ public class Etc {
         this.ownerUid = ownerUid;
     }
 
-    public String getOtherType() {
-        return otherType;
+    public String getStoreType() {
+        return storeType;
     }
 
-    public void setOtherType(String otherType) {
-        this.otherType = otherType;
+    public void setStoreType(String storeType) {
+        this.storeType = storeType;
     }
 
     public String getName() {
@@ -166,5 +170,13 @@ public class Etc {
 
     public void setLog(double log) {
         this.log = log;
+    }
+
+    public int getLove() {
+        return love;
+    }
+
+    public void setLove(int love) {
+        this.love = love;
     }
 }

@@ -105,6 +105,7 @@ public class CafeKeyword2Activity extends BasicActivity {
                     bundle2.putString("thing", thing);
 
                     Intent intent = new Intent(CafeKeyword2Activity.this, CafeImage3Activity.class);
+                    intent.putExtras(bundle2);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                     break;
