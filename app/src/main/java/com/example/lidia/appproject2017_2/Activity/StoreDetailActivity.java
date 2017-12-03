@@ -3,12 +3,10 @@ package com.example.lidia.appproject2017_2.Activity;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.lidia.appproject2017_2.Adapter.SliderAdapter;
@@ -16,7 +14,12 @@ import com.example.lidia.appproject2017_2.Class.Cafe;
 import com.example.lidia.appproject2017_2.Class.Etc;
 import com.example.lidia.appproject2017_2.Class.Pension;
 import com.example.lidia.appproject2017_2.Class.Rest;
-import com.example.lidia.appproject2017_2.DialogFragment.CheckLocaDialog;
+import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
+import com.example.lidia.appproject2017_2.Listener.OnImageAddedListener;
+import com.example.lidia.appproject2017_2.Model.CafeModel;
+import com.example.lidia.appproject2017_2.Model.EtcModel;
+import com.example.lidia.appproject2017_2.Model.PensionModel;
+import com.example.lidia.appproject2017_2.Model.RestModel;
 import com.example.lidia.appproject2017_2.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -102,10 +105,10 @@ public class StoreDetailActivity extends BasicActivity {
     private SliderAdapter sliderAdapter;
     private GoogleMap mainMap;
     private double lat, log;
-    private Pension pension = null;
-    private Cafe cafe = null;
-    private Rest rest = null;
-    private Etc etc = null;
+    private PensionModel pensionModel = new PensionModel();
+    private CafeModel cafeModel = new CafeModel();
+    private RestModel restModel = new RestModel();
+    private EtcModel etcModel = new EtcModel();
 
     // 아래는 모두 영상용이다
 
@@ -117,11 +120,9 @@ public class StoreDetailActivity extends BasicActivity {
                     if(!like.isChecked()){
                         // 클릭할때 마다 해당 가게의 like값 - 1
                         Snackbar.make(getWindow().getDecorView().getRootView(), "좋아요를 취소하셨습니다", Snackbar.LENGTH_SHORT).show();
-                        System.out.println(like.isChecked()+" -----------");
                     }else{
                         // 클릭할때 마다 해당 가게의 like값 + 1
                         Snackbar.make(getWindow().getDecorView().getRootView(), "좋아요를 클릭하셨습니다", Snackbar.LENGTH_SHORT).show();
-                        System.out.println(like.isChecked()+" -----------");
                     }
                     break;
                 case R.id.storeDetail_review:
@@ -143,36 +144,34 @@ public class StoreDetailActivity extends BasicActivity {
         setContentView(R.layout.activity_store_detail);
         ButterKnife.bind(this);
 
-       // String storeUid = getIntent().getStringExtra("storeUid");
 
-        sliderAdapter = new SliderAdapter(StoreDetailActivity.this, list);
-
-        // 이건 등록 이후 확인
-        //final Bundle bundle = getIntent().getExtras();
+        // 구글맵 초기화
+        MapsInitializer.initialize(this);
+        map.onCreate(savedInstanceState);
+        map.onResume();
 
         int storeType = getIntent().getIntExtra("type",1);
 
         switch (storeType){
             case 1:
-                pension = (Pension) getIntent().getSerializableExtra("pension");
-                setData(pension,savedInstanceState);
+                Pension pension = (Pension) getIntent().getSerializableExtra("pension");
+                setPensionData(pension);
                 break;
             case 2:
+                Cafe cafe = (Cafe) getIntent().getSerializableExtra("cafe");
+                setCafeData(cafe);
                 break;
             case 3:
+                Rest rest = (Rest) getIntent().getSerializableExtra("rest");
+                setRestData(rest);
                 break;
             case 4:
+                Etc etc = (Etc) getIntent().getSerializableExtra("etc");
+                setEtcData(etc);
                 break;
         }
 
-
-
-        // 뷰 페이지
-        list.add("https://images.trvl-media.com/hotels/18000000/17410000/17407900/17407880/0295344f_z.jpg");
-        list.add("https://s-ec.bstatic.com/images/hotel/max1024x768/878/87842344.jpg");
         viewPager= findViewById(R.id.storeDetail_viewpager);
-        viewPager.setAdapter(sliderAdapter);
-
 
         like.setOnClickListener(listener);
         review.setOnClickListener(listener);
@@ -180,8 +179,7 @@ public class StoreDetailActivity extends BasicActivity {
 
     }
 
-    private void setData(final Pension p, Bundle savedInstanceState){
-        // 아래는 임시 보여주기 입니다, 나중에 지우세요
+    private void setPensionData(final Pension p){
         storeTitle.setText(p.getName());
         address.setText(p.getWholeAddress());
         phone.setText(p.getPhone());
@@ -191,19 +189,263 @@ public class StoreDetailActivity extends BasicActivity {
         caution.setText(p.getCaution());
         thing.setText(p.getThings());
         environOrFoodUserInput.setText(p.getEnvironment());
-        animalSize.setText(p.getAnimalSize());
-        animalTypeUserInput.setText(p.getAnimalType());
 
-        // 구글맵
-        MapsInitializer.initialize(this);
-        map.onCreate(savedInstanceState);
-        map.onResume();
+        // 반려동물 사이즈 입력
+        switch (p.getAnimalSize()){
+            case 1:
+                animalSize.setText("소+중형");
+                break;
+            case 2:
+                animalSize.setText("대형");
+                break;
+            case 3:
+                animalSize.setText("모두가능");
+                break;
+        }
+
+        // 반려동물 타입
+        switch (p.getAnimalType()){
+            case 1:
+                animalTypeUserInput.setText("반려견");
+                petTypeImage.setImageResource(R.drawable.dogblack);
+                break;
+            case 2:
+                animalTypeUserInput.setText("반려묘");
+                petTypeImage.setImageResource(R.drawable.catblack);
+                break;
+        }
+
+        // 이미지 가져와서 넣기
+        pensionModel.getPensionImages(p.getUid());
+        pensionModel.setImageListener(new OnGetImageListener() {
+            @Override
+            public void getImage(List<String> imageList) {
+                list.addAll(imageList);
+                sliderAdapter = new SliderAdapter(StoreDetailActivity.this, list);
+                viewPager.setAdapter(sliderAdapter);
+            }
+        });
+
+        // 위치 셋팅하기
         map.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 mainMap = googleMap;
                 lat = p.getLat();
                 log = p.getLog();
+
+                LatLng latLng = new LatLng(lat,log);
+                mainMap.addMarker(new MarkerOptions().position(latLng));
+                mainMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
+            }
+        });
+    }
+
+    private void setCafeData(final Cafe c){
+        storeTitle.setText(c.getName());
+        address.setText(c.getWholeAddress());
+        phone.setText(c.getPhone());
+        web.setText(c.getWeb());
+        priceOrTimeFixed.setText("영업시간");
+        priceOrTimeUserInput.setText(c.getTime());
+        plus.setText(c.getPlusDescription());
+        caution.setText(c.getCaution());
+        thing.setText(c.getThings());
+        environOrFoodFixed.setText("반려동물음식 판매여부");
+
+        // 반려동물 사이즈 입력
+        switch (c.getIsFood()){
+            case 1:
+                environOrFoodUserInput.setText("판매함");
+                break;
+            case 2:
+                environOrFoodUserInput.setText("판매하지않음");
+                break;
+        }
+
+        // 반려동물 사이즈 입력
+        switch (c.getAnimalSize()){
+            case 1:
+                animalSize.setText("소+중형");
+                break;
+            case 2:
+                animalSize.setText("대형");
+                break;
+            case 3:
+                animalSize.setText("모두가능");
+                break;
+        }
+
+        // 반려동물 타입
+        switch (c.getAnimalType()){
+            case 1:
+                animalTypeUserInput.setText("반려견");
+                petTypeImage.setImageResource(R.drawable.dogblack);
+                break;
+            case 2:
+                animalTypeUserInput.setText("반려묘");
+                petTypeImage.setImageResource(R.drawable.catblack);
+                break;
+        }
+
+        // 이미지 가져와서 넣기
+        cafeModel.getCafeImages(c.getUid());
+        cafeModel.setImageListener(new OnGetImageListener() {
+            @Override
+            public void getImage(List<String> imageList) {
+                list.addAll(imageList);
+                sliderAdapter = new SliderAdapter(StoreDetailActivity.this, list);
+                viewPager.setAdapter(sliderAdapter);
+            }
+        });
+
+        // 위치 셋팅하기
+        map.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                mainMap = googleMap;
+                lat = c.getLat();
+                log = c.getLog();
+
+                LatLng latLng = new LatLng(lat,log);
+                mainMap.addMarker(new MarkerOptions().position(latLng));
+                mainMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
+            }
+        });
+    }
+
+    private void setRestData(final Rest r){
+        storeTitle.setText(r.getName());
+        address.setText(r.getWholeAddress());
+        phone.setText(r.getPhone());
+        web.setText(r.getWeb());
+        priceOrTimeFixed.setText("영업시간");
+        priceOrTimeUserInput.setText(r.getTime());
+        plus.setText(r.getPlusDescription());
+        caution.setText(r.getCaution());
+        thing.setText(r.getThings());
+        environOrFoodFixed.setText("반려동물음식 판매여부");
+
+        // 반려동물 사이즈 입력
+        switch (r.getIsFood()){
+            case 1:
+                environOrFoodUserInput.setText("판매함");
+                break;
+            case 2:
+                environOrFoodUserInput.setText("판매하지않음");
+                break;
+        }
+
+        // 반려동물 사이즈 입력
+        switch (r.getAnimalSize()){
+            case 1:
+                animalSize.setText("소+중형");
+                break;
+            case 2:
+                animalSize.setText("대형");
+                break;
+            case 3:
+                animalSize.setText("모두가능");
+                break;
+        }
+
+        // 반려동물 타입
+        switch (r.getAnimalType()){
+            case 1:
+                animalTypeUserInput.setText("반려견");
+                petTypeImage.setImageResource(R.drawable.dogblack);
+                break;
+            case 2:
+                animalTypeUserInput.setText("반려묘");
+                petTypeImage.setImageResource(R.drawable.catblack);
+                break;
+        }
+
+        // 이미지 가져와서 넣기
+        restModel.getRestImages(r.getUid());
+        restModel.setImageListener(new OnGetImageListener() {
+            @Override
+            public void getImage(List<String> imageList) {
+                list.addAll(imageList);
+                sliderAdapter = new SliderAdapter(StoreDetailActivity.this, list);
+                viewPager.setAdapter(sliderAdapter);
+            }
+        });
+
+        // 위치 셋팅하기
+        map.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                mainMap = googleMap;
+                lat = r.getLat();
+                log = r.getLog();
+
+                LatLng latLng = new LatLng(lat,log);
+                mainMap.addMarker(new MarkerOptions().position(latLng));
+                mainMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
+            }
+        });
+    }
+
+    private void setEtcData(final Etc r){
+        storeTitle.setText(r.getName());
+        address.setText(r.getWholeAddress());
+        phone.setText(r.getPhone());
+        web.setText(r.getWeb());
+
+        priceOrTimeFixed.setVisibility(View.GONE);
+        priceOrTimeUserInput.setVisibility(View.GONE);
+        environOrFoodFixed.setVisibility(View.GONE);
+        environOrFoodUserInput.setVisibility(View.GONE);
+
+        plus.setText(r.getPlusDescription());
+        caution.setText(r.getCaution());
+        thing.setText(r.getThings());
+
+
+        // 반려동물 사이즈 입력
+        switch (r.getAnimalSize()){
+            case 1:
+                animalSize.setText("소+중형");
+                break;
+            case 2:
+                animalSize.setText("대형");
+                break;
+            case 3:
+                animalSize.setText("모두가능");
+                break;
+        }
+
+        // 반려동물 타입
+        switch (r.getAnimalType()){
+            case 1:
+                animalTypeUserInput.setText("반려견");
+                petTypeImage.setImageResource(R.drawable.dogblack);
+                break;
+            case 2:
+                animalTypeUserInput.setText("반려묘");
+                petTypeImage.setImageResource(R.drawable.catblack);
+                break;
+        }
+
+        // 이미지 가져와서 넣기
+        etcModel.getEtcImages(r.getUid());
+        etcModel.setImageListener(new OnGetImageListener() {
+            @Override
+            public void getImage(List<String> imageList) {
+                list.addAll(imageList);
+                sliderAdapter = new SliderAdapter(StoreDetailActivity.this, list);
+                viewPager.setAdapter(sliderAdapter);
+            }
+        });
+
+        // 위치 셋팅하기
+        map.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                mainMap = googleMap;
+                lat = r.getLat();
+                log = r.getLog();
 
                 LatLng latLng = new LatLng(lat,log);
                 mainMap.addMarker(new MarkerOptions().position(latLng));

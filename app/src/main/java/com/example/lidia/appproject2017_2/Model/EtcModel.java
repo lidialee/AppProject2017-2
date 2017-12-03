@@ -4,24 +4,28 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.lidia.appproject2017_2.Class.Cafe;
 import com.example.lidia.appproject2017_2.Class.Etc;
+import com.example.lidia.appproject2017_2.Listener.OnEtcChangedListener;
+import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
 public class EtcModel {
-    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-
-    private int fileNumber = 1;
     private String specificType;
     private String ownerUid;
     private String name;
@@ -36,6 +40,26 @@ public class EtcModel {
     private String things;
     private double lat;
     private double log;
+
+    private List<Etc> etcList = new ArrayList<>();
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private int fileNumber = 1;
+    private OnEtcChangedListener etcChangedListener;
+    private AscendingEtc ascendingEtc;
+    private OnGetImageListener imageListener;
+    private List<String> mImageList = new ArrayList<>();
+
+    public EtcModel() {
+        ascendingEtc = new AscendingEtc();
+    }
+
+    public void setEtcChangedListener(OnEtcChangedListener etcChangedListener) {
+        this.etcChangedListener = etcChangedListener;
+    }
+    public void setImageListener(OnGetImageListener imageListener) {
+        this.imageListener = imageListener;
+    }
+
 
     public void storeImage(final List<InputStream> list, final DatabaseReference storeRef, final String storeUid, final Bundle bundle) {
 
@@ -65,6 +89,35 @@ public class EtcModel {
             fileNumber++;
         }
     }
+    public void getEtc(String area) {
+        mDatabase.child("Etc").child(area).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final List<Etc> tempList = new ArrayList<>();
+
+                for (DataSnapshot e : dataSnapshot.getChildren()) {
+                    Etc etc= e.getValue(Etc.class);
+                    tempList.add(etc);
+                }
+
+                etcList = tempList;
+                if (etcChangedListener != null){
+                    Collections.sort(etcList,ascendingEtc);
+                    etcChangedListener.getEtc(etcList);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println(databaseError.getMessage());
+            }
+        });
+    }
+
+    public List<Etc> getEtcList() {
+        return etcList;
+    }
 
     private void unPackInfo(Bundle bundle) {
         this.ownerUid = bundle.getString("userUid");
@@ -82,5 +135,40 @@ public class EtcModel {
         this.lat= bundle.getDouble("lat");
         this.log= bundle.getDouble("log");
 
+    }
+
+    class AscendingEtc implements Comparator<Etc> {
+        @Override
+        public int compare(Etc p1, Etc p2) {
+            if(p1.getLove()>p2.getLove())
+                return -1;
+            else if(p1.getLove() < p2.getLove())
+                return 1;
+            else
+                return 0;
+        }
+    }
+    // post별 image string 가져오기
+    public void getEtcImages(String pensionKey) {
+        mDatabase.child("ImageDatabase")
+                .child(pensionKey)
+                .addValueEventListener(new ValueEventListener() {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot e : dataSnapshot.getChildren()) {
+                            String a = e.getValue(String.class);
+                            mImageList.add(a);
+                        }
+                        if (imageListener != null) {
+                            imageListener.getImage(mImageList);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e(databaseError.getDetails(), "");
+                    }
+                });
+    }
+    public List<String> getImageList() {
+        return mImageList;
     }
 }

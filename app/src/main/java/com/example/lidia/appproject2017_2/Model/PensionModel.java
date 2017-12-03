@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.lidia.appproject2017_2.Class.Pension;
+import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
+import com.example.lidia.appproject2017_2.Listener.OnImageAddedListener;
 import com.example.lidia.appproject2017_2.Listener.OnPensionChangedListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -12,7 +14,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -20,7 +21,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -44,9 +44,11 @@ public class PensionModel {
     private double log;
 
     private List<Pension> pensionList = new ArrayList<>();
+    private List<String> mImageList = new ArrayList<>();
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private int fileNumber = 1;
     private OnPensionChangedListener pensionChangedListener;
+    private OnGetImageListener imageListener;
     private Ascending ascending ;
 
 
@@ -58,6 +60,10 @@ public class PensionModel {
 
     public void setPensionChangedListener(OnPensionChangedListener pensionChangedListener) {
         this.pensionChangedListener = pensionChangedListener;
+    }
+
+    public void setImageListener(OnGetImageListener imageListener) {
+        this.imageListener = imageListener;
     }
 
     /**
@@ -136,9 +142,7 @@ public class PensionModel {
         });
     }
 
-    public List<Pension> getPensionList() {
-        return this.pensionList;
-    }
+
 
     private void unPackInfo(Bundle bundle) {
         this.ownerUid = bundle.getString("userUid");
@@ -171,5 +175,34 @@ public class PensionModel {
                 return 0;
         }
     }
+
+    // post별 image string 가져오기
+    public void getPensionImages(String pensionKey) {
+        mDatabase.child("ImageDatabase")
+                .child(pensionKey)
+                .addValueEventListener(new ValueEventListener() {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot e : dataSnapshot.getChildren()) {
+                            String a = e.getValue(String.class);
+                            mImageList.add(a);
+                        }
+                        if (imageListener != null) {
+                            imageListener.getImage(mImageList);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e(databaseError.getDetails(), "");
+                    }
+                });
+    }
+
+    public List<Pension> getPensionList() {
+        return this.pensionList;
+    }
+    public List<String> getImageList() {
+        return mImageList;
+    }
+
 
 }

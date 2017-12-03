@@ -7,8 +7,10 @@
     android:paddingEnd="20dp"
     android:paddingTop="15dp"
     android:paddingBottom="15dp"
-    android:background="#fdfbf0">
-
+    android:background="@drawable/recycler_item_outer"
+    android:layout_marginTop="7dp"
+    android:layout_marginStart="9dp"
+    android:layout_marginEnd="9dp">
 
         <TextView
             android:id="@+id/name_pension"
@@ -25,7 +27,7 @@
             android:text="서울 특별시 성동구 133-13"
             android:textSize="14sp"
             android:layout_below="@+id/name_pension"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/black"/>
 
         <TextView
@@ -35,7 +37,7 @@
             android:text="소형캔넬 배변패드"
             android:textSize="14sp"
             android:layout_below="@+id/address_pension"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="3dp"
             android:textColor="@color/black"/>
         <TextView
             android:id="@+id/things_plus"
@@ -45,7 +47,7 @@
             android:textSize="14sp"
             android:layout_below="@+id/address_pension"
             android:layout_toEndOf="@+id/things_pension"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="3dp"
             android:layout_marginStart="3dp"/>
 
         <RelativeLayout

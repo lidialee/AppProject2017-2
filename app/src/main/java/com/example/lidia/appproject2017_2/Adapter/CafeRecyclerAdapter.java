@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lidia.appproject2017_2.Activity.StoreDetailActivity;
+import com.example.lidia.appproject2017_2.Class.Cafe;
 import com.example.lidia.appproject2017_2.Class.Pension;
+import com.example.lidia.appproject2017_2.Holder.CafeHolder;
 import com.example.lidia.appproject2017_2.Holder.PensionHolder;
 import com.example.lidia.appproject2017_2.Listener.OnRecyclerViewClickListener;
 import com.example.lidia.appproject2017_2.R;
@@ -16,36 +18,36 @@ import com.example.lidia.appproject2017_2.R;
 import java.util.List;
 
 
-public class PensionRecyclerAdapter extends RecyclerView.Adapter<PensionHolder> {
-    private List<Pension> pensionList;
+public class CafeRecyclerAdapter extends RecyclerView.Adapter<CafeHolder> {
+    private List<Cafe> cafeList;
     private Context context;
 
-    public PensionRecyclerAdapter(List<Pension> pensionList, Context context) {
-        this.pensionList = pensionList;
+    public CafeRecyclerAdapter(List<Cafe> cafeList, Context context) {
+        this.cafeList = cafeList;
         this.context = context;
     }
 
 
-    public void setPensionList(List<Pension> list){ this.pensionList = list; }
+    public void setCafeList(List<Cafe> list){ this.cafeList = list; }
 
     @Override
-    public PensionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CafeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.recycler_rank_item_pension,parent,false);
-        return new PensionHolder(view);
+        return new CafeHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(PensionHolder holder, int position) {
-        final Pension pension = pensionList.get(position);
-        holder.bindData(pension,context);
+    public void onBindViewHolder(CafeHolder holder, int position) {
+        final Cafe cafe = cafeList.get(position);
+        holder.bindData(cafe,context);
 
         holder.setListener(new OnRecyclerViewClickListener() {
             @Override
             public void onItemClick(View v, int adapterPosition) {
                 Intent intent = new Intent(context, StoreDetailActivity.class);
-                intent.putExtra("pension",pension);
-                intent.putExtra("type",1);
+                intent.putExtra("cafe",cafe);
+                intent.putExtra("type",2);
                 context.startActivity(intent);
 
             }
@@ -54,6 +56,6 @@ public class PensionRecyclerAdapter extends RecyclerView.Adapter<PensionHolder> 
 
     @Override
     public int getItemCount() {
-        return pensionList.size();
+        return cafeList.size();
     }
 }

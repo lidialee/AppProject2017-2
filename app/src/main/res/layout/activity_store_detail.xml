@@ -240,7 +240,7 @@
 
                 <TextView
                     android:id="@+id/storeDetail_plue_text_unfixed"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/plus_dest"
                     android:textSize="14sp"

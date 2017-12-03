@@ -13,12 +13,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.example.lidia.appproject2017_2.Adapter.PensionRecyclerAdapter;
+import com.example.lidia.appproject2017_2.Adapter.RestRecyclerAdapter;
+import com.example.lidia.appproject2017_2.Class.Rest;
+import com.example.lidia.appproject2017_2.Listener.OnRestChangedListener;
+import com.example.lidia.appproject2017_2.Model.RestModel;
 import com.example.lidia.appproject2017_2.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,9 +29,31 @@ public class RankFoodFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private Spinner areaSpinner;
-    private DatabaseReference database;
-    private String choiceArea;
-    private int storeType;
+    private String choiceArea = "서울특별시";
+    private RestModel restModel = new RestModel();
+    private RestRecyclerAdapter recyclerAdapter;
+
+    // 스피너 아이템 고르기 리스너
+    AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            choiceArea = areaSpinner.getSelectedItem().toString();
+            restModel.getRest(choiceArea);
+        }
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+            choiceArea = "서울특별시";
+        }
+    };
+
+    // 리사이클러뷰 리스너
+    OnRestChangedListener restListChangeListener = new OnRestChangedListener() {
+        @Override
+        public void getRest(List<Rest> restList) {
+            recyclerView.getAdapter().notifyDataSetChanged();
+            recyclerAdapter.setRestList(restList);
+        }
+    };
 
 
     public RankFoodFragment() {
@@ -38,9 +62,7 @@ public class RankFoodFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_rank_food, container, false);
         recyclerView = rootView.findViewById(R.id.base_recycler_rest);
 
@@ -48,8 +70,6 @@ public class RankFoodFragment extends Fragment {
         ArrayAdapter arrayAdapter = ArrayAdapter.createFromResource(getContext(),R.array.arealist,android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaSpinner.setAdapter(arrayAdapter);
-
-        database = FirebaseDatabase.getInstance().getReference();
 
         return rootView;
     }
@@ -61,26 +81,16 @@ public class RankFoodFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        restModel.getRest(choiceArea);
 
-        //PensionRecyclerAdapter adapter = new PensionRecyclerAdapter();
-        //recyclerView.setAdapter(adapter);
-
+        recyclerAdapter = new RestRecyclerAdapter(restModel.getRestList(),getContext());
+        restModel.setRestChangedListener(restListChangeListener);
+        recyclerView.setAdapter(recyclerAdapter);
 
         // 스피너 선택하면 나타나기
-        areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                choiceArea = areaSpinner.getSelectedItem().toString();
-                System.out.println("지역 확인 "+choiceArea);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
-        });
-
+        areaSpinner.setOnItemSelectedListener(spinnerListener);
 
         // 스피너 사이즈 줄이기
         try {

@@ -8,44 +8,44 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lidia.appproject2017_2.Activity.StoreDetailActivity;
-import com.example.lidia.appproject2017_2.Class.Pension;
-import com.example.lidia.appproject2017_2.Holder.PensionHolder;
+import com.example.lidia.appproject2017_2.Class.Etc;
+import com.example.lidia.appproject2017_2.Holder.EtcHolder;
 import com.example.lidia.appproject2017_2.Listener.OnRecyclerViewClickListener;
 import com.example.lidia.appproject2017_2.R;
 
 import java.util.List;
 
 
-public class PensionRecyclerAdapter extends RecyclerView.Adapter<PensionHolder> {
-    private List<Pension> pensionList;
+public class EtcRecyclerAdapter extends RecyclerView.Adapter<EtcHolder> {
+    private List<Etc> etcList;
     private Context context;
 
-    public PensionRecyclerAdapter(List<Pension> pensionList, Context context) {
-        this.pensionList = pensionList;
+    public EtcRecyclerAdapter(List<Etc> etcList, Context context) {
+        this.etcList = etcList;
         this.context = context;
     }
 
 
-    public void setPensionList(List<Pension> list){ this.pensionList = list; }
+    public void setEtcList(List<Etc> list){ this.etcList = list; }
 
     @Override
-    public PensionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EtcHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.recycler_rank_item_pension,parent,false);
-        return new PensionHolder(view);
+        return new EtcHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(PensionHolder holder, int position) {
-        final Pension pension = pensionList.get(position);
-        holder.bindData(pension,context);
+    public void onBindViewHolder(EtcHolder holder, int position) {
+        final Etc etc = etcList.get(position);
+        holder.bindData(etc,context);
 
         holder.setListener(new OnRecyclerViewClickListener() {
             @Override
             public void onItemClick(View v, int adapterPosition) {
                 Intent intent = new Intent(context, StoreDetailActivity.class);
-                intent.putExtra("pension",pension);
-                intent.putExtra("type",1);
+                intent.putExtra("etc",etc);
+                intent.putExtra("type",4);
                 context.startActivity(intent);
 
             }
@@ -54,6 +54,6 @@ public class PensionRecyclerAdapter extends RecyclerView.Adapter<PensionHolder> 
 
     @Override
     public int getItemCount() {
-        return pensionList.size();
+        return etcList.size();
     }
 }

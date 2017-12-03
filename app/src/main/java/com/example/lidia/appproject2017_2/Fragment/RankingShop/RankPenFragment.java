@@ -18,8 +18,6 @@ import com.example.lidia.appproject2017_2.Class.Pension;
 import com.example.lidia.appproject2017_2.Listener.OnPensionChangedListener;
 import com.example.lidia.appproject2017_2.Model.PensionModel;
 import com.example.lidia.appproject2017_2.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -31,23 +29,29 @@ public class RankPenFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private Spinner areaSpinner;
-    private DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("PensionORHotel");
     private String choiceArea = "서울특별시";
-    private int storeType;
     private PensionModel pensionModel = new PensionModel();
     private PensionRecyclerAdapter recyclerAdapter;
 
-
+    // 스피너 아이템 고르기 리스너
     AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             choiceArea = areaSpinner.getSelectedItem().toString();
             pensionModel.getPension(choiceArea);
         }
-
         @Override
         public void onNothingSelected(AdapterView<?> adapterView) {
             choiceArea = "서울특별시";
+        }
+    };
+
+    // 리사이클러뷰 리스너
+    OnPensionChangedListener pensionListChangeListener = new OnPensionChangedListener() {
+        @Override
+        public void getPension(List<Pension> pensionList) {
+            recyclerView.getAdapter().notifyDataSetChanged();
+            recyclerAdapter.setPensionList(pensionList);
         }
     };
 
@@ -58,9 +62,7 @@ public class RankPenFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_rank_pen, container, false);
         recyclerView = rootView.findViewById(R.id.base_recycler_pen);
 
@@ -68,9 +70,6 @@ public class RankPenFragment extends Fragment {
         ArrayAdapter arrayAdapter = ArrayAdapter.createFromResource(getContext(), R.array.arealist, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaSpinner.setAdapter(arrayAdapter);
-
-        database = FirebaseDatabase.getInstance().getReference();
-
 
         return rootView;
     }
@@ -84,14 +83,9 @@ public class RankPenFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         pensionModel.getPension(choiceArea);
+
         recyclerAdapter = new PensionRecyclerAdapter(pensionModel.getPensionList(),getContext());
-        pensionModel.setPensionChangedListener(new OnPensionChangedListener() {
-            @Override
-            public void getPension(List<Pension> pensionList) {
-                recyclerView.getAdapter().notifyDataSetChanged();
-                recyclerAdapter.setPensionList(pensionList);
-            }
-        });
+        pensionModel.setPensionChangedListener(pensionListChangeListener);
         recyclerView.setAdapter(recyclerAdapter);
 
 
@@ -113,7 +107,4 @@ public class RankPenFragment extends Fragment {
         }
     }
 
-    public DatabaseReference getDatabaseReference(DatabaseReference databaseReference, String area) {
-        return databaseReference.child(area);
-    }
 }
