@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.lidia.appproject2017_2.Class.Etc;
+import com.example.lidia.appproject2017_2.Class.Etc;
 import com.example.lidia.appproject2017_2.Listener.OnEtcChangedListener;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -76,7 +77,7 @@ public class EtcModel {
                     unPackInfo(bundle);
                     // 쉽게 가게 찾을 수 있도록 데이터의 중첩이 생겨도 그냥 통째 집어넣는는 db
                     mDatabase.child("allEtc").child(storeUid).setValue(Etc.newEtc(storeUid,ownerUid,specificType,name,wholeAddress,sectionArea,phone,web,plusDescription,caution,animalType,animalSize,things,lat,log,0));
-                    // PensionImage3Activity 에서 이미 상점 타입을 보내줬어여
+                    // EtcImage3Activity 에서 이미 상점 타입을 보내줬어여
                     storeRef.setValue(Etc.newEtc(storeUid,ownerUid,specificType,name,wholeAddress,sectionArea,phone,web,plusDescription,caution,animalType,animalSize,things,lat,log,0));
 
                 }
@@ -149,9 +150,9 @@ public class EtcModel {
         }
     }
     // post별 image string 가져오기
-    public void getEtcImages(String pensionKey) {
+    public void getEtcImages(String EtcKey) {
         mDatabase.child("ImageDatabase")
-                .child(pensionKey)
+                .child(EtcKey)
                 .addValueEventListener(new ValueEventListener() {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot e : dataSnapshot.getChildren()) {
@@ -167,6 +168,45 @@ public class EtcModel {
                         Log.e(databaseError.getDetails(), "");
                     }
                 });
+    }
+
+    public void onLoveClicked(DatabaseReference EtcRef) {
+        EtcRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Etc p = child.getValue(Etc.class);
+                    int current = p.getLove();
+                    current += 1;
+                    child.getRef().child("love").setValue(current);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void onLoveUnClicked(DatabaseReference EtcRef) {
+        EtcRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Etc p = child.getValue(Etc.class);
+                    int current = p.getLove();
+                    if(current>0){
+                        current -= 1;
+                        child.getRef().child("love").setValue(current);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
     public List<String> getImageList() {
         return mImageList;

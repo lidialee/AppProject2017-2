@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.lidia.appproject2017_2.Activity.StoreDetailActivity;
-import com.example.lidia.appproject2017_2.Class.Cafe;
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.PensionDetailActivity;
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.RestDetailActivity;
 import com.example.lidia.appproject2017_2.Class.Rest;
-import com.example.lidia.appproject2017_2.Holder.CafeHolder;
 import com.example.lidia.appproject2017_2.Holder.RestHolder;
 import com.example.lidia.appproject2017_2.Listener.OnRecyclerViewClickListener;
 import com.example.lidia.appproject2017_2.R;
@@ -45,7 +44,7 @@ public class RestRecyclerAdapter extends RecyclerView.Adapter<RestHolder> {
         holder.setListener(new OnRecyclerViewClickListener() {
             @Override
             public void onItemClick(View v, int adapterPosition) {
-                Intent intent = new Intent(context, StoreDetailActivity.class);
+                Intent intent = new Intent(context, RestDetailActivity.class);
                 intent.putExtra("rest",rest);
                 intent.putExtra("type",3);
                 context.startActivity(intent);

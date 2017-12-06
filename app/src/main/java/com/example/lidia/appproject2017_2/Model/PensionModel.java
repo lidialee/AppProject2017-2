@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.lidia.appproject2017_2.Class.Love;
 import com.example.lidia.appproject2017_2.Class.Pension;
+import com.example.lidia.appproject2017_2.Listener.OnCheckAlreadyLove;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
 import com.example.lidia.appproject2017_2.Listener.OnImageAddedListener;
+import com.example.lidia.appproject2017_2.Listener.OnLoveChangeListener;
 import com.example.lidia.appproject2017_2.Listener.OnPensionChangedListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -14,6 +17,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -27,6 +32,7 @@ import java.util.List;
 
 
 public class PensionModel {
+    private static final String TAG = "pension Model";
     private String ownerUid;
     private String name;
     private String wholeAddress;
@@ -49,6 +55,8 @@ public class PensionModel {
     private int fileNumber = 1;
     private OnPensionChangedListener pensionChangedListener;
     private OnGetImageListener imageListener;
+    private OnLoveChangeListener loveChangeListener;
+    private OnCheckAlreadyLove alreadyLoveLitener;
     private Ascending ascending ;
 
 
@@ -64,6 +72,14 @@ public class PensionModel {
 
     public void setImageListener(OnGetImageListener imageListener) {
         this.imageListener = imageListener;
+    }
+
+    public void setLoveChangeListener(OnLoveChangeListener loveChangeListener) {
+        this.loveChangeListener = loveChangeListener;
+    }
+
+    public void setAlreadyLoveLitener(OnCheckAlreadyLove alreadyLoveLitener) {
+        this.alreadyLoveLitener = alreadyLoveLitener;
     }
 
     /**
@@ -176,7 +192,7 @@ public class PensionModel {
         }
     }
 
-    // post별 image string 가져오기
+    // Pension별 image string 가져오기
     public void getPensionImages(String pensionKey) {
         mDatabase.child("ImageDatabase")
                 .child(pensionKey)
@@ -195,6 +211,103 @@ public class PensionModel {
                         Log.e(databaseError.getDetails(), "");
                     }
                 });
+    }
+
+    public void onLoveClicked(DatabaseReference pensionRef) {
+        pensionRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Pension p = child.getValue(Pension.class);
+                    int current = p.getLove();
+                    current += 1;
+
+                    if(loveChangeListener!=null)
+                        loveChangeListener.changeLove(current);
+
+                    child.getRef().child("love").setValue(current);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void onLoveUnClicked(DatabaseReference pensionRef) {
+        pensionRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Pension p = child.getValue(Pension.class);
+                    int current = p.getLove();
+                    if(current>0){
+                        current -= 1;
+
+                        if(loveChangeListener!=null)
+                            loveChangeListener.changeLove(current);
+
+                        child.getRef().child("love").setValue(current);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void isLoveAlready(String userUid, final String storeUid){
+        mDatabase.child("UserLoveList").child(userUid)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot e : dataSnapshot.getChildren()) {
+                            String storelistUid = e.getValue(String.class);
+                            System.out.println("storelistUid : "+storelistUid);
+
+                            assert storelistUid != null;
+
+                            if(storelistUid.equals(storeUid)){
+                                alreadyLoveLitener.isLove(true);
+                                System.out.println("찾음 : "+storeUid);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println(databaseError.getMessage());
+                    }
+                });
+    }
+
+    public void addLoveList(String userUid,String storeUid){
+        mDatabase.child("UserLoveList").child(userUid).push().setValue(storeUid);
+    }
+
+    public void removeLoveList(String userUid, final String storeUid){
+        mDatabase.child("UserLoveList").child(userUid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot e : dataSnapshot.getChildren()) {
+                    String storelistUid = e.getValue(String.class);
+
+                    assert storelistUid != null;
+
+                    if(storelistUid.equals(storeUid)){
+                        e.getRef().setValue(null);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println(databaseError.getMessage());
+            }
+        });
+        //.child(storeUid).setValue(null);
     }
 
     public List<Pension> getPensionList() {

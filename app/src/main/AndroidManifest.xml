@@ -54,7 +54,10 @@
         <activity android:name=".Activity.FindRestKeywordActivity" />
         <activity android:name=".Activity.FindEtcKeywordActivity" />
         <activity android:name=".Activity.CommentActivity" />
-        <activity android:name=".Activity.StoreDetailActivity"/>
+        <activity android:name=".Activity.DetailActivity.PensionDetailActivity"/>
+        <activity android:name=".Activity.DetailActivity.CafeDetailActivity"/>
+        <activity android:name=".Activity.DetailActivity.RestDetailActivity"/>
+        <activity android:name=".Activity.DetailActivity.EtcDetailActivity"/>
     </application>
 
 </manifest>

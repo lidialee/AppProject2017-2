@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.lidia.appproject2017_2.Activity.StoreDetailActivity;
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.EtcDetailActivity;
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.PensionDetailActivity;
 import com.example.lidia.appproject2017_2.Class.Etc;
 import com.example.lidia.appproject2017_2.Holder.EtcHolder;
 import com.example.lidia.appproject2017_2.Listener.OnRecyclerViewClickListener;
@@ -43,7 +44,7 @@ public class EtcRecyclerAdapter extends RecyclerView.Adapter<EtcHolder> {
         holder.setListener(new OnRecyclerViewClickListener() {
             @Override
             public void onItemClick(View v, int adapterPosition) {
-                Intent intent = new Intent(context, StoreDetailActivity.class);
+                Intent intent = new Intent(context, EtcDetailActivity.class);
                 intent.putExtra("etc",etc);
                 intent.putExtra("type",4);
                 context.startActivity(intent);

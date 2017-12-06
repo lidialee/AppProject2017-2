@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.lidia.appproject2017_2.Class.Cafe;
+import com.example.lidia.appproject2017_2.Class.Etc;
 import com.example.lidia.appproject2017_2.Class.Pension;
 import com.example.lidia.appproject2017_2.Listener.OnCafeChangedListener;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
@@ -175,6 +176,44 @@ public class CafeModel {
                         Log.e(databaseError.getDetails(), "");
                     }
                 });
+    }
+    public void onLoveClicked(DatabaseReference CafeRef) {
+        CafeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Cafe p = child.getValue(Cafe.class);
+                    int current = p.getLove();
+                    current += 1;
+                    child.getRef().child("love").setValue(current);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void onLoveUnClicked(DatabaseReference CafeRef) {
+        CafeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Cafe p = child.getValue(Cafe.class);
+                    int current = p.getLove();
+                    if(current>0){
+                        current -= 1;
+                        child.getRef().child("love").setValue(current);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
     public List<String> getImageList() {
         return mImageList;

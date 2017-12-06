@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.lidia.appproject2017_2.Activity.StoreDetailActivity;
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.PensionDetailActivity;
 import com.example.lidia.appproject2017_2.Class.Pension;
 import com.example.lidia.appproject2017_2.Holder.PensionHolder;
 import com.example.lidia.appproject2017_2.Listener.OnRecyclerViewClickListener;
@@ -43,7 +43,7 @@ public class PensionRecyclerAdapter extends RecyclerView.Adapter<PensionHolder> 
         holder.setListener(new OnRecyclerViewClickListener() {
             @Override
             public void onItemClick(View v, int adapterPosition) {
-                Intent intent = new Intent(context, StoreDetailActivity.class);
+                Intent intent = new Intent(context, PensionDetailActivity.class);
                 intent.putExtra("pension",pension);
                 intent.putExtra("type",1);
                 context.startActivity(intent);

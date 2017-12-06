@@ -1,6 +1,8 @@
 package com.example.lidia.appproject2017_2.Class;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 // 부모 Store를 상속받는 형태도 수정하자
 public class Pension implements Serializable{
@@ -21,7 +23,7 @@ public class Pension implements Serializable{
     private String environment;
     private double lat;
     private double log;
-    private int love;
+    private int love = 0;
 
     public Pension() {}
 

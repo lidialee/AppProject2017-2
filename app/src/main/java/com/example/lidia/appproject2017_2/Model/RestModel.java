@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.lidia.appproject2017_2.Class.Cafe;
+import com.example.lidia.appproject2017_2.Class.Etc;
 import com.example.lidia.appproject2017_2.Class.Rest;
 import com.example.lidia.appproject2017_2.Listener.OnCafeChangedListener;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
@@ -173,6 +174,45 @@ public class RestModel {
                         Log.e(databaseError.getDetails(), "");
                     }
                 });
+    }
+
+    public void onLoveClicked(DatabaseReference RestRef) {
+        RestRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Rest p = child.getValue(Rest.class);
+                    int current = p.getLove();
+                    current += 1;
+                    child.getRef().child("love").setValue(current);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void onLoveUnClicked(DatabaseReference RestRef) {
+        RestRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Rest p = child.getValue(Rest.class);
+                    int current = p.getLove();
+                    if(current>0){
+                        current -= 1;
+                        child.getRef().child("love").setValue(current);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
     public List<String> getImageList() {
         return mImageList;

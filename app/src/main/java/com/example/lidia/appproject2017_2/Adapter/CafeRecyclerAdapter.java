@@ -7,11 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.lidia.appproject2017_2.Activity.StoreDetailActivity;
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.CafeDetailActivity;
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.PensionDetailActivity;
 import com.example.lidia.appproject2017_2.Class.Cafe;
-import com.example.lidia.appproject2017_2.Class.Pension;
 import com.example.lidia.appproject2017_2.Holder.CafeHolder;
-import com.example.lidia.appproject2017_2.Holder.PensionHolder;
 import com.example.lidia.appproject2017_2.Listener.OnRecyclerViewClickListener;
 import com.example.lidia.appproject2017_2.R;
 
@@ -45,7 +44,7 @@ public class CafeRecyclerAdapter extends RecyclerView.Adapter<CafeHolder> {
         holder.setListener(new OnRecyclerViewClickListener() {
             @Override
             public void onItemClick(View v, int adapterPosition) {
-                Intent intent = new Intent(context, StoreDetailActivity.class);
+                Intent intent = new Intent(context, CafeDetailActivity.class);
                 intent.putExtra("cafe",cafe);
                 intent.putExtra("type",2);
                 context.startActivity(intent);

@@ -181,7 +181,7 @@ public class PensionImage3Activity extends BasicActivity {
                 .setPositiveButton(buttonText, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        Intent intent = new Intent(PensionImage3Activity.this, StoreDetailActivity.class);
+//                        Intent intent = new Intent(PensionImage3Activity.this, CafeDetailActivity.class);
 //                        //원래 이거 보내고 데베에서 찾아야 된다 intent.putExtra("storeUid",storeUid);
 //                        intent.putExtras(bundle);
 //                        startActivity(intent);
