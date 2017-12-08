@@ -4,11 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.lidia.appproject2017_2.Class.Area;
 import com.example.lidia.appproject2017_2.Class.Cafe;
 import com.example.lidia.appproject2017_2.Class.Etc;
+import com.example.lidia.appproject2017_2.Class.Pension;
 import com.example.lidia.appproject2017_2.Class.Rest;
+import com.example.lidia.appproject2017_2.Listener.OnAllPensionListener;
+import com.example.lidia.appproject2017_2.Listener.OnAllRestListener;
 import com.example.lidia.appproject2017_2.Listener.OnCafeChangedListener;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
+import com.example.lidia.appproject2017_2.Listener.OnLoveChangeListener;
 import com.example.lidia.appproject2017_2.Listener.OnRestChangedListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,8 +55,10 @@ public class RestModel {
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private int fileNumber = 1;
     private OnRestChangedListener restChangedListener;
-    private AscendingRest ascendingRest;
+    private OnLoveChangeListener loveChangeListener;
     private OnGetImageListener imageListener;
+    private OnAllRestListener allRestListener;
+    private AscendingRest ascendingRest;
     private List<String> mImageList = new ArrayList<>();
 
 
@@ -65,7 +72,13 @@ public class RestModel {
     public void setImageListener(OnGetImageListener imageListener) {
         this.imageListener = imageListener;
     }
+    public void setLoveChangeListener(OnLoveChangeListener loveChangeListener) {
+        this.loveChangeListener = loveChangeListener;
+    }
 
+    public void setAllRestListener(OnAllRestListener allRestListener) {
+        this.allRestListener = allRestListener;
+    }
 
     public void storeImage(final List<InputStream> list, final DatabaseReference storeRef, final String storeUid, final Bundle bundle) {
 
@@ -176,33 +189,19 @@ public class RestModel {
                 });
     }
 
-    public void onLoveClicked(DatabaseReference RestRef) {
-        RestRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    // 카운드 계산 +1
+    public void onLoveClicked(DatabaseReference pensionRef, final String storeUid) {
+        pensionRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot child : dataSnapshot.getChildren()){
                     Rest p = child.getValue(Rest.class);
-                    int current = p.getLove();
-                    current += 1;
-                    child.getRef().child("love").setValue(current);
-                }
-            }
+                    if(p.getUid().equals(storeUid)){
+                        int current = p.getLove();
+                        current += 1;
+                        if(loveChangeListener!=null)
+                            loveChangeListener.changeLove(current);
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-    public void onLoveUnClicked(DatabaseReference RestRef) {
-        RestRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot child : dataSnapshot.getChildren()){
-                    Rest p = child.getValue(Rest.class);
-                    int current = p.getLove();
-                    if(current>0){
-                        current -= 1;
                         child.getRef().child("love").setValue(current);
                     }
                 }
@@ -213,6 +212,54 @@ public class RestModel {
 
             }
         });
+    }
+
+    // 카운트 계산 -1
+    public void onLoveUnClicked(DatabaseReference pensionRef, final String storeUid) {
+        pensionRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Rest p = child.getValue(Rest.class);
+                    if(p.getUid().equals(storeUid)){
+                        int current = p.getLove();
+                        if(current>0){
+                            current -= 1;
+                            if(loveChangeListener!=null)
+                                loveChangeListener.changeLove(current);
+                            child.getRef().child("love").setValue(current);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getAllRest(){
+        final List<Rest> temp = new ArrayList<>();
+        for(int i =0 ; i<17;i++){
+            mDatabase.child("Rest").child(Area.list[i]).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot e : dataSnapshot.getChildren()) {
+                        Rest rest = e.getValue(Rest.class);
+                        temp.add(rest);
+                    }
+                    if(allRestListener!=null){
+                        allRestListener.getAllRest(temp);
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println(databaseError.getMessage());
+                }
+            });
+        }
     }
     public List<String> getImageList() {
         return mImageList;

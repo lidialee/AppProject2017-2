@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.lidia.appproject2017_2.Class.Area;
 import com.example.lidia.appproject2017_2.Class.Love;
 import com.example.lidia.appproject2017_2.Class.Pension;
+import com.example.lidia.appproject2017_2.Listener.OnAllPensionListener;
 import com.example.lidia.appproject2017_2.Listener.OnCheckAlreadyLove;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
-import com.example.lidia.appproject2017_2.Listener.OnImageAddedListener;
 import com.example.lidia.appproject2017_2.Listener.OnLoveChangeListener;
 import com.example.lidia.appproject2017_2.Listener.OnPensionChangedListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -17,8 +18,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -52,12 +51,13 @@ public class PensionModel {
     private List<Pension> pensionList = new ArrayList<>();
     private List<String> mImageList = new ArrayList<>();
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    private int fileNumber = 1;
     private OnPensionChangedListener pensionChangedListener;
     private OnGetImageListener imageListener;
     private OnLoveChangeListener loveChangeListener;
-    private OnCheckAlreadyLove alreadyLoveLitener;
+    private OnAllPensionListener allPensionListener;
     private Ascending ascending ;
+    private int fileNumber = 1;
+
 
 
     // 생성자
@@ -78,23 +78,9 @@ public class PensionModel {
         this.loveChangeListener = loveChangeListener;
     }
 
-    public void setAlreadyLoveLitener(OnCheckAlreadyLove alreadyLoveLitener) {
-        this.alreadyLoveLitener = alreadyLoveLitener;
+    public void setAllPensionListener(OnAllPensionListener allPensionListener) {
+        this.allPensionListener = allPensionListener;
     }
-
-    /**
-     * < Storage >의 경우
-     * storeImages (폴더
-     * - 상점uid
-     * - 1
-     * - 2
-     * - 3
-     * - 상점 uid... 형식으로
-     */
-
-
-
-
 
     public void storeImage(final List<InputStream> list, final DatabaseReference storeRef, final String storeUid, final Bundle bundle) {
 
@@ -180,7 +166,6 @@ public class PensionModel {
     }
 
     class Ascending implements Comparator<Pension>{
-
         @Override
         public int compare(Pension p1, Pension p2) {
             if(p1.getLove()>p2.getLove())
@@ -213,37 +198,16 @@ public class PensionModel {
                 });
     }
 
-    public void onLoveClicked(DatabaseReference pensionRef) {
+    // 카운드 계산 +1
+    public void onLoveClicked(DatabaseReference pensionRef, final String storeUid) {
         pensionRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot child : dataSnapshot.getChildren()){
                     Pension p = child.getValue(Pension.class);
-                    int current = p.getLove();
-                    current += 1;
-
-                    if(loveChangeListener!=null)
-                        loveChangeListener.changeLove(current);
-
-                    child.getRef().child("love").setValue(current);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-    public void onLoveUnClicked(DatabaseReference pensionRef) {
-        pensionRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot child : dataSnapshot.getChildren()){
-                    Pension p = child.getValue(Pension.class);
-                    int current = p.getLove();
-                    if(current>0){
-                        current -= 1;
+                    if(p.getUid().equals(storeUid)){
+                        int current = p.getLove();
+                        current += 1;
 
                         if(loveChangeListener!=null)
                             loveChangeListener.changeLove(current);
@@ -260,54 +224,55 @@ public class PensionModel {
         });
     }
 
-    public void isLoveAlready(String userUid, final String storeUid){
-        mDatabase.child("UserLoveList").child(userUid)
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot e : dataSnapshot.getChildren()) {
-                            String storelistUid = e.getValue(String.class);
-                            System.out.println("storelistUid : "+storelistUid);
-
-                            assert storelistUid != null;
-
-                            if(storelistUid.equals(storeUid)){
-                                alreadyLoveLitener.isLove(true);
-                                System.out.println("찾음 : "+storeUid);
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        System.out.println(databaseError.getMessage());
-                    }
-                });
-    }
-
-    public void addLoveList(String userUid,String storeUid){
-        mDatabase.child("UserLoveList").child(userUid).push().setValue(storeUid);
-    }
-
-    public void removeLoveList(String userUid, final String storeUid){
-        mDatabase.child("UserLoveList").child(userUid).addValueEventListener(new ValueEventListener() {
+    // 카운트 계산 -1
+    public void onLoveUnClicked(DatabaseReference pensionRef, final String storeUid) {
+        pensionRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot e : dataSnapshot.getChildren()) {
-                    String storelistUid = e.getValue(String.class);
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Pension p = child.getValue(Pension.class);
+                    if(p.getUid().equals(storeUid)){
+                        int current = p.getLove();
+                        if(current>0){
+                            current -= 1;
 
-                    assert storelistUid != null;
+                            if(loveChangeListener!=null)
+                                loveChangeListener.changeLove(current);
 
-                    if(storelistUid.equals(storeUid)){
-                        e.getRef().setValue(null);
+                            child.getRef().child("love").setValue(current);
+                        }
                     }
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println(databaseError.getMessage());
+
             }
         });
-        //.child(storeUid).setValue(null);
+    }
+
+    public void getAllPension(){
+        final List<Pension> temp = new ArrayList<>();
+        for(int i =0 ; i<17;i++){
+            mDatabase.child("PensionORHotel").child(Area.list[i]).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot e : dataSnapshot.getChildren()) {
+                        Pension pension = e.getValue(Pension.class);
+                        temp.add(pension);
+
+                        if(allPensionListener!=null){
+                            allPensionListener.getAllPension(temp);
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println(databaseError.getMessage());
+                }
+            });
+        }
     }
 
     public List<Pension> getPensionList() {

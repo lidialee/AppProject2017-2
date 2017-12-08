@@ -2,7 +2,6 @@ package com.example.lidia.appproject2017_2.Fragment;
 
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,7 +43,6 @@ public class ProfileFragment extends Fragment {
     private Dialog registerStoreDialog;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private ImageView pension, cafe, rest, etc;
     private UserModel userModel = new UserModel();
 
 
@@ -104,7 +101,8 @@ public class ProfileFragment extends Fragment {
         FragmentPagerAdapter pagerAdapter = new FragmentPagerAdapter(activity.getSupportFragmentManager()) {
             private final Fragment[] fragments = new Fragment[]{
                     new WishFragment(),
-                    new ReviewFragment(),
+                    new LovePFragment(),
+                    // 여기를 그냥 전부 love누른 숙박 fragment, 카페fragment, 이렇게 4개로 나눔
             };
 
             private final String[] titles = new String[]{"위시 리스트", "좋아요 가게", "작성한 리뷰"};
@@ -188,10 +186,10 @@ public class ProfileFragment extends Fragment {
         registerStoreDialog.setContentView(R.layout.register_store_dialog);
         //registerStoreDialog.setCanceledOnTouchOutside(false);
 
-        pension = registerStoreDialog.findViewById(R.id.register_dialog_pension);
-        cafe = registerStoreDialog.findViewById(R.id.register_dialog_cafe);
-        rest = registerStoreDialog.findViewById(R.id.register_dialog_rest);
-        etc = registerStoreDialog.findViewById(R.id.register_dialog_etc);
+        ImageView pension = registerStoreDialog.findViewById(R.id.register_dialog_pension);
+        ImageView cafe = registerStoreDialog.findViewById(R.id.register_dialog_cafe);
+        ImageView rest = registerStoreDialog.findViewById(R.id.register_dialog_rest);
+        ImageView etc = registerStoreDialog.findViewById(R.id.register_dialog_etc);
 
         Glide.with(this).load(R.drawable.pension2).into(pension);
         Glide.with(this).load(R.drawable.cafe2).into(cafe);

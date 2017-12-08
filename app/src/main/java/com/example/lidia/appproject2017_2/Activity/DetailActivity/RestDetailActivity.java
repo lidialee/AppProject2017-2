@@ -16,7 +16,9 @@ import com.example.lidia.appproject2017_2.Class.Cafe;
 import com.example.lidia.appproject2017_2.Class.Etc;
 import com.example.lidia.appproject2017_2.Class.Pension;
 import com.example.lidia.appproject2017_2.Class.Rest;
+import com.example.lidia.appproject2017_2.Listener.OnCheckAlreadyLove;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
+import com.example.lidia.appproject2017_2.Listener.OnLoveChangeListener;
 import com.example.lidia.appproject2017_2.Model.CafeModel;
 import com.example.lidia.appproject2017_2.Model.EtcModel;
 import com.example.lidia.appproject2017_2.Model.PensionModel;
@@ -107,13 +109,14 @@ public class RestDetailActivity extends BasicActivity {
     CheckBox like;
 
     private List<String> list = new ArrayList<>();
-    private SliderAdapter sliderAdapter;
     private GoogleMap mainMap;
     private double lat, log;
     private RestModel restModel = new RestModel();
-    private String areaType;
+    private StoreModel storeModel = new StoreModel();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private String storeUid;
+    private String areaType;
 
     // 아래는 모두 영상용이다
 
@@ -122,24 +125,52 @@ public class RestDetailActivity extends BasicActivity {
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.storeDetail_heart:
-                    if (!like.isChecked()) {
-                        // 클릭할때 마다 해당 가게의 like값 - 1
+                    if(!like.isChecked()){
                         Snackbar.make(getWindow().getDecorView().getRootView(), "좋아요를 취소하셨습니다", Snackbar.LENGTH_SHORT).show();
-                        restModel.onLoveUnClicked(databaseReference.child("Rest").child(areaType));
-                    } else {
+                        restModel.onLoveUnClicked(databaseReference.child("Rest").child(areaType),storeUid);
+                        storeModel.removeLoveList(auth.getCurrentUser().getUid(),storeUid);
+                    }else{
                         Snackbar.make(getWindow().getDecorView().getRootView(), "좋아요를 클릭하셨습니다", Snackbar.LENGTH_SHORT).show();
-                        restModel.onLoveClicked(databaseReference.child("Rest").child(areaType));
+                        restModel.onLoveClicked(databaseReference.child("Rest").child(areaType),storeUid);
+                        storeModel.addLoveList(storeUid, auth.getCurrentUser().getUid(),"음식점");
                     }
                     break;
                 case R.id.storeDetail_review:
                     Intent intent = new Intent(RestDetailActivity.this,CommentActivity.class);
-                    // 인텐트에 해당 가게의 uid를 보내야겠지?
+                    intent.putExtra("storeUid",storeUid);
                     startActivity(intent);
                     break;
                 case R.id.storeDetail_back:
                     finish();
                     break;
             }
+        }
+    };
+
+    // 가게 이미지 가져오기 리스너
+    OnGetImageListener getImageListener = new OnGetImageListener() {
+        @Override
+        public void getImage(List<String> imageList) {
+            list.addAll(imageList);
+            SliderAdapter sliderAdapter = new SliderAdapter(RestDetailActivity.this, list);
+            viewPager.setAdapter(sliderAdapter);
+        }
+    };
+
+    // 좋아요 숫자 수정 리스너
+    OnLoveChangeListener loveChangeListener = new OnLoveChangeListener() {
+        @Override
+        public void changeLove(int updatelove) {
+            likeCount.setText(updatelove+"");
+        }
+    };
+
+    // 이미 좋아요인지 확인
+    OnCheckAlreadyLove alreadyLove = new OnCheckAlreadyLove() {
+        @Override
+        public void isLove(boolean result) {
+            if(result)
+                like.setChecked(true);
         }
     };
 
@@ -150,7 +181,6 @@ public class RestDetailActivity extends BasicActivity {
         setContentView(R.layout.activity_store_detail);
         ButterKnife.bind(this);
 
-
         // 구글맵 초기화
         MapsInitializer.initialize(this);
         map.onCreate(savedInstanceState);
@@ -158,7 +188,6 @@ public class RestDetailActivity extends BasicActivity {
 
         Rest rest = (Rest) getIntent().getSerializableExtra("rest");
         setRestData(rest);
-        areaType = rest.getSectionArea();
 
         viewPager= findViewById(R.id.storeDetail_viewpager);
 
@@ -182,6 +211,11 @@ public class RestDetailActivity extends BasicActivity {
         caution.setText(r.getCaution());
         thing.setText(r.getThings());
         environOrFoodFixed.setText("반려동물음식 판매여부");
+        likeCount.setText(r.getLove()+"");
+
+        // 가게 단위 지역
+        areaType = r.getSectionArea();
+        storeUid = r.getUid();
 
         // 반려동물 사이즈 입력
         switch (r.getIsFood()){
@@ -219,15 +253,14 @@ public class RestDetailActivity extends BasicActivity {
         }
 
         // 이미지 가져와서 넣기
-        restModel.getRestImages(r.getUid());
-        restModel.setImageListener(new OnGetImageListener() {
-            @Override
-            public void getImage(List<String> imageList) {
-                list.addAll(imageList);
-                sliderAdapter = new SliderAdapter(RestDetailActivity.this, list);
-                viewPager.setAdapter(sliderAdapter);
-            }
-        });
+        restModel.getRestImages(storeUid);
+
+        // 모델에 리스너 등록하기
+        restModel.setImageListener(getImageListener);
+        restModel.setLoveChangeListener(loveChangeListener);
+        storeModel.setAlreadyLoveLitener(alreadyLove);
+        storeModel.isLoveAlready(auth.getCurrentUser().getUid(),storeUid);
+
 
         // 위치 셋팅하기
         map.getMapAsync(new OnMapReadyCallback() {

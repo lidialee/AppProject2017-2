@@ -12,17 +12,11 @@ import android.widget.TextView;
 import com.example.lidia.appproject2017_2.Activity.BasicActivity;
 import com.example.lidia.appproject2017_2.Activity.CommentActivity;
 import com.example.lidia.appproject2017_2.Adapter.SliderAdapter;
-import com.example.lidia.appproject2017_2.Class.Cafe;
-import com.example.lidia.appproject2017_2.Class.Etc;
 import com.example.lidia.appproject2017_2.Class.Pension;
-import com.example.lidia.appproject2017_2.Class.Rest;
 import com.example.lidia.appproject2017_2.Listener.OnCheckAlreadyLove;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
 import com.example.lidia.appproject2017_2.Listener.OnLoveChangeListener;
-import com.example.lidia.appproject2017_2.Model.CafeModel;
-import com.example.lidia.appproject2017_2.Model.EtcModel;
 import com.example.lidia.appproject2017_2.Model.PensionModel;
-import com.example.lidia.appproject2017_2.Model.RestModel;
 import com.example.lidia.appproject2017_2.Model.StoreModel;
 import com.example.lidia.appproject2017_2.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,14 +27,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -107,16 +97,14 @@ public class PensionDetailActivity extends BasicActivity {
     CheckBox like;
 
     private List<String> list = new ArrayList<>();
-    private SliderAdapter sliderAdapter;
     private GoogleMap mainMap;
     private double lat, log;
     private PensionModel pensionModel = new PensionModel();
-    private String areaType;
+    private StoreModel storeModel = new StoreModel();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private String storeUid;
-
-    // 아래는 모두 영상용이다
+    private String areaType;
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -125,17 +113,17 @@ public class PensionDetailActivity extends BasicActivity {
                 case R.id.storeDetail_heart:
                     if (!like.isChecked()) {
                         Snackbar.make(getWindow().getDecorView().getRootView(), "좋아요를 취소하셨습니다", Snackbar.LENGTH_SHORT).show();
-                        pensionModel.onLoveUnClicked(databaseReference.child("PensionORHotel").child(areaType));
-                        pensionModel.removeLoveList(auth.getCurrentUser().getUid(),storeUid);
+                        pensionModel.onLoveUnClicked(databaseReference.child("PensionORHotel").child(areaType),storeUid);
+                        storeModel.removeLoveList(auth.getCurrentUser().getUid(),storeUid);
                     } else {
                         Snackbar.make(getWindow().getDecorView().getRootView(), "좋아요를 클릭하셨습니다", Snackbar.LENGTH_SHORT).show();
-                        pensionModel.onLoveClicked(databaseReference.child("PensionORHotel").child(areaType));
-                        pensionModel.addLoveList(auth.getCurrentUser().getUid(),storeUid);
+                        pensionModel.onLoveClicked(databaseReference.child("PensionORHotel").child(areaType),storeUid);
+                        storeModel.addLoveList(storeUid, auth.getCurrentUser().getUid(),"숙박/호텔");
                     }
                     break;
                 case R.id.storeDetail_review:
                     Intent intent = new Intent(PensionDetailActivity.this, CommentActivity.class);
-                    // 인텐트에 해당 가게의 uid를 보내야겠지?
+                    intent.putExtra("storeUid",storeUid);
                     startActivity(intent);
                     break;
                 case R.id.storeDetail_back:
@@ -150,7 +138,7 @@ public class PensionDetailActivity extends BasicActivity {
         @Override
         public void getImage(List<String> imageList) {
             list.addAll(imageList);
-            sliderAdapter = new SliderAdapter(PensionDetailActivity.this, list);
+            SliderAdapter sliderAdapter = new SliderAdapter(PensionDetailActivity.this, list);
             viewPager.setAdapter(sliderAdapter);
         }
     };
@@ -243,9 +231,8 @@ public class PensionDetailActivity extends BasicActivity {
         // 모델에 리스너 등록하기
         pensionModel.setImageListener(getImageListener);
         pensionModel.setLoveChangeListener(loveChangeListener);
-        pensionModel.setAlreadyLoveLitener(alreadyLove);
-
-        pensionModel.isLoveAlready(auth.getCurrentUser().getUid(),storeUid);
+        storeModel.setAlreadyLoveLitener(alreadyLove);
+        storeModel.isLoveAlready(auth.getCurrentUser().getUid(),storeUid);
 
         // 위치 셋팅하기
         map.getMapAsync(new OnMapReadyCallback() {

@@ -15,12 +15,12 @@ import com.example.lidia.appproject2017_2.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReviewFragment extends Fragment {
+public class LovePFragment extends Fragment {
 
     private TextView textView;
 
 
-    public ReviewFragment() {
+    public LovePFragment() {
         // Required empty public constructor
     }
 

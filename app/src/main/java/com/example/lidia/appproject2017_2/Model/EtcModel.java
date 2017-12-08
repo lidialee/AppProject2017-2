@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.lidia.appproject2017_2.Class.Area;
 import com.example.lidia.appproject2017_2.Class.Etc;
-import com.example.lidia.appproject2017_2.Class.Etc;
+import com.example.lidia.appproject2017_2.Listener.OnAllEtcListener;
 import com.example.lidia.appproject2017_2.Listener.OnEtcChangedListener;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
+import com.example.lidia.appproject2017_2.Listener.OnLoveChangeListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -46,8 +48,10 @@ public class EtcModel {
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private int fileNumber = 1;
     private OnEtcChangedListener etcChangedListener;
-    private AscendingEtc ascendingEtc;
+    private OnLoveChangeListener loveChangeListener;
     private OnGetImageListener imageListener;
+    private OnAllEtcListener allEtcListener;
+    private AscendingEtc ascendingEtc;
     private List<String> mImageList = new ArrayList<>();
 
     public EtcModel() {
@@ -60,7 +64,13 @@ public class EtcModel {
     public void setImageListener(OnGetImageListener imageListener) {
         this.imageListener = imageListener;
     }
+    public void setLoveChangeListener(OnLoveChangeListener loveChangeListener) {
+        this.loveChangeListener = loveChangeListener;
+    }
 
+    public void setAllEtcListener(OnAllEtcListener allEtcListener) {
+        this.allEtcListener = allEtcListener;
+    }
 
     public void storeImage(final List<InputStream> list, final DatabaseReference storeRef, final String storeUid, final Bundle bundle) {
 
@@ -170,33 +180,20 @@ public class EtcModel {
                 });
     }
 
-    public void onLoveClicked(DatabaseReference EtcRef) {
-        EtcRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    // 카운드 계산 +1
+    public void onLoveClicked(DatabaseReference pensionRef, final String storeUid) {
+        pensionRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot child : dataSnapshot.getChildren()){
                     Etc p = child.getValue(Etc.class);
-                    int current = p.getLove();
-                    current += 1;
-                    child.getRef().child("love").setValue(current);
-                }
-            }
+                    if(p.getUid().equals(storeUid)){
+                        int current = p.getLove();
+                        current += 1;
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                        if(loveChangeListener!=null)
+                            loveChangeListener.changeLove(current);
 
-            }
-        });
-    }
-    public void onLoveUnClicked(DatabaseReference EtcRef) {
-        EtcRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot child : dataSnapshot.getChildren()){
-                    Etc p = child.getValue(Etc.class);
-                    int current = p.getLove();
-                    if(current>0){
-                        current -= 1;
                         child.getRef().child("love").setValue(current);
                     }
                 }
@@ -207,6 +204,53 @@ public class EtcModel {
 
             }
         });
+    }
+
+    // 카운트 계산 -1
+    public void onLoveUnClicked(DatabaseReference pensionRef, final String storeUid) {
+        pensionRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Etc p = child.getValue(Etc.class);
+                    if(p.getUid().equals(storeUid)){
+                        int current = p.getLove();
+                        if(current>0){
+                            current -= 1;
+
+                            if(loveChangeListener!=null)
+                                loveChangeListener.changeLove(current);
+
+                            child.getRef().child("love").setValue(current);
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+    }
+    public void getAllEtc(){
+        final List<Etc> temp = new ArrayList<>();
+        for(int i =0 ; i<17;i++){
+            mDatabase.child("Etc").child(Area.list[i]).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot e : dataSnapshot.getChildren()) {
+                        Etc etcone = e.getValue(Etc.class);
+                        temp.add(etcone);
+
+                        if(allEtcListener!=null){
+                            allEtcListener.getAllEtc(temp);
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println(databaseError.getMessage());
+                }
+            });
+        }
     }
     public List<String> getImageList() {
         return mImageList;

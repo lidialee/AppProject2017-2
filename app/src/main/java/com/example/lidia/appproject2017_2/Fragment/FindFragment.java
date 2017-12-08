@@ -28,6 +28,18 @@ import com.example.lidia.appproject2017_2.Activity.FindAreaActivity;
 import com.example.lidia.appproject2017_2.Activity.MainFindActivity;
 import com.example.lidia.appproject2017_2.Activity.PensionCommon1Activity;
 import com.example.lidia.appproject2017_2.Activity.RestCommon1Activity;
+import com.example.lidia.appproject2017_2.Class.Cafe;
+import com.example.lidia.appproject2017_2.Class.Etc;
+import com.example.lidia.appproject2017_2.Class.Pension;
+import com.example.lidia.appproject2017_2.Class.Rest;
+import com.example.lidia.appproject2017_2.Listener.OnAllCafeListener;
+import com.example.lidia.appproject2017_2.Listener.OnAllEtcListener;
+import com.example.lidia.appproject2017_2.Listener.OnAllPensionListener;
+import com.example.lidia.appproject2017_2.Listener.OnAllRestListener;
+import com.example.lidia.appproject2017_2.Model.CafeModel;
+import com.example.lidia.appproject2017_2.Model.EtcModel;
+import com.example.lidia.appproject2017_2.Model.PensionModel;
+import com.example.lidia.appproject2017_2.Model.RestModel;
 import com.example.lidia.appproject2017_2.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,6 +47,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -49,11 +62,14 @@ import java.util.List;
 public class FindFragment extends Fragment{
     private static final int REQUEST_CODE_LOCATION = 2;
     private GoogleMap mainMap;
+    private List<Marker> storeMarker = new ArrayList<>();
     private LocationListener locationListener;
     private LocationManager locationManager;
-    private ImageView find;
     private Dialog findDialog;
-    private ImageView pension, cafe, rest, etc;
+    private PensionModel pensionModel = new PensionModel();
+    private CafeModel cafeModel = new CafeModel();
+    private RestModel restModel = new RestModel();
+    private EtcModel etcModel = new EtcModel();
 
 
 
@@ -87,6 +103,7 @@ public class FindFragment extends Fragment{
         }
     };
 
+
     // fragment 지도 클릭 리스너
     private GoogleMap.OnMapClickListener mapClickListener = new GoogleMap.OnMapClickListener() {
         @Override
@@ -97,6 +114,7 @@ public class FindFragment extends Fragment{
     private GoogleMap.OnMarkerClickListener markerClickListener = new GoogleMap.OnMarkerClickListener() {
         @Override
         public boolean onMarkerClick(Marker marker) {
+
             return false;
         }
     };
@@ -109,7 +127,7 @@ public class FindFragment extends Fragment{
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_find, container, false);
         // 가게 찾기 아이콘
-        find = rootView.findViewById(R.id.find);
+        ImageView find = rootView.findViewById(R.id.find);
         // 구글 맵 초기화 과정
         MapView mapView = rootView.findViewById(R.id.googleMap_find);
         MapsInitializer.initialize(getActivity());
@@ -121,12 +139,13 @@ public class FindFragment extends Fragment{
                 mainMap = googleMap;
                 mainMap.setOnMarkerClickListener(markerClickListener);
                 mainMap.setOnMapClickListener(mapClickListener);
-                mainMap.moveCamera(CameraUpdateFactory.newLatLngZoom(getMyLocation(),12));
+                mainMap.moveCamera(CameraUpdateFactory.newLatLngZoom(getMyLocation(),10));
             }
         });
 
         // 찾기 아이콘에 리스너 부착
         find.setOnClickListener(listener);
+        getAllStoreList();
         return rootView;
     }
 
@@ -167,16 +186,16 @@ public class FindFragment extends Fragment{
         findDialog.setContentView(R.layout.findicon_dialog);
         //findDialog.setCanceledOnTouchOutside(false);
 
-        pension = findDialog.findViewById(R.id.find_dialog_pension);
+        ImageView pension = findDialog.findViewById(R.id.find_dialog_pension);
         Glide.with(this).load(R.drawable.pension2).into(pension);
 
-        cafe = findDialog.findViewById(R.id.find_dialog_cafe);
+        ImageView cafe = findDialog.findViewById(R.id.find_dialog_cafe);
         Glide.with(this).load(R.drawable.cafe2).into(cafe);
 
-        rest = findDialog.findViewById(R.id.find_dialog_rest);
+        ImageView rest = findDialog.findViewById(R.id.find_dialog_rest);
         Glide.with(this).load(R.drawable.rest2).into(rest);
 
-        etc = findDialog.findViewById(R.id.find_dialog_etc);
+        ImageView etc = findDialog.findViewById(R.id.find_dialog_etc);
         Glide.with(this).load(R.drawable.etc2).into(etc);
 
 
@@ -185,6 +204,93 @@ public class FindFragment extends Fragment{
         rest.setOnClickListener(listener);
         etc.setOnClickListener(listener);
 
+    }
+
+    private void getAllStoreList(){
+
+        pensionModel.setAllPensionListener(new OnAllPensionListener() {
+            @Override
+            public void getAllPension(List<Pension> list) {
+                setPensionMarker(list);
+            }
+        });
+        pensionModel.getAllPension();
+
+        cafeModel.setAllCafeListener(new OnAllCafeListener() {
+            @Override
+            public void getAllCafe(List<Cafe> list) {
+                setCafeMarker(list);
+            }
+        });
+        cafeModel.getAllCafe();
+
+        restModel.setAllRestListener(new OnAllRestListener() {
+            @Override
+            public void getAllRest(List<Rest> list) {
+                setRestMarker(list);
+            }
+        });
+        restModel.getAllRest();
+
+        etcModel.setAllEtcListener(new OnAllEtcListener() {
+            @Override
+            public void getAllEtc(List<Etc> list) {
+                setEtcMarker(list);
+            }
+        });
+        etcModel.getAllEtc();
+    }
+
+
+    private void setPensionMarker(List<Pension> list){
+        for(Pension p : list){
+
+            LatLng Loca = new LatLng(p.getLat(),p.getLog());
+
+            Marker marker = mainMap.addMarker(new MarkerOptions()
+                    .position(Loca)
+                    .title(p.getName())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+            //marker.setTag("1"+"/"+p.);
+            storeMarker.add(marker);
+        }
+    }
+
+    private void setCafeMarker(List<Cafe> list){
+        for(Cafe p : list){
+            System.out.println("카운트");
+            LatLng Loca = new LatLng(p.getLat(),p.getLog());
+            Marker marker = mainMap.addMarker(new MarkerOptions()
+                    .position(Loca)
+                    .title(p.getName())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            marker.setTag(p.getAnimalType());
+            storeMarker.add(marker);
+        }
+    }
+
+    private void setRestMarker(List<Rest> list){
+        for(Rest p : list){
+            LatLng Loca = new LatLng(p.getLat(),p.getLog());
+            Marker marker = mainMap.addMarker(new MarkerOptions()
+                    .position(Loca)
+                    .title(p.getName())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+            marker.setTag(p.getAnimalType());
+            storeMarker.add(marker);
+        }
+    }
+
+    private void setEtcMarker(List<Etc> list){
+        for(Etc p : list){
+            LatLng Loca = new LatLng(p.getLat(),p.getLog());
+            Marker marker = mainMap.addMarker(new MarkerOptions()
+                    .position(Loca)
+                    .title(p.getName())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+            marker.setTag(p.getAnimalType());
+            storeMarker.add(marker);
+        }
     }
 
 }

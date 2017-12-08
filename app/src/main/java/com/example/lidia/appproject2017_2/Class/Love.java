@@ -2,16 +2,24 @@ package com.example.lidia.appproject2017_2.Class;
 
 public class Love {
     String storeUid;
+    String storeType;
+    String loveUid;
 
-    public Love() {}
-
-    public Love(String storeUid) {
-        this.storeUid = storeUid;
+    public Love() {
     }
 
+    public Love(String storeUid, String storeType,String loveUid) {
+        this.storeUid = storeUid;
+        this.storeType = storeType;
+        this.loveUid = loveUid;
+    }
 
-    public static Love newLove(String uid) {
-        return new Love(uid);
+    public String getLoveUid() {
+        return loveUid;
+    }
+
+    public void setLoveUid(String loveUid) {
+        this.loveUid = loveUid;
     }
 
     public String getStoreUid() {
@@ -21,4 +29,17 @@ public class Love {
     public void setStoreUid(String storeUid) {
         this.storeUid = storeUid;
     }
+
+    public String getStoreType() {
+        return storeType;
+    }
+
+    public void setStoreType(String storeType) {
+        this.storeType = storeType;
+    }
+
+    public static Love newLove(String storeUid, String type,String uid) {
+        return new Love(storeUid, type,uid);
+    }
+
 }

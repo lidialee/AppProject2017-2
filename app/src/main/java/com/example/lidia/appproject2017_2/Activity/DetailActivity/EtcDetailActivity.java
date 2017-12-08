@@ -16,7 +16,9 @@ import com.example.lidia.appproject2017_2.Class.Cafe;
 import com.example.lidia.appproject2017_2.Class.Etc;
 import com.example.lidia.appproject2017_2.Class.Pension;
 import com.example.lidia.appproject2017_2.Class.Rest;
+import com.example.lidia.appproject2017_2.Listener.OnCheckAlreadyLove;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
+import com.example.lidia.appproject2017_2.Listener.OnLoveChangeListener;
 import com.example.lidia.appproject2017_2.Model.CafeModel;
 import com.example.lidia.appproject2017_2.Model.EtcModel;
 import com.example.lidia.appproject2017_2.Model.PensionModel;
@@ -107,40 +109,66 @@ public class EtcDetailActivity extends BasicActivity {
     CheckBox like;
 
     private List<String> list = new ArrayList<>();
-    private SliderAdapter sliderAdapter;
     private GoogleMap mainMap;
     private double lat, log;
     private EtcModel etcModel = new EtcModel();
-    private StoreModel storeModel = null;
-    private String areaType;
+    private StoreModel storeModel = new StoreModel();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
-
-    // 아래는 모두 영상용이다
+    private String storeUid;
+    private String areaType;
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.storeDetail_heart:
-                    if (!like.isChecked()) {
-                        // 클릭할때 마다 해당 가게의 like값 - 1
+                    if(!like.isChecked()){
                         Snackbar.make(getWindow().getDecorView().getRootView(), "좋아요를 취소하셨습니다", Snackbar.LENGTH_SHORT).show();
-                        etcModel.onLoveUnClicked(databaseReference.child("Etc").child(areaType));
-                    } else {
+                        etcModel.onLoveUnClicked(databaseReference.child("Etc").child(areaType),storeUid);
+                        storeModel.removeLoveList(auth.getCurrentUser().getUid(),storeUid);
+                    }else{
                         Snackbar.make(getWindow().getDecorView().getRootView(), "좋아요를 클릭하셨습니다", Snackbar.LENGTH_SHORT).show();
-                        etcModel.onLoveClicked(databaseReference.child("Etc").child(areaType));
+                        etcModel.onLoveClicked(databaseReference.child("Etc").child(areaType),storeUid);
+                        storeModel.addLoveList(storeUid, auth.getCurrentUser().getUid(),"기타");
                     }
                     break;
                 case R.id.storeDetail_review:
                     Intent intent = new Intent(EtcDetailActivity.this, CommentActivity.class);
-                    // 인텐트에 해당 가게의 uid를 보내야겠지?
+                    intent.putExtra("storeUid",storeUid);
                     startActivity(intent);
                     break;
                 case R.id.storeDetail_back:
                     finish();
                     break;
             }
+        }
+    };
+
+    // 가게 이미지 가져오기 리스너
+    OnGetImageListener getImageListener = new OnGetImageListener() {
+        @Override
+        public void getImage(List<String> imageList) {
+            list.addAll(imageList);
+            SliderAdapter sliderAdapter = new SliderAdapter(EtcDetailActivity.this, list);
+            viewPager.setAdapter(sliderAdapter);
+        }
+    };
+
+    // 좋아요 숫자 수정 리스너
+    OnLoveChangeListener loveChangeListener = new OnLoveChangeListener() {
+        @Override
+        public void changeLove(int updatelove) {
+            likeCount.setText(updatelove+"");
+        }
+    };
+
+    // 이미 좋아요인지 확인
+    OnCheckAlreadyLove alreadyLove = new OnCheckAlreadyLove() {
+        @Override
+        public void isLove(boolean result) {
+            if(result)
+                like.setChecked(true);
         }
     };
 
@@ -151,17 +179,13 @@ public class EtcDetailActivity extends BasicActivity {
         setContentView(R.layout.activity_store_detail);
         ButterKnife.bind(this);
 
-
         // 구글맵 초기화
         MapsInitializer.initialize(this);
         map.onCreate(savedInstanceState);
         map.onResume();
 
-
         Etc etc = (Etc) getIntent().getSerializableExtra("etc");
         setEtcData(etc);
-        areaType = etc.getSectionArea();
-
 
         viewPager = findViewById(R.id.storeDetail_viewpager);
 
@@ -173,21 +197,23 @@ public class EtcDetailActivity extends BasicActivity {
 
 
     private void setEtcData(final Etc r) {
-        storeType.setText(r.getStoreType());
-        storeTitle.setText(r.getName());
+        storeType.setText(r.getName());
+        storeTitle.setText(r.getStoreType());
         address.setText(r.getWholeAddress());
         phone.setText(r.getPhone());
         web.setText(r.getWeb());
-
         priceOrTimeFixed.setVisibility(View.GONE);
         priceOrTimeUserInput.setVisibility(View.GONE);
         environOrFoodFixed.setVisibility(View.GONE);
         environOrFoodUserInput.setVisibility(View.GONE);
-
         plus.setText(r.getPlusDescription());
         caution.setText(r.getCaution());
         thing.setText(r.getThings());
+        likeCount.setText(r.getLove()+"");
 
+        // 가게 단위 지역
+        areaType = r.getSectionArea();
+        storeUid = r.getUid();
 
         // 반려동물 사이즈 입력
         switch (r.getAnimalSize()) {
@@ -215,15 +241,13 @@ public class EtcDetailActivity extends BasicActivity {
         }
 
         // 이미지 가져와서 넣기
-        etcModel.getEtcImages(r.getUid());
-        etcModel.setImageListener(new OnGetImageListener() {
-            @Override
-            public void getImage(List<String> imageList) {
-                list.addAll(imageList);
-                sliderAdapter = new SliderAdapter(EtcDetailActivity.this, list);
-                viewPager.setAdapter(sliderAdapter);
-            }
-        });
+        etcModel.getEtcImages(storeUid);
+
+        // 모델에 리스너 등록하기
+        etcModel.setImageListener(getImageListener);
+        etcModel.setLoveChangeListener(loveChangeListener);
+        storeModel.setAlreadyLoveLitener(alreadyLove);
+        storeModel.isLoveAlready(auth.getCurrentUser().getUid(),storeUid);
 
         // 위치 셋팅하기
         map.getMapAsync(new OnMapReadyCallback() {
