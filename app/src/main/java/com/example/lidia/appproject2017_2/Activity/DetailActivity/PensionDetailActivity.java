@@ -115,12 +115,13 @@ public class PensionDetailActivity extends BasicActivity {
                         Snackbar.make(getWindow().getDecorView().getRootView(), "좋아요를 취소하셨습니다", Snackbar.LENGTH_SHORT).show();
                         pensionModel.onLoveUnClicked(databaseReference.child("PensionORHotel").child(areaType),storeUid);
                         storeModel.removeLoveList(auth.getCurrentUser().getUid(),storeUid);
+                        break;
                     } else {
                         Snackbar.make(getWindow().getDecorView().getRootView(), "좋아요를 클릭하셨습니다", Snackbar.LENGTH_SHORT).show();
                         pensionModel.onLoveClicked(databaseReference.child("PensionORHotel").child(areaType),storeUid);
                         storeModel.addLoveList(storeUid, auth.getCurrentUser().getUid(),"숙박/호텔");
+                        break;
                     }
-                    break;
                 case R.id.storeDetail_review:
                     Intent intent = new Intent(PensionDetailActivity.this, CommentActivity.class);
                     intent.putExtra("storeUid",storeUid);

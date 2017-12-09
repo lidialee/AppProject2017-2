@@ -1,4 +1,4 @@
-package com.example.lidia.appproject2017_2.Fragment;
+package com.example.lidia.appproject2017_2.Fragment.Love;
 
 
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import com.example.lidia.appproject2017_2.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WishFragment extends Fragment {
+public class LoveCFragment extends Fragment {
 
 
-    public WishFragment() {
+    public LoveCFragment() {
         // Required empty public constructor
     }
 

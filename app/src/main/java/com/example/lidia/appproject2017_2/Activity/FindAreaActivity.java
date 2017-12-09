@@ -67,8 +67,9 @@ public class FindAreaActivity extends BasicActivity {
     @BindView(R.id.area_back)
     ImageView back;
 
-    //private int storeType;
+    private int storeType;
     private int areaType;
+
     // 1 = 팬션  2 = 카페  3 = 음식점  4 = 기타
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -80,55 +81,55 @@ public class FindAreaActivity extends BasicActivity {
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.seoul:
-                    goToStoreKeywordActivity(1) ;
+                    goToStoreKeywordActivity("서울특별시") ;
                     break;
                 case R.id.busan:
-                    goToStoreKeywordActivity(2) ;
+                    goToStoreKeywordActivity("부산광역시") ;
                     break;
                 case R.id.degu:
-                    goToStoreKeywordActivity(3) ;
+                    goToStoreKeywordActivity("대구광역시") ;
                     break;
                 case R.id.inchen:
-                    goToStoreKeywordActivity(4) ;
+                    goToStoreKeywordActivity("인천광역시") ;
                     break;
                 case R.id.dejen:
-                    goToStoreKeywordActivity(5) ;
+                    goToStoreKeywordActivity("대전광역시") ;
                     break;
                 case R.id.gwangju:
-                    goToStoreKeywordActivity(6) ;
+                    goToStoreKeywordActivity("광주광역시") ;
                     break;
                 case R.id.wolsan:
-                    goToStoreKeywordActivity(7) ;
+                    goToStoreKeywordActivity("울산광역시") ;
                     break;
                 case R.id.sejong:
-                    goToStoreKeywordActivity(8) ;
+                    goToStoreKeywordActivity("세종특별자치시") ;
                     break;
                 case R.id.geongii:
-                    goToStoreKeywordActivity(9) ;
+                    goToStoreKeywordActivity("경기도") ;
                     break;
                 case R.id.gangwondo:
-                    goToStoreKeywordActivity(10) ;
+                    goToStoreKeywordActivity("강원도") ;
                     break;
                 case R.id.chungnorth:
-                    goToStoreKeywordActivity(11) ;
+                    goToStoreKeywordActivity("충청북도") ;
                     break;
                 case R.id.chungsouth:
-                    goToStoreKeywordActivity(12) ;
+                    goToStoreKeywordActivity("충청남도") ;
                     break;
                 case R.id.junranorth:
-                    goToStoreKeywordActivity(13) ;
+                    goToStoreKeywordActivity("전라북도") ;
                     break;
                 case R.id.junrasouth:
-                    goToStoreKeywordActivity(14) ;
+                    goToStoreKeywordActivity("전라남도") ;
                     break;
                 case R.id.geongnorth:
-                    goToStoreKeywordActivity(15) ;
+                    goToStoreKeywordActivity("경상북도") ;
                     break;
                 case R.id.geongsouth:
-                    goToStoreKeywordActivity(16) ;
+                    goToStoreKeywordActivity("경상남도") ;
                     break;
                 case R.id.jeju:
-                    goToStoreKeywordActivity(17) ;
+                    goToStoreKeywordActivity("제주특별자치도") ;
                     break;
 
             }
@@ -143,8 +144,8 @@ public class FindAreaActivity extends BasicActivity {
         ButterKnife.bind(this);
 
         // 앞에서 사용자가 선택한 가게 타입 받아오기
-        //storeType = getIntent().getExtras().getInt("storeNumber");
-
+        storeType = getIntent().getExtras().getInt("storeType");
+        System.out.println("앞에서 선택한 가게타입은 : " + storeType);
 
         // 리스너 부착
         setListenerToView();
@@ -171,7 +172,7 @@ public class FindAreaActivity extends BasicActivity {
         back.setOnClickListener(listener);
     }
 
-    private void goToStoreKeywordActivity(int areaType){
+    private void goToStoreKeywordActivity(String areaType){
         Intent intent = null;
         int storeType = getIntent().getExtras().getInt("storeType");
         switch (storeType){
@@ -198,6 +199,7 @@ public class FindAreaActivity extends BasicActivity {
         }
         startActivity(intent);
         overridePendingTransition(0, 0);
+        finish();
     }
 }
 

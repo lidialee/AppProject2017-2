@@ -11,17 +11,18 @@
     <RelativeLayout
         android:id="@+id/relative_mypage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        android:background="#fff8f1">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image_mypage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/edit_info_image"
             android:src="@drawable/profiledefault"
             app:civ_border_color="@color/orange"
+            android:layout_marginTop="30dp"
             app:civ_border_width="2dp" />
 
         <TextView
@@ -64,11 +65,10 @@
 
         <ImageView
             android:id="@+id/register_store"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
-            android:layout_above="@+id/profile_image_mypage"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/userType_text_mypage"
+            android:layout_centerHorizontal="true"
             android:src="@drawable/register" />
 
         <ImageView
@@ -82,44 +82,6 @@
 
 
     </RelativeLayout>
-
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbarlayout_profile"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/tabcolor"
-        android:layout_below="@+id/relative_mypage">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tablayout_profile_frag"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:background="@color/tabcolor"
-                android:textAlignment="center"
-                app:tabIndicatorColor="@color/colorAccent"
-                app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/colorAccent"
-                app:tabTextColor="@color/black" />
-
-        </RelativeLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/ViewPagercontainerProfile"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/appbarlayout_profile"
-        android:layout_marginTop="15dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
 </RelativeLayout>

@@ -1,20 +1,20 @@
 package com.example.lidia.appproject2017_2.Model;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.lidia.appproject2017_2.Class.Area;
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.CafeDetailActivity;
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.RestDetailActivity;
 import com.example.lidia.appproject2017_2.Class.Cafe;
-import com.example.lidia.appproject2017_2.Class.Etc;
-import com.example.lidia.appproject2017_2.Class.Pension;
 import com.example.lidia.appproject2017_2.Class.Rest;
-import com.example.lidia.appproject2017_2.Listener.OnAllPensionListener;
 import com.example.lidia.appproject2017_2.Listener.OnAllRestListener;
-import com.example.lidia.appproject2017_2.Listener.OnCafeChangedListener;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
 import com.example.lidia.appproject2017_2.Listener.OnLoveChangeListener;
 import com.example.lidia.appproject2017_2.Listener.OnRestChangedListener;
+import com.example.lidia.appproject2017_2.Listener.OnSearchRestResultListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -58,6 +58,8 @@ public class RestModel {
     private OnLoveChangeListener loveChangeListener;
     private OnGetImageListener imageListener;
     private OnAllRestListener allRestListener;
+    private OnSearchRestResultListener restResultListener;
+
     private AscendingRest ascendingRest;
     private List<String> mImageList = new ArrayList<>();
 
@@ -78,6 +80,10 @@ public class RestModel {
 
     public void setAllRestListener(OnAllRestListener allRestListener) {
         this.allRestListener = allRestListener;
+    }
+
+    public void setRestResultListener(OnSearchRestResultListener restResultListener) {
+        this.restResultListener = restResultListener;
     }
 
     public void storeImage(final List<InputStream> list, final DatabaseReference storeRef, final String storeUid, final Bundle bundle) {
@@ -242,8 +248,7 @@ public class RestModel {
 
     public void getAllRest(){
         final List<Rest> temp = new ArrayList<>();
-        for(int i =0 ; i<17;i++){
-            mDatabase.child("Rest").child(Area.list[i]).addValueEventListener(new ValueEventListener() {
+            mDatabase.child("allRest").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot e : dataSnapshot.getChildren()) {
@@ -259,7 +264,54 @@ public class RestModel {
                     System.out.println(databaseError.getMessage());
                 }
             });
-        }
+    }
+
+    // 검색용 서치
+    public void searchRest(String areaSection, final int petSize, final int pettype, final String things, final int isFood  ){
+        mDatabase.child("Rest").child(areaSection).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final List<Rest> temp = new ArrayList<>();
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Rest p = child.getValue(Rest.class);
+                    if(p.getAnimalType() == pettype){
+                        if(p.getAnimalSize() == petSize || p.getAnimalSize() ==3){
+                            String oneThings = p.getThings();
+                            int food = p.getIsFood();
+
+                            if(oneThings.contains(things) && food ==  isFood){
+                                temp.add(p);
+
+                            }
+                        }
+                    }
+                }
+                restList = temp;
+                if(restResultListener != null)
+                    restResultListener.searchResult(restList);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("searchPension 문제");
+            }
+        });
+    }
+    public void oneRest(String uid, final Context context) {
+        mDatabase.child("allRest").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Rest ps= dataSnapshot.getValue(Rest.class);
+                Intent intent = new Intent(context, RestDetailActivity.class);
+                intent.putExtra("rest",ps);
+                intent.putExtra("type",3);
+                context.startActivity(intent);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println(databaseError.getMessage());
+            }
+        });
     }
     public List<String> getImageList() {
         return mImageList;

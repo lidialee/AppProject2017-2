@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lidia.appproject2017_2.Activity.ResultActivity.ResultRestActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/research_r_appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/research_r_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/main">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/research_r_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/backarrow" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="결과 리스트"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/userInput_r"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/research_r_appBarLayout"
+        android:paddingTop="15dp"
+        android:paddingStart="20dp">
+
+        <TextView
+            android:id="@+id/script"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="앞에서 선택한 조건에 맞는 "
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/area_r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="경기도"
+            android:textSize="14sp"
+            android:layout_toEndOf="@+id/script"
+            android:textColor="@color/black"
+            android:layout_marginStart="10dp"
+            />
+
+        <TextView
+            android:id="@+id/area_r_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 에 있는"
+            android:textSize="12sp"
+            android:layout_alignBottom="@+id/area_r"
+            android:layout_toEndOf="@+id/area_r"
+            android:layout_marginStart="3dp"/>
+
+        <TextView
+            android:id="@+id/pet_r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="강아지"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_below="@+id/area_r"/>
+
+        <TextView
+            android:id="@+id/pet_r_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 와 함께할 수 있는 음식점입니다"
+            android:textSize="12sp"
+            android:layout_toEndOf="@+id/pet_r"
+            android:layout_below="@+id/area_r"
+            android:layout_alignBottom="@+id/pet_r"
+            android:layout_marginStart="3dp"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/research_r_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/userInput_r">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

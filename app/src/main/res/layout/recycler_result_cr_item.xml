@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginEnd="9dp"
+    android:layout_marginStart="9dp"
+    android:layout_marginTop="7dp"
+    android:background="@drawable/recycler_item_outer"
+    android:paddingBottom="15dp"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp"
+    android:paddingTop="15dp">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도그보그맘"
+        android:textColor="@color/black"
+        android:textSize="21sp" />
+
+    <TextView
+        android:id="@+id/address_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/name"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/name"
+        android:text="서울특별시"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/things"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/address_section"
+        android:layout_marginTop="3dp"
+        android:text="소형캔넬 배변패드"
+        android:textColor="@color/red"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/things_plus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_toEndOf="@+id/things"
+        android:layout_below="@+id/name"
+        android:layout_alignBottom="@+id/things"
+        android:text="제공"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/things"
+        android:layout_marginTop="3dp"
+        android:text="음식제공"
+        android:textColor="@color/red"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/heart"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/fill_heart"
+        android:layout_toStartOf="@+id/count"
+        android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="0"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginEnd="10dp"/>
+</RelativeLayout>

@@ -1,15 +1,20 @@
 package com.example.lidia.appproject2017_2.Model;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.lidia.appproject2017_2.Class.Area;
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.CafeDetailActivity;
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.PensionDetailActivity;
 import com.example.lidia.appproject2017_2.Class.Cafe;
+import com.example.lidia.appproject2017_2.Class.Pension;
 import com.example.lidia.appproject2017_2.Listener.OnAllCafeListener;
 import com.example.lidia.appproject2017_2.Listener.OnCafeChangedListener;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
 import com.example.lidia.appproject2017_2.Listener.OnLoveChangeListener;
+import com.example.lidia.appproject2017_2.Listener.OnSearchCafeResultListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -53,6 +58,7 @@ public class CafeModel {
     private OnLoveChangeListener loveChangeListener;
     private OnGetImageListener imageListener;
     private OnAllCafeListener allCafeListener;
+    private OnSearchCafeResultListener cafeResultListener;
     private AscendingCafe ascendingCafe;
     private List<String> mImageList = new ArrayList<>();
 
@@ -72,6 +78,10 @@ public class CafeModel {
     }
     public void setAllCafeListener(OnAllCafeListener allCafeListener) {
         this.allCafeListener = allCafeListener;
+    }
+
+    public void setCafeResultListener(OnSearchCafeResultListener cafeResultListener) {
+        this.cafeResultListener = cafeResultListener;
     }
 
     public void storeImage(final List<InputStream> list, final DatabaseReference storeRef, final String storeUid, final Bundle bundle) {
@@ -236,8 +246,7 @@ public class CafeModel {
     }
     public void getAllCafe(){
         final List<Cafe> temp = new ArrayList<>();
-        for(int i =0 ; i<17;i++){
-            mDatabase.child("Cafe").child(Area.list[i]).addValueEventListener(new ValueEventListener() {
+            mDatabase.child("allCafe").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot e : dataSnapshot.getChildren()) {
@@ -254,7 +263,53 @@ public class CafeModel {
                     System.out.println(databaseError.getMessage());
                 }
             });
-        }
+    }
+    // 검색용 서치
+    public void searchCafe(String areaSection, final int petSize, final int pettype, final String things, final int isFood  ){
+        mDatabase.child("Cafe").child(areaSection).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final List<Cafe> temp = new ArrayList<>();
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Cafe p = child.getValue(Cafe.class);
+                    if(p.getAnimalType() == pettype){
+                        if(p.getAnimalSize() == petSize || p.getAnimalSize() == 3){
+                            String oneThings = p.getThings();
+                            int food = p.getIsFood();
+                            if(oneThings.contains(things) && food ==  isFood){
+                                temp.add(p);
+                                System.out.println("++++++++++++++++++++++++++++");
+                            }
+                        }
+                    }
+                }
+                cafeList = temp;
+                if(cafeResultListener != null)
+                    cafeResultListener.searchResult(cafeList);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("searchPension 문제");
+            }
+        });
+    }
+
+    public void oneCafe(String uid, final Context context) {
+        mDatabase.child("allCafe").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Cafe ps= dataSnapshot.getValue(Cafe.class);
+                Intent intent = new Intent(context, CafeDetailActivity.class);
+                intent.putExtra("cafe",ps);
+                intent.putExtra("type",2);
+                context.startActivity(intent);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println(databaseError.getMessage());
+            }
+        });
     }
 
     public List<String> getImageList() {

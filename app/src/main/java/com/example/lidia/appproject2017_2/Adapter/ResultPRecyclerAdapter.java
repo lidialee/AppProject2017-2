@@ -9,34 +9,33 @@ import android.view.ViewGroup;
 
 import com.example.lidia.appproject2017_2.Activity.DetailActivity.PensionDetailActivity;
 import com.example.lidia.appproject2017_2.Class.Pension;
-import com.example.lidia.appproject2017_2.Holder.PensionHolder;
+import com.example.lidia.appproject2017_2.Holder.ResultPHolder;
 import com.example.lidia.appproject2017_2.Listener.OnRecyclerViewClickListener;
 import com.example.lidia.appproject2017_2.R;
 
 import java.util.List;
 
 
-public class PensionRecyclerAdapter extends RecyclerView.Adapter<PensionHolder> {
+public class ResultPRecyclerAdapter extends RecyclerView.Adapter<ResultPHolder> {
     private List<Pension> pensionList;
     private Context context;
 
-    public PensionRecyclerAdapter(List<Pension> pensionList, Context context) {
+    public ResultPRecyclerAdapter(List<Pension> pensionList, Context context) {
         this.pensionList = pensionList;
         this.context = context;
     }
 
-
     public void setPensionList(List<Pension> list){ this.pensionList = list; }
 
     @Override
-    public PensionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ResultPHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.recycler_rank_item_pension,parent,false);
-        return new PensionHolder(view);
+        View view = layoutInflater.inflate(R.layout.recycler_result_p_item,parent,false);
+        return new ResultPHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(PensionHolder holder, int position) {
+    public void onBindViewHolder(ResultPHolder holder, int position) {
         final Pension pension = pensionList.get(position);
         holder.bindData(pension,context);
 
@@ -47,7 +46,6 @@ public class PensionRecyclerAdapter extends RecyclerView.Adapter<PensionHolder> 
                 intent.putExtra("pension",pension);
                 intent.putExtra("type",1);
                 context.startActivity(intent);
-
             }
         });
     }
@@ -56,7 +54,6 @@ public class PensionRecyclerAdapter extends RecyclerView.Adapter<PensionHolder> 
     public int getItemCount() {
         return pensionList.size();
     }
-
     @Override
     public long getItemId(int position) {
         return position;

@@ -1,15 +1,21 @@
 package com.example.lidia.appproject2017_2.Model;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.EtcDetailActivity;
 import com.example.lidia.appproject2017_2.Class.Area;
+import com.example.lidia.appproject2017_2.Class.Etc;
+import com.example.lidia.appproject2017_2.Class.Etc;
 import com.example.lidia.appproject2017_2.Class.Etc;
 import com.example.lidia.appproject2017_2.Listener.OnAllEtcListener;
 import com.example.lidia.appproject2017_2.Listener.OnEtcChangedListener;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
 import com.example.lidia.appproject2017_2.Listener.OnLoveChangeListener;
+import com.example.lidia.appproject2017_2.Listener.OnSearchEtcResultListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -51,6 +57,7 @@ public class EtcModel {
     private OnLoveChangeListener loveChangeListener;
     private OnGetImageListener imageListener;
     private OnAllEtcListener allEtcListener;
+    private OnSearchEtcResultListener etcResultListener;
     private AscendingEtc ascendingEtc;
     private List<String> mImageList = new ArrayList<>();
 
@@ -70,6 +77,10 @@ public class EtcModel {
 
     public void setAllEtcListener(OnAllEtcListener allEtcListener) {
         this.allEtcListener = allEtcListener;
+    }
+
+    public void setEtcResultListener(OnSearchEtcResultListener etcResultListener) {
+        this.etcResultListener = etcResultListener;
     }
 
     public void storeImage(final List<InputStream> list, final DatabaseReference storeRef, final String storeUid, final Bundle bundle) {
@@ -232,8 +243,7 @@ public class EtcModel {
     }
     public void getAllEtc(){
         final List<Etc> temp = new ArrayList<>();
-        for(int i =0 ; i<17;i++){
-            mDatabase.child("Etc").child(Area.list[i]).addValueEventListener(new ValueEventListener() {
+            mDatabase.child("allEtc").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot e : dataSnapshot.getChildren()) {
@@ -250,8 +260,55 @@ public class EtcModel {
                     System.out.println(databaseError.getMessage());
                 }
             });
-        }
     }
+
+
+    // 검색용 서치
+    public void searchEtc(String areaSection, final int petSize, final int pettype, final String things){
+        mDatabase.child("Etc").child(areaSection).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final List<Etc> temp = new ArrayList<>();
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Etc p = child.getValue(Etc.class);
+                    if(p.getAnimalType() == pettype){
+                        if(p.getAnimalSize() == petSize || p.getAnimalSize() ==3){
+                            String oneThings = p.getThings();
+
+                            if(oneThings.contains(things)){
+                                temp.add(p);
+                            }
+                        }
+                    }
+                }
+                etcList = temp;
+                if(etcResultListener != null)
+                    etcResultListener.searchResult(etcList);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("searchPension 문제");
+            }
+        });
+    }
+    public void oneEtc(String uid, final Context context) {
+        mDatabase.child("allEtc").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Etc ps= dataSnapshot.getValue(Etc.class);
+                Intent intent = new Intent(context, EtcDetailActivity.class);
+                intent.putExtra("etc",ps);
+                intent.putExtra("type",4);
+                context.startActivity(intent);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println(databaseError.getMessage());
+            }
+        });
+    }
+
     public List<String> getImageList() {
         return mImageList;
     }

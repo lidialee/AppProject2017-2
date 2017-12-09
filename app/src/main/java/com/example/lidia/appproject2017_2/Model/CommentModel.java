@@ -55,10 +55,6 @@ public class CommentModel {
         });
     }
 
-    public void getMyComment(){
-
-    }
-
     public List<Comment> getCommentList() {
         return commentList;
     }

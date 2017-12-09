@@ -88,7 +88,6 @@ public class RankPenFragment extends Fragment {
         pensionModel.setPensionChangedListener(pensionListChangeListener);
         recyclerView.setAdapter(recyclerAdapter);
 
-
         // 스피너 선택하면 나타나기
         areaSpinner.setOnItemSelectedListener(spinnerListener);
 

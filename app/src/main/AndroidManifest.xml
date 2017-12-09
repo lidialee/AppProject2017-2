@@ -54,10 +54,14 @@
         <activity android:name=".Activity.FindRestKeywordActivity" />
         <activity android:name=".Activity.FindEtcKeywordActivity" />
         <activity android:name=".Activity.CommentActivity" />
-        <activity android:name=".Activity.DetailActivity.PensionDetailActivity"/>
-        <activity android:name=".Activity.DetailActivity.CafeDetailActivity"/>
-        <activity android:name=".Activity.DetailActivity.RestDetailActivity"/>
-        <activity android:name=".Activity.DetailActivity.EtcDetailActivity"/>
+        <activity android:name=".Activity.DetailActivity.PensionDetailActivity" />
+        <activity android:name=".Activity.DetailActivity.CafeDetailActivity" />
+        <activity android:name=".Activity.DetailActivity.RestDetailActivity" />
+        <activity android:name=".Activity.DetailActivity.EtcDetailActivity" />
+        <activity android:name=".Activity.ResultActivity.ResultPensionActivity" />
+        <activity android:name=".Activity.ResultActivity.ResultCafeActivity" />
+        <activity android:name=".Activity.ResultActivity.ResultRestActivity" />
+        <activity android:name=".Activity.ResultActivity.ResultEtcActivity"></activity>
     </application>
 
 </manifest>

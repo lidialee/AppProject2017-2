@@ -32,6 +32,7 @@ public class PensionKeyword2Activity extends BasicActivity {
     RelativeLayout catLayout;
     @BindView(R.id.guide_text)
     TextView guideText;
+
     @BindView(R.id.pension2_group_type)
     RadioGroup radioTypeGroup;
     @BindView(R.id.pension2_dog)
@@ -151,7 +152,6 @@ public class PensionKeyword2Activity extends BasicActivity {
         setContentView(R.layout.activity_register_pension_keyword);
         ButterKnife.bind(this);
 
-
         backStep.setOnClickListener(moveListener);
         nextStep.setOnClickListener(moveListener);
 
@@ -218,6 +218,11 @@ public class PensionKeyword2Activity extends BasicActivity {
 
         if(animalSize == 0){
             Snackbar.make(getWindow().getDecorView().getRootView(), "반려동물 사이즈을 선택해주세요", Snackbar.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(thing.equals("")){
+            Snackbar.make(getWindow().getDecorView().getRootView(), "제공하는 서비스를 1개 이상 선택해주세요", Snackbar.LENGTH_SHORT).show();
             return false;
         }
 

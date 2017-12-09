@@ -1,5 +1,7 @@
 package com.example.lidia.appproject2017_2.Class;
 
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;

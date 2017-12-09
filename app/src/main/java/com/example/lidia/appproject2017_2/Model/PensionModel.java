@@ -1,9 +1,12 @@
 package com.example.lidia.appproject2017_2.Model;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.lidia.appproject2017_2.Activity.DetailActivity.PensionDetailActivity;
 import com.example.lidia.appproject2017_2.Class.Area;
 import com.example.lidia.appproject2017_2.Class.Love;
 import com.example.lidia.appproject2017_2.Class.Pension;
@@ -12,6 +15,7 @@ import com.example.lidia.appproject2017_2.Listener.OnCheckAlreadyLove;
 import com.example.lidia.appproject2017_2.Listener.OnGetImageListener;
 import com.example.lidia.appproject2017_2.Listener.OnLoveChangeListener;
 import com.example.lidia.appproject2017_2.Listener.OnPensionChangedListener;
+import com.example.lidia.appproject2017_2.Listener.OnSearchPensionResultListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -55,6 +59,7 @@ public class PensionModel {
     private OnGetImageListener imageListener;
     private OnLoveChangeListener loveChangeListener;
     private OnAllPensionListener allPensionListener;
+    private OnSearchPensionResultListener searchPensionResultListener;
     private Ascending ascending ;
     private int fileNumber = 1;
 
@@ -80,6 +85,10 @@ public class PensionModel {
 
     public void setAllPensionListener(OnAllPensionListener allPensionListener) {
         this.allPensionListener = allPensionListener;
+    }
+
+    public void setSearchPensionResultListener(OnSearchPensionResultListener searchPensionResultListener) {
+        this.searchPensionResultListener = searchPensionResultListener;
     }
 
     public void storeImage(final List<InputStream> list, final DatabaseReference storeRef, final String storeUid, final Bundle bundle) {
@@ -140,6 +149,36 @@ public class PensionModel {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println(databaseError.getMessage());
+            }
+        });
+    }
+
+    // 검색용 서치
+    public void searchPension(String areaSection, final int petSize, final int pettype, final String things, final String environment ){
+        mDatabase.child("PensionORHotel").child(areaSection).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final List<Pension> temp = new ArrayList<>();
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    Pension p = child.getValue(Pension.class);
+                    if(p.getAnimalType() == pettype ){
+                        if(p.getAnimalSize() == petSize || p.getAnimalSize() == 3){
+                            String oneThings = p.getThings();
+                            String oneEnvirn = p.getEnvironment();
+                            if(oneThings.contains(things) && oneEnvirn.contains(environment)){
+                                temp.add(p);
+                            }
+                        }
+                    }
+                }
+                pensionList = temp;
+                if(searchPensionResultListener != null)
+                    searchPensionResultListener.searchResult(pensionList);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("searchPension 문제");
             }
         });
     }
@@ -252,15 +291,16 @@ public class PensionModel {
         });
     }
 
+    // 지도 표시용 모두 가져오기
     public void getAllPension(){
         final List<Pension> temp = new ArrayList<>();
-        for(int i =0 ; i<17;i++){
-            mDatabase.child("PensionORHotel").child(Area.list[i]).addValueEventListener(new ValueEventListener() {
+            mDatabase.child("allPension").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot e : dataSnapshot.getChildren()) {
                         Pension pension = e.getValue(Pension.class);
                         temp.add(pension);
+                        System.out.println(pension.getName());
 
                         if(allPensionListener!=null){
                             allPensionListener.getAllPension(temp);
@@ -272,8 +312,28 @@ public class PensionModel {
                     System.out.println(databaseError.getMessage());
                 }
             });
-        }
+
     }
+
+    public void onePension(String uid, final Context context) {
+        mDatabase.child("allPension").child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                    Pension ps= dataSnapshot.getValue(Pension.class);
+                    Intent intent = new Intent(context, PensionDetailActivity.class);
+                    intent.putExtra("pension",ps);
+                    intent.putExtra("type",1);
+                    context.startActivity(intent);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println(databaseError.getMessage());
+            }
+        });
+    }
+
+
 
     public List<Pension> getPensionList() {
         return this.pensionList;

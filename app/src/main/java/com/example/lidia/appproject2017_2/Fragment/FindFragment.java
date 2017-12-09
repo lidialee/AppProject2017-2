@@ -71,8 +71,6 @@ public class FindFragment extends Fragment{
     private RestModel restModel = new RestModel();
     private EtcModel etcModel = new EtcModel();
 
-
-
     // !!!!!! 이거 보내는 값만 다르지 하나로 뭉쳐버려
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -114,6 +112,22 @@ public class FindFragment extends Fragment{
     private GoogleMap.OnMarkerClickListener markerClickListener = new GoogleMap.OnMarkerClickListener() {
         @Override
         public boolean onMarkerClick(Marker marker) {
+           String data = (String) marker.getTag();
+           String type = data.split("/")[0];
+            String uid = data.split("/")[1];
+
+            System.out.println(" 마커 확인 "+ type);
+            System.out.println(" 마커 확인 "+ uid);
+
+            if(type.equals("1")){
+               pensionModel.onePension(uid,getContext());
+            }else if(type.equals("2")){
+                cafeModel.oneCafe(uid,getContext());
+            }else if(type.equals("3")){
+                restModel.oneRest(uid,getContext());
+            }else if(type.equals("4")){
+                etcModel.oneEtc(uid,getContext());
+            }
 
             return false;
         }
@@ -244,27 +258,24 @@ public class FindFragment extends Fragment{
 
     private void setPensionMarker(List<Pension> list){
         for(Pension p : list){
-
             LatLng Loca = new LatLng(p.getLat(),p.getLog());
-
             Marker marker = mainMap.addMarker(new MarkerOptions()
                     .position(Loca)
                     .title(p.getName())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-            //marker.setTag("1"+"/"+p.);
+            marker.setTag("1"+"/"+p.getUid());
             storeMarker.add(marker);
         }
     }
 
     private void setCafeMarker(List<Cafe> list){
         for(Cafe p : list){
-            System.out.println("카운트");
             LatLng Loca = new LatLng(p.getLat(),p.getLog());
             Marker marker = mainMap.addMarker(new MarkerOptions()
                     .position(Loca)
                     .title(p.getName())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            marker.setTag(p.getAnimalType());
+            marker.setTag("2"+"/"+p.getUid());
             storeMarker.add(marker);
         }
     }
@@ -276,7 +287,7 @@ public class FindFragment extends Fragment{
                     .position(Loca)
                     .title(p.getName())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-            marker.setTag(p.getAnimalType());
+            marker.setTag("3"+"/"+p.getUid());
             storeMarker.add(marker);
         }
     }
@@ -288,7 +299,7 @@ public class FindFragment extends Fragment{
                     .position(Loca)
                     .title(p.getName())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-            marker.setTag(p.getAnimalType());
+            marker.setTag("4"+"/"+p.getUid());
             storeMarker.add(marker);
         }
     }

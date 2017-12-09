@@ -23,6 +23,8 @@ import com.example.lidia.appproject2017_2.Activity.CafeCommon1Activity;
 import com.example.lidia.appproject2017_2.Activity.EtcCommon1Activity;
 import com.example.lidia.appproject2017_2.Activity.PensionCommon1Activity;
 import com.example.lidia.appproject2017_2.Activity.RestCommon1Activity;
+import com.example.lidia.appproject2017_2.Fragment.Love.LovePFragment;
+import com.example.lidia.appproject2017_2.Fragment.Love.LoveCFragment;
 import com.example.lidia.appproject2017_2.Listener.UserInfoEventListener;
 import com.example.lidia.appproject2017_2.R;
 import com.example.lidia.appproject2017_2.Class.User;
@@ -41,8 +43,8 @@ public class ProfileFragment extends Fragment {
     private ImageView setting, editStore;
     private MainFindActivity activity;
     private Dialog registerStoreDialog;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+   // private TabLayout tabLayout;
+   // private ViewPager viewPager;
     private UserModel userModel = new UserModel();
 
 
@@ -91,40 +93,40 @@ public class ProfileFragment extends Fragment {
         setting = rootView.findViewById(R.id.edit_info_image);
         editStore = rootView.findViewById(R.id.register_store);
 
-        tabLayout = rootView.findViewById(R.id.tablayout_profile_frag);
-        viewPager = rootView.findViewById(R.id.ViewPagercontainerProfile);
+       // tabLayout = rootView.findViewById(R.id.tablayout_profile_frag);
+       // viewPager = rootView.findViewById(R.id.ViewPagercontainerProfile);
 
         activity = (MainFindActivity) getActivity();
         this.userUid = activity.getUid();
 
 
-        FragmentPagerAdapter pagerAdapter = new FragmentPagerAdapter(activity.getSupportFragmentManager()) {
-            private final Fragment[] fragments = new Fragment[]{
-                    new WishFragment(),
-                    new LovePFragment(),
-                    // 여기를 그냥 전부 love누른 숙박 fragment, 카페fragment, 이렇게 4개로 나눔
-            };
-
-            private final String[] titles = new String[]{"위시 리스트", "좋아요 가게", "작성한 리뷰"};
-
-            @Override
-            public Fragment getItem(int position) {
-                return fragments[position];
-            }
-
-            @Override
-            public int getCount() {
-                return fragments.length;
-            }
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return titles[position];
-            }
-        };
-
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+//        FragmentPagerAdapter pagerAdapter = new FragmentPagerAdapter(activity.getSupportFragmentManager()) {
+//            private final Fragment[] fragments = new Fragment[]{
+//                    new LoveCFragment(),
+//                    new LovePFragment(),
+//                    // 여기를 그냥 전부 love누른 숙박 fragment, 카페fragment, 이렇게 4개로 나눔
+//            };
+//
+//            private final String[] titles = new String[]{"위시 리스트", "좋아요 가게", "작성한 리뷰"};
+//
+//            @Override
+//            public Fragment getItem(int position) {
+//                return fragments[position];
+//            }
+//
+//            @Override
+//            public int getCount() {
+//                return fragments.length;
+//            }
+//
+//            @Override
+//            public CharSequence getPageTitle(int position) {
+//                return titles[position];
+//            }
+//        };
+//
+//        viewPager.setAdapter(pagerAdapter);
+//        tabLayout.setupWithViewPager(viewPager);
 
         return rootView;
     }

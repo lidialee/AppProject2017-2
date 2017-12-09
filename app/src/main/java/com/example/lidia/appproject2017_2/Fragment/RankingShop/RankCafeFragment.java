@@ -84,7 +84,6 @@ public class RankCafeFragment extends Fragment {
 
         cafeModel.getCafe(choiceArea);
 
-
         recyclerAdapter = new CafeRecyclerAdapter(cafeModel.getCafeList(),getContext());
         cafeModel.setCafeChangedListener(cafeListChangeListener);
         recyclerView.setAdapter(recyclerAdapter);
