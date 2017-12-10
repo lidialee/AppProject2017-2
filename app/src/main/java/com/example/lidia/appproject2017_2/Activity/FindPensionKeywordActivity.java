@@ -93,13 +93,6 @@ public class FindPensionKeywordActivity extends BasicActivity {
     private int petSize;  // 1 = small 2 = big  3 = all ( cat is all )
     private String areaSection="";
 
-
-    /**
-     * 정말 중요한 거
-     * 고양이의 경우 따로 크기를 받지 않기 때문에
-     * 크기 검색에 있어서 디폴트값으로 '모두가능' 이라고 검색했다고 해야합니다
-     **/
-
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -131,13 +124,6 @@ public class FindPensionKeywordActivity extends BasicActivity {
                         hideProgressDialog();
                         return;
                     }else{
-                        System.out.println("일단 베일드 하다 ");
-                        System.out.println("선택지역 : "+areaSection);
-                        System.out.println("동물타입 : "+petSize);
-                        System.out.println("동물사이즈 : "+petSize);
-                        System.out.println("thing 조건 1 : "+thing);
-                        System.out.println("environment 조건 2 : "+environment);
-
                         Intent intent = new Intent(FindPensionKeywordActivity.this, ResultPensionActivity.class);
                         intent.putExtra("areaSection", areaSection);
                         intent.putExtra("petSize", petSize);

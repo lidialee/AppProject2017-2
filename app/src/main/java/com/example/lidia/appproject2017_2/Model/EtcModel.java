@@ -275,7 +275,7 @@ public class EtcModel {
                         if(p.getAnimalSize() == petSize || p.getAnimalSize() ==3){
                             String oneThings = p.getThings();
 
-                            if(oneThings.contains(things)){
+                            if(oneThings.equals(things)){
                                 temp.add(p);
                             }
                         }

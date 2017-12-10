@@ -165,7 +165,7 @@ public class PensionModel {
                         if(p.getAnimalSize() == petSize || p.getAnimalSize() == 3){
                             String oneThings = p.getThings();
                             String oneEnvirn = p.getEnvironment();
-                            if(oneThings.contains(things) && oneEnvirn.contains(environment)){
+                            if(oneThings.equals(things) && oneEnvirn.equals(environment)){
                                 temp.add(p);
                             }
                         }

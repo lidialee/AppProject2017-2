@@ -276,7 +276,7 @@ public class CafeModel {
                         if(p.getAnimalSize() == petSize || p.getAnimalSize() == 3){
                             String oneThings = p.getThings();
                             int food = p.getIsFood();
-                            if(oneThings.contains(things) && food ==  isFood){
+                            if(oneThings.equals(things) && food ==  isFood){
                                 temp.add(p);
                                 System.out.println("++++++++++++++++++++++++++++");
                             }

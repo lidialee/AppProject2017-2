@@ -139,14 +139,16 @@
                     android:id="@+id/find_r_key_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="소+중형" />
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_small" />
 
                 <RadioButton
                     android:id="@+id/find_r_key_big"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:text="대형" />
+                    android:layout_marginStart="10dp"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_big" />
             </RadioGroup>
             <View
                 android:id="@+id/pension_divier2"
@@ -188,7 +190,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="20dp"
-                android:paddingStart="10dp"
                 android:visibility="gone">
 
                 <LinearLayout
@@ -201,27 +202,24 @@
                         android:id="@+id/find_r_key_dog_fense"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:scaleX="1.1"
-                        android:scaleY="1.1"
-                        android:text="팬스" />
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_fense" />
 
                     <CheckBox
                         android:id="@+id/find_r_key_dog_s_cage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:scaleX="1.1"
-                        android:scaleY="1.1"
-                        android:text="소형켄넬" />
+                        android:layout_marginStart="3dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_smallcage" />
 
                     <CheckBox
                         android:id="@+id/find_r_key_dog_room"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:scaleX="1.1"
-                        android:scaleY="1.1"
-                        android:text="개인룸" />
+                        android:layout_marginStart="3dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_room"  />
                 </LinearLayout>
 
                 <LinearLayout
@@ -236,18 +234,16 @@
                         android:id="@+id/find_r_key_dog_toliet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:scaleX="1.1"
-                        android:scaleY="1.1"
-                        android:text="배변패드 제공" />
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_pad" />
 
                     <CheckBox
                         android:id="@+id/find_r_key_dog_b_cage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:scaleX="1.1"
-                        android:scaleY="1.1"
-                        android:text="대형켄넬" />
+                        android:layout_marginStart="3dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_bigcage" />
 
 
                 </LinearLayout>
@@ -271,38 +267,34 @@
 
                     <CheckBox
                         android:id="@+id/find_r_key_cat_cage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleX="1.1"
-                        android:scaleY="1.1"
-                        android:text="켄넬" />
+                        android:layout_width="83dp"
+                        android:layout_height="30dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_catcage" />
 
                     <CheckBox
                         android:id="@+id/find_r_key_cat_tower"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:scaleX="1.1"
-                        android:scaleY="1.1"
-                        android:text="캣타워" />
+                        android:layout_width="83dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_height="30dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_tower" />
 
                     <CheckBox
                         android:id="@+id/find_r_key_cat_sand"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:scaleX="1.1"
-                        android:scaleY="1.1"
-                        android:text="화장실" />
+                        android:layout_width="83dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_height="30dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_catwash" />
 
                     <CheckBox
                         android:id="@+id/find_r_key_cat_room"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:scaleX="1.1"
-                        android:scaleY="1.1"
-                        android:text="개인룸" />
+                        android:layout_width="83dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_height="30dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_room"  />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -339,14 +331,16 @@
                     android:id="@+id/find_r_key_yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="판매함" />
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_foodok" />
 
                 <RadioButton
                     android:id="@+id/find_r_key_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:text="판매하지 않음" />
+                    android:layout_marginStart="10dp"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_foodno" />
 
             </RadioGroup>
 

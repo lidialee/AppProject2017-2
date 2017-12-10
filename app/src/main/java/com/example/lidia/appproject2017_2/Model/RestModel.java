@@ -279,7 +279,7 @@ public class RestModel {
                             String oneThings = p.getThings();
                             int food = p.getIsFood();
 
-                            if(oneThings.contains(things) && food ==  isFood){
+                            if(oneThings.equals(things) && food ==  isFood){
                                 temp.add(p);
 
                             }

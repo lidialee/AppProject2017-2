@@ -262,7 +262,7 @@ public class FindFragment extends Fragment{
             Marker marker = mainMap.addMarker(new MarkerOptions()
                     .position(Loca)
                     .title(p.getName())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pensionmarker)));
             marker.setTag("1"+"/"+p.getUid());
             storeMarker.add(marker);
         }
@@ -274,7 +274,7 @@ public class FindFragment extends Fragment{
             Marker marker = mainMap.addMarker(new MarkerOptions()
                     .position(Loca)
                     .title(p.getName())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.cafemarker)));
             marker.setTag("2"+"/"+p.getUid());
             storeMarker.add(marker);
         }
@@ -286,7 +286,7 @@ public class FindFragment extends Fragment{
             Marker marker = mainMap.addMarker(new MarkerOptions()
                     .position(Loca)
                     .title(p.getName())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.restmarker)));
             marker.setTag("3"+"/"+p.getUid());
             storeMarker.add(marker);
         }
@@ -298,7 +298,7 @@ public class FindFragment extends Fragment{
             Marker marker = mainMap.addMarker(new MarkerOptions()
                     .position(Loca)
                     .title(p.getName())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.etcmarker)));
             marker.setTag("4"+"/"+p.getUid());
             storeMarker.add(marker);
         }
