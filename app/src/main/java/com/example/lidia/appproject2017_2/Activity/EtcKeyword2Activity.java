@@ -76,6 +76,7 @@ public class EtcKeyword2Activity extends BasicActivity {
                     Intent intent = new Intent(EtcKeyword2Activity.this, EtcImage3Activity.class);
                     intent.putExtras(bundle2);
                     startActivity(intent);
+                    finish();
                     overridePendingTransition(0, 0);
                     break;
             }

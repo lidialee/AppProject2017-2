@@ -83,8 +83,9 @@ public class PensionImage3Activity extends BasicActivity {
                         DatabaseReference storeRef = mDatabase.child("PensionORHotel").child(areaSection).push();
                         String storeKey = storeRef.getKey();
                         pensionModel.storeImage(changeToInputStream(mImageUriList), storeRef, storeKey, finalBundle);
-                        showAlertDialog("포스트를 등록하였습니다", "등록한 포스트 확인하기",finalBundle);
+                        showAlertDialog("포스트를 등록하였습니다", "확인",finalBundle);
                     }
+
                     break;
 
                 case R.id.pension3_camera:
@@ -181,12 +182,7 @@ public class PensionImage3Activity extends BasicActivity {
                 .setPositiveButton(buttonText, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        Intent intent = new Intent(PensionImage3Activity.this, CafeDetailActivity.class);
-//                        //원래 이거 보내고 데베에서 찾아야 된다 intent.putExtra("storeUid",storeUid);
-//                        intent.putExtras(bundle);
-//                        startActivity(intent);
-//                        overridePendingTransition(0, 0);
-                        finish();
+                       finish();
                     }
                 }).create();
         dialog.show();

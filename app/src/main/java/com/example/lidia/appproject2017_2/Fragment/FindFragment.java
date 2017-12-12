@@ -116,9 +116,6 @@ public class FindFragment extends Fragment{
            String type = data.split("/")[0];
             String uid = data.split("/")[1];
 
-            System.out.println(" 마커 확인 "+ type);
-            System.out.println(" 마커 확인 "+ uid);
-
             if(type.equals("1")){
                pensionModel.onePension(uid,getContext());
             }else if(type.equals("2")){
@@ -171,14 +168,18 @@ public class FindFragment extends Fragment{
     }
 
     private LatLng getMyLocation() {
-        LatLng currentLatLng = null;
+        // 디폴트 값으로 서울 한가운데 위경도
+        LatLng currentLatLng = new LatLng(37.553042,126.981300);
         if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_LOCATION);
         } else {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
             Location currL = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            currentLatLng = new LatLng(currL.getLatitude(),currL.getLongitude());
+
+            if(currL!=null){
+                currentLatLng = new LatLng(currL.getLatitude(),currL.getLongitude());
+            }
         }
         return currentLatLng;
     }

@@ -84,7 +84,7 @@ public class CafeImage3Activity extends BasicActivity {
                         DatabaseReference storeRef = mDatabase.child("Cafe").child(areaSection).push();
                         String storeKey = storeRef.getKey();
                         cafeModel.storeImage(changeToInputStream(mImageUriList), storeRef, storeKey, finalBundle);
-                        showAlertDialog("포스트를 등록하였습니다", "메인으로 돌아가기");
+                        showAlertDialog("포스트를 등록하였습니다", "확인");
                     }
 
 

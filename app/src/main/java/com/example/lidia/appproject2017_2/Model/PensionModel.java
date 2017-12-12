@@ -51,7 +51,6 @@ public class PensionModel {
     private String environment;
     private double lat;
     private double log;
-
     private List<Pension> pensionList = new ArrayList<>();
     private List<String> mImageList = new ArrayList<>();
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();

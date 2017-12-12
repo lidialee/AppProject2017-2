@@ -89,7 +89,7 @@
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/register_edit"
                 android:focusableInTouchMode="true"
-                android:text="카페1"/>
+                android:text="바우바우"/>
 
 
             <RelativeLayout
@@ -179,7 +179,8 @@
                 android:layout_height="40dp"
                 android:background="@drawable/register_edit"
                 android:focusableInTouchMode="true"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                android:text="월-토 10시부터 20시까지 (일요휴무)"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -194,7 +195,7 @@
                 android:background="@drawable/register_edit"
                 android:focusableInTouchMode="true"
                 android:layout_marginBottom="12dp"
-                android:text="안녕하세요"/>
+                android:text="안녕하세요 카페 바우바우입니다. 반려견와 함께 즐거운 시간 보내실수 있는 카페입니다"/>
 
             <TextView
                 android:id="@+id/cafe_caution_text"
@@ -229,7 +230,7 @@
                 android:background="@drawable/register_edit"
                 android:focusableInTouchMode="true"
                 android:layout_marginBottom="12dp"
-                android:text="안녕하세요"/>
+                android:text="소형견만 데려오실 수 있고 발정기 시기에는 방문을 자제해주셨으면 합니다."/>
         </LinearLayout>
 
     </ScrollView>

@@ -73,6 +73,7 @@ public class CafeCommon1Activity extends BasicActivity {
                     Intent intent = new Intent(CafeCommon1Activity.this, CafeKeyword2Activity.class);
                     intent.putExtras(makeBundle());
                     startActivity(intent);
+                    finish();
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.cafe_address_btn:

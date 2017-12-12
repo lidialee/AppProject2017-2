@@ -74,6 +74,7 @@ public class RestCommon1Activity extends BasicActivity {
                     Intent intent = new Intent(RestCommon1Activity.this, RestKeyword2Activity.class);
                     intent.putExtras(makeBundle());
                     startActivity(intent);
+                    finish();
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.rest_address_btn:

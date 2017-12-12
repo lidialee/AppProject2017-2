@@ -89,7 +89,8 @@
             android:layout_height="40dp"
             android:layout_marginBottom="12dp"
             android:background="@drawable/register_edit"
-            android:focusableInTouchMode="true" />
+            android:focusableInTouchMode="true"
+            android:text="바우바우"/>
 
 
         <RelativeLayout
@@ -146,7 +147,8 @@
             android:layout_height="40dp"
             android:background="@drawable/register_edit"
             android:focusableInTouchMode="true"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:text="02-789-2221"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -160,7 +162,8 @@
             android:layout_height="40dp"
             android:background="@drawable/register_edit"
             android:focusableInTouchMode="true"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:text="www.bulter.com"/>
 
         <TextView
             android:id="@+id/pension_price_text"
@@ -187,7 +190,8 @@
             android:layout_height="40dp"
             android:background="@drawable/register_edit"
             android:focusableInTouchMode="true"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:text="(비수기, 평일 기준) 7-19만원"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -202,7 +206,7 @@
             android:background="@drawable/register_edit"
             android:focusableInTouchMode="true"
             android:layout_marginBottom="12dp"
-            />
+            android:text="안녕하세요. 강아지와 함께 즐겁게 머물수 있는 호텔 바우바우입니다."/>
 
         <TextView
             android:id="@+id/pension_caution_text"
@@ -236,7 +240,8 @@
             android:layout_height="110dp"
             android:background="@drawable/register_edit"
             android:focusableInTouchMode="true"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:text="발정기 시기에는 방문을 자제해주셨으면 합니다. 객실 내 일정 이상 수준 손상시 추가 금액이 청구 되실 수 있습니다 홈페이지를 참조해주세요 "/>
     </LinearLayout>
 
     </ScrollView>

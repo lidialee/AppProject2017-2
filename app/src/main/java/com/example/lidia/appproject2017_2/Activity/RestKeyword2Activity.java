@@ -108,6 +108,7 @@ public class RestKeyword2Activity extends BasicActivity {
                     Intent intent = new Intent(RestKeyword2Activity.this, RestImage3Activity.class);
                     intent.putExtras(bundle2);
                     startActivity(intent);
+                    finish();
                     overridePendingTransition(0, 0);
                     break;
 

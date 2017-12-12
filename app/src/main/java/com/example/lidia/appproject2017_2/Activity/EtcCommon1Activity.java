@@ -74,6 +74,7 @@ public class EtcCommon1Activity extends BasicActivity {
                     Intent intent = new Intent(EtcCommon1Activity.this, EtcKeyword2Activity.class);
                     intent.putExtras(makeBundle());
                     startActivity(intent);
+                    finish();
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.etc_address_btn:

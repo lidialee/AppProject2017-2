@@ -106,6 +106,7 @@ public class PensionKeyword2Activity extends BasicActivity {
                     Intent intent = new Intent(PensionKeyword2Activity.this, PensionImage3Activity.class);
                     intent.putExtras(bundle2);
                     startActivity(intent);
+                    finish();
                     overridePendingTransition(0, 0);
                     break;
             }
